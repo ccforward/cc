@@ -411,7 +411,7 @@ body {
     -o-animation-name: swing;
     animation-name: swing;
 }
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
+
 
 @-webkit-keyframes wobble {
     0% {
@@ -539,7 +539,6 @@ body {
     -o-animation-name: wobble;
     animation-name: wobble;
 }
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 
 @-webkit-keyframes pulse {
     0% {
@@ -3567,7 +3566,7 @@ body {
     -o-animation-name: hinge;
     animation-name: hinge;
 }
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
+
 
 @-webkit-keyframes rollIn {
     0% {
@@ -3623,7 +3622,7 @@ body {
     -o-animation-name: rollIn;
     animation-name: rollIn;
 }
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
+
 
 @-webkit-keyframes rollOut {
     0% {
@@ -3680,7 +3679,6 @@ body {
     animation-name: rollOut;
 }
 
-/* originally authored by Angelo Rohit - https://github.com/angelorohit */
 
 @-webkit-keyframes lightSpeedIn {
     0% {
