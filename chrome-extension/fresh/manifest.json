@@ -1,0 +1,23 @@
+{
+   "name": "no-fresh",
+   "version": "1.0",
+   "description": "从此告别F5了.",
+   "icons": {
+      "128": "rubik_128.png",
+      "16": "rubik_16.png",
+      "48": "rubik_48.png",
+      "64": "rubik_64.png"
+   },
+   "browser_action": {
+      "default_icon": "rubik_icon.png",
+      "default_title": "TMD 我不要去按F5"
+      // "default_popup": "popup.html"
+   },
+   "background": {
+      "persistent": false,
+      "scripts": [ "background.js" ]
+   },
+   "manifest_version": 2,
+   "options_page": "options.html",
+   "permissions": [ "bookmarks", "background", "contextMenus",  "management", "tabs", "https://*/*", "http://*/*" ]
+}
