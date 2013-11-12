@@ -1,0 +1,26 @@
+html,body {
+    background-color: #333;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.wrap {
+    width: 990px;
+    height: 100%;
+    margin: 10px auto;
+}
+.wrap .title {
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+    color: #f60;
+}
+.wrap .block {
+    width: 300px;
+    height: 400px;
+    margin: 10px;
+    border: 1px solid #fff;
+}
