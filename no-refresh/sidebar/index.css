@@ -1,0 +1,96 @@
+html,body {
+    background-color: #333;
+}
+.side-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 35px;
+    height: 100%;
+    background-color: #fff;
+    z-index: 999999;
+    _position: absolute;
+    _height:500px;
+}
+
+.side-bar .side-bar-tabs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35px;
+    height: 100%;
+    z-index: 99999;
+    background-color: #ccc;
+}
+.side-bar .side-bar-tabs .side-bar-tab {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 35px;
+    height: 50px;
+    cursor: pointer;
+}
+.side-bar .side-bar-tabs .side-bar-tab.tab-hover,
+.side-bar .side-bar-tabs .side-bar-tab.tab-sel{
+    background-color: #9c0;
+    color: #fff;
+}
+.side-bar .side-bar-tabs .side-bar-tab .side-bar-tab-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35px;
+    height: 26px;
+}
+.side-bar .side-bar-tabs .side-bar-tab .side-bar-tab-text {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 35px;
+    text-align: center;
+}
+
+
+.side-bar .side-bar-contents {
+    background-color: #fff;
+    position: absolute; 
+    width: 235px;
+    height: 100%;
+    top: 0;
+    left: -235px;
+    z-index: 99998;
+}
+
+.side-bar .side-bar-contents .side-bar-con {
+    position: absolute;
+    visibility: hidden;
+    width: 235px;
+    height: 100%;
+    background-color: #f60;
+    border-radius: 0 15px 0 0;
+    overflow: auto;
+}
+.side-bar .side-bar-contents .side-bar-con div {
+    padding: 0 10px;
+}
+
+
+
+
+.side-bar ::-webkit-scrollbar {
+    width: 5px;
+}
+
+.side-bar ::-webkit-scrollbar-track {
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background-color: transparent;
+}
+
+.side-bar ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background-color: #cfbec4;
+}
+
+

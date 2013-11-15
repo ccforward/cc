@@ -1,3 +1,9 @@
+<?php
+    // $time = time() - 60; // or filemtime($fn), etc  
+    // header('Last-Modified: '.gmdate('D, d M Y H:i:s', $time).' GMT'); 
+  
+
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -10,7 +16,7 @@
 </head>
 <body>
 <div class="wrap clearfix">
-    <h1 class="title">this is title-html</h1>
+    <h1 class="title">this is title -- php</h1>
     <div class="block fl">
         <!-- <a href="" id="J_link">link</a> -->
     </div>

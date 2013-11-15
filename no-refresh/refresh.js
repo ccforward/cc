@@ -1,4 +1,4 @@
-(function(){
+(function(S){
     var firstRender = true,
         // 可监测文件类型
         file = {'local':1, 'js':1, 'css':1},
@@ -11,6 +11,8 @@
         //存储页面上本地css的路径
         linkElements = {},
         oldLinkElements = {},
+        scriptElements = {},
+        oldScriptElements = {},
         interruptRequest = {};
 
     var Auto = {
@@ -37,17 +39,18 @@
 
             //监控js
             for(var i=0; i<scripts.length; i++){
-                var js  = scripts[i].getAttribute('src');
+                var js  = scripts[i].getAttribute('src'),
+                    type = scripts[i].getAttribute('type') || 'text/javascript';
 
                 //存储本地的js路径
-                if(js && isLocal(js)){
-                // if(js){
+                if(js && type == 'text/javascript' && isLocal(js)){
                     routes.push(js);
+                    scriptElements[js] = scripts[i];
                 }
             }
-            //不监控js--清空数组
             if(!file.js)
                 routes = [];
+
             //监控本地文件
             file.local && routes.push(document.location.href);
 
@@ -66,18 +69,15 @@
                 Auto.requestHead(routes[i], function(route, headInfo){
                     fileHead[route] = headInfo;
                 });
-                console.log(fileHead[routes[i]]);
+                // console.log(fileHead[routes[i]]);
             }
 
-            // 添加css文件发生改变时动画效果
             var head = document.getElementsByTagName('head')[0],
                 style = document.createElement('style'),
                 css = '.no-fresh * { transition: all 0.3s '+ transition +';-webkit-transition: all 0.3s '+ transition +';}';
-            // style.setAttribute('type','text/css');
             head.appendChild(style);
             style.appendChild(document.createTextNode(css));
             
-            // 所有文件第一次加载结束
             firstRender = false;
         },
 
@@ -117,29 +117,44 @@
         // 重新加载文件
         reloadFile : function(route, type){
             switch(type) {
-             case 'text/css':
-                var link = linkElements[route],
-                    html = document.body.parentNode,
-                    head = link.parentNode,
-                    next = link.nextSibling,
-                    newLink = document.createElement('link');
-                
-                html.className = html.className.replace(/\*no\-fresh/gi, '') + ' no-fresh';
-                newLink.setAttribute("type", "text/css");
-                newLink.setAttribute("rel", "stylesheet");
-                newLink.setAttribute("href", route + "?now=" + new Date() * 1);
-                next ? head.insertBefore(newLink, next) : head.appendChild(newLink);
-                linkElements[route] = newLink;
-                oldLinkElements[route] = link;
-                Auto.replaceLink();
-                break;
+                case 'text/css':
+                 // debugger;
+                    var link = linkElements[route],
+                        html = document.body.parentNode,
+                        head = link.parentNode,
+                        next = link.nextSibling,
+                        newLink = document.createElement('link');
+                    
+                    html.className = html.className.replace(/\*no\-fresh/gi, '') + ' no-fresh';
+                    newLink.setAttribute('type', 'text/css');
+                    newLink.setAttribute('rel', 'stylesheet');
+                    newLink.setAttribute('href', route + '?t=' + new Date()*1);
+                    next ? head.insertBefore(newLink, next) : head.appendChild(newLink);
+                    linkElements[route] = newLink;
+                    oldLinkElements[route] = link;
+                    Auto.replaceLink();
+                    break;
 
-             case 'text/html':
-                 if(route!=document.location)
-                     return;
-             case 'application/javascript':
-             case 'text/javascript':
-                 document.location.reload();
+                case 'text/html':
+                    if(route!=document.location)
+                        return;
+                    document.location.reload();
+                    break;
+                case 'application/javascript':
+                case 'text/javascript':
+                    var script = scriptElements[route],
+                        body = document.body,
+                        next = script.nextSibling,
+                        newScript = document.createElement('script');
+
+                    newScript.setAttribute('type', 'text/javascript');
+                    newScript.setAttribute('src', route + '?t=' + new Date()*1);
+                    next ? body.insertBefore(newScript, script):body.appendChild(newScript);
+                    scriptElements[route] = newScript;
+                    oldScriptElements[route]  = script;
+                    Auto.replaceScript();
+
+                    document.location.reload();
             }
         },
         replaceLink: function () {
@@ -148,8 +163,9 @@
                 try {
                     var link = linkElements[route],
                         oldLink = oldLinkElements[route],
-                        html = document.body.parentNode,
-                        sheet = link.sheet || link.styleSheet,
+                        html = document.body.parentNode;
+
+                    var sheet = link.sheet || link.styleSheet,
                         rules = sheet.rules || sheet.cssRules;
                     if (rules.length >= 0) {
                         oldLink.parentNode.removeChild(oldLink);
@@ -159,19 +175,30 @@
                         }, 100);
                     }
                 } catch (e) {
+                    // throw e;
                     pending++;
                 }
                 if (pending) setTimeout(Auto.replaceLink, 50);
             }
         },
+        replaceScript: function(){
+            var peding = 0;
+
+            for(var route in oldScriptElements){
+                try{
+                    var script = scriptElements[route],
+                        oldScript = oldScriptElements[route];
+                    oldScript.parentNode.removeChild(oldScript);
+                    delete oldScriptElements[route];
+                }catch(e){
+                    peding++;
+                }
+            }
+        },
 
         //请求本地文件的HTTP头信息
         requestHead : function(route,callback){
-            interruptRequest[route] = true;
-            var xhr = window.XMLHttpRequest ? new XMLHttpRequest() :  new ActiveXObject("Microsoft.XmlHttp");
-            var xhr = new XMLHttpRequest();
-            xhr.open('HEAD', route, true);
-            /**
+            /*
              *
              * 0: 未初始化 对象已建立尚未初始化,未调用open方法；
              * 1: 初始化，对象已建立，尚未调用send方法
@@ -182,8 +209,12 @@
              *
              * 304：Not Modified
              *
-             *
-            */
+             */
+            interruptRequest[route] = true;
+            // var xhr = window.XMLHttpRequest ? new XMLHttpRequest() :  new ActiveXObject("Microsoft.XmlHttp");
+            var xhr = new XMLHttpRequest();
+            xhr.open('HEAD', route, true);
+
             xhr.onreadystatechange = function(){
                 delete interruptRequest[route];
                 if(xhr.readyState == 4 && xhr.status != 304){
@@ -201,10 +232,9 @@
 
     if(document.location.protocol != 'file:'){
         if(!window.loadOver){
-            debugger;
             Auto.init();
         }
         window.loadOver = true;
     }
 
-})();
+})(KISSY);

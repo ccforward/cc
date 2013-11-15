@@ -10,17 +10,18 @@ html,body {
 .wrap {
     width: 990px;
     height: 100%;
-    margin: 10px auto;
+    margin: 1px auto;
 }
 .wrap .title {
     color: #fff;
     text-align: center;
-    font-size: 30px;
     color: #f60;
+    font-size: 30px;
 }
 .wrap .block {
     width: 300px;
     height: 400px;
     margin: 10px;
     border: 1px solid #fff;
+    background-color: #9c0;
 }
