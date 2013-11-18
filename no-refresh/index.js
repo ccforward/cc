@@ -1,8 +1,16 @@
 KISSY.ready(function(S){
 	var $ = S.all,
-		E = S.Event;
-	E.on('#J_link', 'click', function(e){
-		e.preventDefault();
-		console.log('eeee1123232');
-	})
-});
+		E = S.Event,
+    	$ = S.all;
+    var domArr = [];
+
+    function getDomArr(dom, grandChild){
+        for(i=0;i<dom.length;i++){
+        	
+        }
+    }
+    
+    getDomArr($('body').children());
+    console.log(domArr);
+    
+})

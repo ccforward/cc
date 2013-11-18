@@ -1,6 +1,25 @@
 html,body {
     background-color: #333;
 }
+@-webkit-keyframes side-bar-scaleDown {
+    to {
+        opacity:0;
+        -webkit-transform:scale(.8);
+    }
+}
+@-moz-keyframes side-bar-scaleDown {
+    to {
+        opacity:0;
+        -moz-transform:scale(.8);
+    }
+}
+@keyframes side-bar-scaleDown {
+    to {
+        opacity:0;
+        transform:scale(.8);
+    }
+}
+
 .side-bar {
     position: fixed;
     top: 0;
@@ -10,7 +29,7 @@ html,body {
     background-color: #fff;
     z-index: 999999;
     _position: absolute;
-    _height:500px;
+    _height:800px;
 }
 
 .side-bar .side-bar-tabs {
@@ -30,7 +49,11 @@ html,body {
     height: 50px;
     cursor: pointer;
 }
-.side-bar .side-bar-tabs .side-bar-tab.tab-hover,
+.side-bar .side-bar-tabs .side-bar-tab:hover{
+    background-color: #9c0;
+    color: #fff;
+
+}
 .side-bar .side-bar-tabs .side-bar-tab.tab-sel{
     background-color: #9c0;
     color: #fff;
@@ -63,12 +86,17 @@ html,body {
 
 .side-bar .side-bar-contents .side-bar-con {
     position: absolute;
-    visibility: hidden;
     width: 235px;
     height: 100%;
     background-color: #f60;
     border-radius: 0 15px 0 0;
     overflow: auto;
+    z-index: 99997;
+}
+.side-bar-con-scaleDown {
+    -webkit-animation: side-bar-scaleDown .7s ease both;
+    -moz-animation: side-bar-scaleDown .7s ease both;
+    animation: side-bar-scaleDown .7s ease both;
 }
 .side-bar .side-bar-contents .side-bar-con div {
     padding: 0 10px;

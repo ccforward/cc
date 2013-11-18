@@ -118,7 +118,6 @@
         reloadFile : function(route, type){
             switch(type) {
                 case 'text/css':
-                 // debugger;
                     var link = linkElements[route],
                         html = document.body.parentNode,
                         head = link.parentNode,
@@ -164,7 +163,6 @@
                     var link = linkElements[route],
                         oldLink = oldLinkElements[route],
                         html = document.body.parentNode;
-
                     var sheet = link.sheet || link.styleSheet,
                         rules = sheet.rules || sheet.cssRules;
                     if (rules.length >= 0) {
@@ -175,8 +173,8 @@
                         }, 100);
                     }
                 } catch (e) {
-                    // throw e;
                     pending++;
+                    // throw e;
                 }
                 if (pending) setTimeout(Auto.replaceLink, 50);
             }
