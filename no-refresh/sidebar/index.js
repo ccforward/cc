@@ -20,12 +20,11 @@ KISSY.ready(function(S){
 
             _hideSideBar: function(){
                 var _self = this;
-                var anim = new S.Anim('#J_side_contents', {'left':'-235px'}, 0.3, '', function(){
-                    D.css($('.side-bar-con'), {'visibility':'visible','top':0});
-                    $('.side-bar-tab').removeClass('tab-sel');
-                    E.remove(BODY, 'click',  _self._outClick);
-                });
-                anim.run();
+                new S.Anim('#J_side_contents', {'left':'-235px'}, 0.3, '', function(){
+                        D.css($('.side-bar-con'), {'visibility':'visible','top':0});
+                        $('.side-bar-tab').removeClass('tab-sel');
+                        E.remove(BODY, 'click',  _self._outClick);
+                }).run();
             },
             _showSideBar: function(idx){
                 var _self = this,
@@ -34,16 +33,17 @@ KISSY.ready(function(S){
                 S.one('.J_side_bar_current') && S.one('.J_side_bar_current').addClass('side-bar-con-scaleDown').removeClass('J_side_bar_current');
                 D.addClass(contents[idx], 'J_side_bar_current');
                 D.removeClass('.J_side_bar_current', 'side-bar-con-scaleDown');
+
+                D.css(contents, {'z-index':'99997'});
+                D.css(contents[idx], {'z-index':'99999'});
                 // 已经显示sidebar
-                D.css(contents[idx], {'top':D.viewportHeight(),'z-index':'99999'});
                 if(parseInt(D.css('#J_side_contents','left'))>0){
-                    var anim = new S.Anim(contents[idx], {'top':'0px'}, 0.3, '', false);
-                    anim.run();
+                    D.css(contents[idx], {'top':D.viewportHeight()});
+                    new S.Anim(contents[idx], {'top':'0px'}, 0.3, '', false).run();
                 }else {
-                    var anim = new S.Anim('#J_side_contents', {'left':'35px'}, 0.3, '', function(){
+                    new S.Anim('#J_side_contents', {'left':'35px'}, 0.3, '', function(){
                         E.on(BODY, 'click',  _self._outClick);
-                    });
-                    anim.run();
+                    }).run();
                 }
             },
             _outClick: function(){
@@ -95,24 +95,25 @@ KISSY.ready(function(S){
         sideBar.init();
     });
 
-    var domArr = [];
-    var dom = $('body').children();
+    // var domArr = [];
+    // var dom = $('body').children();
 
-    // domArr.push['body']
-    function getDomArr(dom){
-        var i = dom.length-1;
-        while(i>=0){
-            // console.log(dom[i]);
-            var child = [];
-            child.push(dom[i]);
-            if($(dom[i]).children()){
-                getDomArr($(dom[i]).children())
-            }
-            delete dom[i];
-            i--
-            domArr.push(child)
-        }
-    }
-    getDomArr($('body').children())
-    console.log(domArr);
+    // // domArr.push['body']
+    // function getDomArr(dom){
+    //     var i = dom.length-1;
+    //     while(i>=0){
+    //         // console.log(dom[i]);
+    //         var child = [];
+    //         child.push(dom[i]);
+    //         if($(dom[i]).children()){
+    //             getDomArr($(dom[i]).children())
+    //         }
+    //         delete dom[i];
+    //         i--
+    //         domArr.push(child)
+    //     }
+    // }
+    // getDomArr($('body').children())
+    // console.log(domArr);
 });
+
