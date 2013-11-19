@@ -10,7 +10,7 @@ KISSY.ready(function(S){
     });
     var E = S.Event, D = S.DOM, $ = S.all, BODY = S.one("body");
 
-    S.use('tbc/mini-login/1.4.0/,sizzle',function(S, Login){
+    S.use('tbc/mini-login/1.4.0/',function(S, Login){
         var isMouseInSideBar = false;
 
         var sideBar =  {
@@ -29,19 +29,19 @@ KISSY.ready(function(S){
             _showSideBar: function(idx){
                 var _self = this,
                     contents = $('.side-bar-con');
-                
+
+                D.css(contents, {'z-index':'99997'});
+                D.css(contents[idx], {'z-index':'99999'});
                 S.one('.J_side_bar_current') && S.one('.J_side_bar_current').addClass('side-bar-con-scaleDown').removeClass('J_side_bar_current');
                 D.addClass(contents[idx], 'J_side_bar_current');
                 D.removeClass('.J_side_bar_current', 'side-bar-con-scaleDown');
 
-                D.css(contents, {'z-index':'99997'});
-                D.css(contents[idx], {'z-index':'99999'});
                 // 已经显示sidebar
                 if(parseInt(D.css('#J_side_contents','left'))>0){
                     D.css(contents[idx], {'top':D.viewportHeight()});
-                    new S.Anim(contents[idx], {'top':'0px'}, 0.3, '', false).run();
+                    new S.Anim(contents[idx], {'top':'0px'}, 0.3, 'swing', false).run();
                 }else {
-                    new S.Anim('#J_side_contents', {'left':'35px'}, 0.3, '', function(){
+                    new S.Anim('#J_side_contents', {'left':'35px'}, 0.3, 'swing', function(){
                         E.on(BODY, 'click',  _self._outClick);
                     }).run();
                 }
@@ -69,7 +69,6 @@ KISSY.ready(function(S){
                                 });
                             }
                         }
-
                     });
                 });
 
@@ -94,26 +93,5 @@ KISSY.ready(function(S){
         }
         sideBar.init();
     });
-
-    // var domArr = [];
-    // var dom = $('body').children();
-
-    // // domArr.push['body']
-    // function getDomArr(dom){
-    //     var i = dom.length-1;
-    //     while(i>=0){
-    //         // console.log(dom[i]);
-    //         var child = [];
-    //         child.push(dom[i]);
-    //         if($(dom[i]).children()){
-    //             getDomArr($(dom[i]).children())
-    //         }
-    //         delete dom[i];
-    //         i--
-    //         domArr.push(child)
-    //     }
-    // }
-    // getDomArr($('body').children())
-    // console.log(domArr);
 });
 

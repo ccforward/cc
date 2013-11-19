@@ -1,16 +1,2 @@
-KISSY.ready(function(S){
-	var $ = S.all,
-		E = S.Event,
-    	$ = S.all;
-    var domArr = [];
-
-    function getDomArr(dom, grandChild){
-        for(i=0;i<dom.length;i++){
-        	
-        }
-    }
+alert(11);
     
-    getDomArr($('body').children());
-    console.log(domArr);
-    
-})

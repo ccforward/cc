@@ -4,8 +4,6 @@
         file = {'local':1, 'js':1, 'css':1},
         // 要获取的HTTP头信息
         headerRequest = {'Content-Encoding':1, 'Content-Length':1, 'Content-Type':1, 'Etag':1, 'Last-Modified':1, },
-        // 存储头信息
-        fileHead = {},
         //css3 动画方式
         transition = 'ease',
         //存储页面上本地css的路径
@@ -13,7 +11,12 @@
         oldLinkElements = {},
         scriptElements = {},
         oldScriptElements = {},
-        interruptRequest = {};
+        interruptRequest = {},
+
+        // 存储本地文件头信息
+        fileHead = {},
+        // 远程文件头信息
+        crossHead = {};
 
     var Auto = {
         init : function(){
@@ -37,14 +40,20 @@
                 links = document.getElementsByTagName('link'),
                 routes = [];
 
+            var crossRoutes = [];
+
             //监控js
             for(var i=0; i<scripts.length; i++){
                 var js  = scripts[i].getAttribute('src'),
                     type = scripts[i].getAttribute('type') || 'text/javascript';
 
                 //存储本地的js路径
-                if(js && type == 'text/javascript' && isLocal(js)){
-                    routes.push(js);
+                if(js && type == 'text/javascript'){
+                    if(isLocal(js)){
+                        routes.push(js);
+                    }else {
+                        crossRoutes.push(js);
+                    }
                     scriptElements[js] = scripts[i];
                 }
             }
@@ -58,8 +67,12 @@
             for(var i=0;i<links.length;i++){
                 var css = links[i].getAttribute('href'),
                     sht = links[i].getAttribute('rel');
-                if(css && sht && sht == 'stylesheet' && isLocal(css)){
-                    routes.push(css);
+                if(css && sht && sht == 'stylesheet'){
+                    if(isLocal(css)){
+                        routes.push(css);
+                    }else {
+                        crossRoutes.push(css);
+                    }
                     linkElements[css] = links[i];
                 }
             }
@@ -69,7 +82,12 @@
                 Auto.requestHead(routes[i], function(route, headInfo){
                     fileHead[route] = headInfo;
                 });
-                // console.log(fileHead[routes[i]]);
+            }
+            //请求跨域文件的头信息并保存
+            for(var i=0;i<crossRoutes.length;i++){
+                Auto.requestHeadCrossDomain(crossRoutes[i], function(route, headInfo){
+                    crossHead[route] = headInfo;
+                });
             }
 
             var head = document.getElementsByTagName('head')[0],
@@ -107,10 +125,34 @@
                             Auto.reloadFile(route, fileType);
                             break;
                         }       
-                        
                     }
                 });
+            }
+            for(var cross in crossHead) {
+                if (interruptRequest[cross])
+                    continue;
+                Auto.requestHeadCrossDomain(cross,function(route, newCross){
+                    var oldHead = crossHead[route],
+                        isChanged = false;
+                    crossHead[route] = newCross;
 
+                    for(var h in oldHead){
+                        var oldH = oldHead[h],
+                            newH = newCross[h];
+                            fileType = newCross['Content-Type'];
+                        switch(h.toLowerCase()){
+                            case 'etag':
+                                if(!newCross) break;
+                            default:
+                                isChanged = (oldH != newH);
+                                break;
+                        }
+                        if(isChanged){
+                            Auto.reloadFile(route, fileType);
+                            break;
+                        }       
+                    }
+                });
             }
         },
 
@@ -140,6 +182,7 @@
                     document.location.reload();
                     break;
                 case 'application/javascript':
+                case 'application/x-javascript':
                 case 'text/javascript':
                     var script = scriptElements[route],
                         body = document.body,
@@ -212,7 +255,6 @@
             // var xhr = window.XMLHttpRequest ? new XMLHttpRequest() :  new ActiveXObject("Microsoft.XmlHttp");
             var xhr = new XMLHttpRequest();
             xhr.open('HEAD', route, true);
-
             xhr.onreadystatechange = function(){
                 delete interruptRequest[route];
                 if(xhr.readyState == 4 && xhr.status != 304){
@@ -224,6 +266,22 @@
                 }
             }
 
+            xhr.send();
+        },
+        requestHeadCrossDomain: function(route, callback){
+            interruptRequest[route] = true;
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', '../file.php?url='+route, true);
+            xhr.onreadystatechange = function(){
+                delete interruptRequest[route];
+                var crossHeadInfo = {}
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    // crossHeadInfo = xhr.responseText;
+                    crossHeadInfo = eval('('+xhr.responseText+')');
+                    // callback(route, eval('('+crossHeadInfo+')'));
+                    callback(route, crossHeadInfo);
+                }
+            }
             xhr.send();
         }
     }
