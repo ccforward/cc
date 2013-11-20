@@ -20,16 +20,18 @@
 
     var Auto = {
         init : function(){
+            var _self = this;
             if(document.body){
                 //只在第一次渲染页面时 加载所有本地文件
-                firstRender && Auto.loadFiles();
+                firstRender && _self.loadFiles();
                 // 实时监测文件
+                // _self.monitorFile();  this --> window
                 Auto.monitorFile();
             }
             setTimeout(Auto.init, 1000);
         },
         loadFiles : function(){
-            // 判断本地文件 TODO 
+            // 判断本地文件 TODO
             function isLocal(file){
                 var local = document.location,
                     reg = new RegExp("^\\.|^\/(?!\/)|^[\\w]((?!://).)*$|" + local.protocol + "//" + local.host);
@@ -95,63 +97,51 @@
                 css = '.no-fresh * { transition: all 0.3s '+ transition +';-webkit-transition: all 0.3s '+ transition +';}';
             head.appendChild(style);
             style.appendChild(document.createTextNode(css));
-            
+
             firstRender = false;
         },
 
-        //匹配头信息 监控文件是否在改变 
+        //匹配头信息 监控文件是否在改变
         monitorFile : function(){
+            var _self = this;
+            function monitor(route, newH, oldH){
+                for(var h in oldH){
+                    var oH = oldH[h],
+                        nH = newH[h];
+                        fileType = newH['Content-Type'];
+                    switch(h.toLowerCase()){
+                        case 'etag':
+                            if(!newH) break;
+                        default:
+                            isChanged = (oH != nH);
+                            break;
+                    }
+                    if(isChanged){
+                        _self.reloadFile(route, fileType);
+                        break;
+                    }
+                }
+            }
             for(var route in fileHead){
                 if (interruptRequest[route])
                     continue;
 
-                Auto.requestHead(route,function(route, newHead){
-                    var oldHead = fileHead[route],
-                        isChanged = false;
-                    fileHead[route] = newHead;
-
-                    for(var h in oldHead){
-                        var oldH = oldHead[h],
-                            newH = newHead[h];
-                            fileType = newHead['Content-Type'];
-                        switch(h.toLowerCase()){
-                            case 'etag':
-                                if(!newHead) break;
-                            default:
-                                isChanged = (oldH != newH);
-                                break;
-                        }
-                        if(isChanged){
-                            Auto.reloadFile(route, fileType);
-                            break;
-                        }       
-                    }
-                });
+                _self.requestHead(route,function(route, newHead){
+                        var oldHead = fileHead[route],
+                            isChanged = false;
+                        fileHead[route] = newHead;
+                        monitor(route, newHead, oldHead);
+                    });
             }
+
             for(var cross in crossHead) {
                 if (interruptRequest[cross])
                     continue;
-                Auto.requestHeadCrossDomain(cross,function(route, newCross){
+                _self.requestHeadCrossDomain(cross,function(route, newCross){
                     var oldHead = crossHead[route],
                         isChanged = false;
                     crossHead[route] = newCross;
-
-                    for(var h in oldHead){
-                        var oldH = oldHead[h],
-                            newH = newCross[h];
-                            fileType = newCross['Content-Type'];
-                        switch(h.toLowerCase()){
-                            case 'etag':
-                                if(!newCross) break;
-                            default:
-                                isChanged = (oldH != newH);
-                                break;
-                        }
-                        if(isChanged){
-                            Auto.reloadFile(route, fileType);
-                            break;
-                        }       
-                    }
+                    monitor(route, newCross, oldHead);
                 });
             }
         },
@@ -165,7 +155,7 @@
                         head = link.parentNode,
                         next = link.nextSibling,
                         newLink = document.createElement('link');
-                    
+
                     html.className = html.className.replace(/\*no\-fresh/gi, '') + ' no-fresh';
                     newLink.setAttribute('type', 'text/css');
                     newLink.setAttribute('rel', 'stylesheet');
@@ -208,7 +198,7 @@
                         html = document.body.parentNode;
                     var sheet = link.sheet || link.styleSheet,
                         rules = sheet.rules || sheet.cssRules;
-                    // if (rules.length >= 0) {
+                    // if (rules.length >= 0) {  //chrome 读取远程link不能获取rules的bug
                     if (true) {
                         oldLink.parentNode.removeChild(oldLink);
                         delete oldLinkElements[route];
