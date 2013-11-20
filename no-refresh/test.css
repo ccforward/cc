@@ -1,3 +1,25 @@
 html,body {
-    background-color: #9c0;
+    background-color: #834;
+}
+
+.side-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 35px;
+    height: 100%;
+    background-color: #fff;
+    z-index: 999999;
+    _position: absolute;
+    _height:800px;
+}
+
+.side-bar .side-bar-tabs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35px;
+    height: 100%;
+    z-index: 99999;
+    background-color: #ccc;
 }

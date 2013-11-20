@@ -208,7 +208,8 @@
                         html = document.body.parentNode;
                     var sheet = link.sheet || link.styleSheet,
                         rules = sheet.rules || sheet.cssRules;
-                    if (rules.length >= 0) {
+                    // if (rules.length >= 0) {
+                    if (true) {
                         oldLink.parentNode.removeChild(oldLink);
                         delete oldLinkElements[route];
                         setTimeout(function () {
