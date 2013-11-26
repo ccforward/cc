@@ -189,7 +189,7 @@
                     document.location.reload();
             }
         },
-        replaceLink: function () {
+        replaceLink: function(){
             var pending = 0;
             for (var route in oldLinkElements) {
                 try {
