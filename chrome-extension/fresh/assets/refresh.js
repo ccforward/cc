@@ -26,14 +26,13 @@
                 firstRender && _self.loadFiles();
                 // 实时监测文件
                 // _self.monitorFile();  this --> window
-                Auto.monitorFile();
+                
+                // 设置根据开关监控文件
+                if(localStorage["send_head_request"] > 0){
+                    Auto.monitorFile();
+                }
             }
-            // 设置开关
-            // debugger;
-            
-            // if(localStorage["send_head_request"] > 0){
-            //     setTimeout(Auto.init, 1000);
-            // }
+
             setTimeout(Auto.init, 1000);
         },
         loadFiles : function(){
