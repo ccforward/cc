@@ -10,18 +10,20 @@
    },
    "browser_action": {
       "default_icon": "rubik_icon.png",
-      "default_title": "TMD 我不要去按F5",
-      "default_popup": "popup.html"
+      "default_popup": "popup.html",
+      "default_title": "TMD 我不要去按F5"
    },
    "background": {
       "persistent": false,
       "scripts": [ "background.js" ]
    },
+
    // "content_scripts": [ {
-   //    "js": ["assets/refresh.js"],
+   //    "js": ["content_script.js"],
    //    "matches": [ "http://*/*" ],
    //    "run_at": "document_end"
    // } ],
+   
    "manifest_version": 2,
    "options_page": "options.html",
    "permissions": ["background", "management", "tabs", "http://*/*" ]

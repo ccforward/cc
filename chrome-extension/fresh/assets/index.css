@@ -1,10 +1,42 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    margin: 0;
+    padding: 0
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
+    font-weight: 500
+}
+
+address,caption,cite,code,dfn,em,th,var {
+    font-style: normal;
+    font-weight: 500
+}
+
+ol,ul {
+    list-style: none
+}
+
+ins,a {
+    text-decoration: none
+}
+
+a:hover {
+    text-decoration: underline
+}
+
+fieldset,img {
+    border: 0
+}
+
+
 body {
-  margin: 0;
   background: linear-gradient(#f7f7f7, #e0e0e0);
 }
+
 .wrap {
   position: relative;
-  width: 300px;
+  width: 500px;
   padding: 30px 10px;
 }
 .slider-btn {
@@ -48,4 +80,23 @@ body {
 }
 .slider-btn.on::after {
   left: 3em;
+}
+
+.files {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+.files li {
+  margin-bottom: 10px;
+  border-bottom: 1px dashed #333;
+}
+
+.files .link-list {
+  color: #35ADF0;
+}
+.files .script-list {
+  color: #DB247C;
+}
+.files .chkbox {
+  margin-right: 5px;
 }
