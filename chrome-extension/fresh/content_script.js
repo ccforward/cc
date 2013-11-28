@@ -1,7 +1,8 @@
 // 初始化 localStorage
-if(localStorage["send_head_request"] <0 || !localStorage["send_head_request"]){
+if(!localStorage["send_head_request"] || localStorage["send_head_request"] < 0){
     localStorage["send_head_request"] = -1;
 }
+console.log(localStorage["send_head_request"]);
 
 
 var firstRender = true,
@@ -38,6 +39,7 @@ var Auto = {
 
         setTimeout(Auto.init, 1000);
     },
+    // 加载文件
     loadFiles : function(){
         // 判断本地文件 TODO
         function isLocal(file){

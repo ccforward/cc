@@ -1,8 +1,7 @@
 // 发送信息到popup
 var pageLinks = document.getElementsByTagName('link'),
-    pageScripts = document.getElementsByTagName('script');
-
-var links = [],
+    pageScripts = document.getElementsByTagName('script'),
+	links = [],
 	scripts = [];
 	
 for(var i=0;i<pageLinks.length;i++){
@@ -22,4 +21,5 @@ for(var i=0;i<pageScripts.length;i++){
 	}
 }
 
-chrome.extension.sendMessage({ links: links, scripts: scripts, localStg: localStorage["send_head_request"] });
+
+chrome.extension.sendMessage({ links: links, scripts: scripts, location: document.location, localStg: localStorage["send_head_request"] });
