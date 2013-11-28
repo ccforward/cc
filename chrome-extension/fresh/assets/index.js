@@ -24,7 +24,7 @@
             // 回调函数 -- 监听接收的信息 
             chrome.extension.onMessage.addListener(function (message) {
                 // 判断页面的localStorage 和 link script 标签
-                if(message.localStg > 0){
+                if(message.localStg.request > 0){
                     switchNode.addClass('on');
                 } 
                 // 显示link script url
