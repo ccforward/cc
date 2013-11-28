@@ -18,11 +18,11 @@
       "scripts": [ "background.js" ]
    },
 
-   // "content_scripts": [ {
-   //    "js": ["content_script.js"],
-   //    "matches": [ "http://*/*" ],
-   //    "run_at": "document_end"
-   // } ],
+   "content_scripts": [ {
+      "js": ["content_script.js"],
+      "matches": [ "http://*/*" ],
+      "run_at": "document_end"
+   } ],
    
    "manifest_version": 2,
    "options_page": "options.html",

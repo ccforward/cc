@@ -23,7 +23,7 @@
             var _self = this;
             if(document.body){
                 //只在第一次渲染页面时 加载所有本地文件
-                firstRender && _self.loadFiles();
+                firstRender && Auto.loadFiles();
                 // 实时监测文件
                 // _self.monitorFile();  this --> window
                 

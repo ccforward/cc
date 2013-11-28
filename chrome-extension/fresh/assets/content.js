@@ -14,7 +14,7 @@ for(var i=0;i<pageLinks.length;i++){
     }
 }
 for(var i=0;i<pageScripts.length;i++){
-	// 判断为script引用
+	// 判断为js script引用
 	var js  = pageScripts[i].getAttribute('src'),
         type = pageScripts[i].getAttribute('type') || 'text/javascript';
 	if(js && type == 'text/javascript'){
