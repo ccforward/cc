@@ -260,20 +260,20 @@
             xhr.send();
         },
         requestHeadCrossDomain: function(route, callback){
-            interruptRequest[route] = true;
-            var xhr = new XMLHttpRequest();
-            xhr.open('get', '../file.php?url='+route, true);
-            xhr.onreadystatechange = function(){
-                delete interruptRequest[route];
-                var crossHeadInfo = {}
-                if(xhr.readyState == 4 && xhr.status == 200){
-                    // crossHeadInfo = xhr.responseText;
-                    crossHeadInfo = eval('('+xhr.responseText+')');
-                    // callback(route, eval('('+crossHeadInfo+')'));
-                    callback(route, crossHeadInfo);
-                }
-            }
-            xhr.send();
+            // interruptRequest[route] = true;
+            // var xhr = new XMLHttpRequest();
+            // xhr.open('get', '../file.php?url='+route, true);
+            // xhr.onreadystatechange = function(){
+            //     delete interruptRequest[route];
+            //     var crossHeadInfo = {}
+            //     if(xhr.readyState == 4 && xhr.status == 200){
+            //         // crossHeadInfo = xhr.responseText;
+            //         crossHeadInfo = eval('('+xhr.responseText+')');
+            //         // callback(route, eval('('+crossHeadInfo+')'));
+            //         callback(route, crossHeadInfo);
+            //     }
+            // }
+            // xhr.send();
         }
     }
 
