@@ -1,25 +1,130 @@
-html,body {
-    background-color: #834;
+.clearfix {
+    *zoom: 1
+}
+.clearfix:before,.clearfix:after {
+    display: table;
+    content: ""
+}
+.clearfix:after {
+    clear: both
 }
 
-.side-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 35px;
-    height: 100%;
-    background-color: #fff;
-    z-index: 999999;
-    _position: absolute;
-    _height:800px;
+.tbc-lottery-overlay {
+    position:absolute;
+    left:-9999px;
+    top:-9999px;
+    border: 8px solid #fff;
+    background-color: #fff0ab;
+    outline: none;
+}
+.twelve-dialog {
+    display: none;
+}
+/*header*/
+.twelve-dialog .tbc-lottery-popup-header{
+    width: auto;
 }
 
-.side-bar .side-bar-tabs {
+/* content  start */
+.twelve-dialog .tbc-lottery-popup-content {
+    width: 630px;
+    height: auto;
+    padding: 10px 49px 20px 39px;
+    font-size: 12px;
+    font-family: '宋体';
+}
+.twelve-dialog .dialog-detail .hd {
+    padding-top: 20px;
+    color: #935e34;
+    font-size: 18px;
+    font-family: 'microsoft yahei';
+}
+/*award*/
+.twelve-dialog .award-show {
+    margin-bottom: 20px;
+}
+.twelve-dialog .award-show .bd {
+    width: 645px;
+}
+.twelve-dialog .award-show .award-item {
+    float: left;
+    margin-right: 22px;
+}
+.twelve-dialog .award-show .award-item .award-img {
+    position: relative;
+}
+.twelve-dialog .award-show .award-item .img-desc {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 35px;
-    height: 100%;
-    z-index: 99999;
-    background-color: #ccc;
+    top: 72px;
+    width: 70px;
+    height: 17px;
+    overflow: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
+.twelve-dialog .award-show .award-item .award-desc p {
+    width: 70px;
+    height: 18px;
+    overflow: hidden;
+    text-align: center;
+    color: #935e34;
+}
+/*winner*/
+.twelve-dialog .winner-list {
+    border-top: 1px solid #dac48c;
+    border-bottom: 1px solid #dac48c;
+    padding-bottom: 20px;
+}
+.twelve-dialog .winner-list .bd {
+    position: relative;
+    height: 40px;
+    overflow: hidden;
+}
+.twelve-dialog .winner-list .winners-item {
+    float: left;
+    width: 210px;
+    height: 20px;
+    overflow: hidden;
+    color: #935e34;
+}
+
+
+
+/*rule*/
+.twelve-dialog .rule p {
+    margin-bottom: 3px;
+    color: #935e34;
+}
+.twelve-dialog .rule .show-detail-rule{
+    margin-left: 18px;
+    color: #12a7f7;
+}
+/* content  end */
+
+/*footer*/
+.twelve-dialog .tbc-lottery-popup-footer {
+    width: auto;
+}
+
+
+
+.twelve-overlay-hidden {
+    visibility: hidden;
+}
+
+.twelve-overlay-mask-hidden {
+    display: none;
+}
+
+.twelve-overlay-shown {
+    visibility: visible;
+}
+
+/*遮罩*/
+.twelve-overlay-mask-shown{
+    display: block;
+    background-color: #000;
+    opacity: 0.5;
+    filter:alpha(opacity=30);
 }
