@@ -89,13 +89,15 @@ body {
     margin-bottom: 10px;
     font-size: 14px;
 }
-.files li {
+.files .file-item {
     padding-bottom: 3px;
     margin-bottom: 6px;
     cursor: pointer;
     word-break: break-all;
 }
-
+.files .file-item .local-file {
+    background-color: #DAF8C3;
+}
 .files .link-list {
   color: #35ADF0;
 }

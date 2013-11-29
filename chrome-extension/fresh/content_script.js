@@ -2,7 +2,32 @@
 if(!localStorage["send_head_request"] || localStorage["send_head_request"] < 0){
     localStorage["send_head_request"] = -1;
 }
-console.log(localStorage["send_head_request"]);
+
+// sessionStorage
+if(!sessionStorage['init-file-links'] && !sessionStorage['init-file-scripts'] ){
+    debugger;
+    var pageLinks = document.getElementsByTagName('link'),
+        pageScripts = document.getElementsByTagName('script'),
+        links = [],
+        scripts = [];
+
+    for(var i=0;i<pageLinks.length;i++){
+        var css = pageLinks[i].getAttribute('href'),
+            sht = pageLinks[i].getAttribute('rel');
+        if(css && sht && sht == 'stylesheet'){
+            links.push(pageLinks[i].href);
+        }
+    }
+    for(var i=0;i<pageScripts.length;i++){
+        var js  = pageScripts[i].getAttribute('src'),
+            type = pageScripts[i].getAttribute('type') || 'text/javascript';
+        if(js && type == 'text/javascript'){
+            scripts.push(pageScripts[i].src);
+        }
+    }
+    sessionStorage['init-file-links'] = links;
+    sessionStorage['init-file-scripts'] = scripts;
+}
 
 
 var firstRender = true,
@@ -10,7 +35,6 @@ var firstRender = true,
     file = {'local':1, 'js':1, 'css':1},
     // 要获取的HTTP头信息
     headerRequest = {'Content-Encoding':1, 'Content-Length':1, 'Content-Type':1, 'Etag':1, 'Last-Modified':1, },
-    //css3 动画方式
     transition = 'ease',
     //存储页面上本地css的路径
     linkElements = {},
@@ -19,10 +43,8 @@ var firstRender = true,
     oldScriptElements = {},
     interruptRequest = {},
 
-    // 存储本地文件头信息
-    fileHead = {},
-    // 远程文件头信息
-    crossHead = {};
+    // 存储文件头信息
+    fileHead = {};
 
 var Auto = {
     init : function(){
@@ -41,31 +63,18 @@ var Auto = {
     },
     // 加载文件
     loadFiles : function(){
-        // 判断本地文件 TODO
-        function isLocal(file){
-            var local = document.location,
-                reg = new RegExp("^\\.|^\/(?!\/)|^[\\w]((?!://).)*$|" + local.protocol + "//" + local.host);
-            return file.match(reg)
-        }
-
         var scripts = document.getElementsByTagName('script'),
             links = document.getElementsByTagName('link'),
             routes = [];
-
-        var crossRoutes = [];
 
         //监控js
         for(var i=0; i<scripts.length; i++){
             var js  = scripts[i].getAttribute('src'),
                 type = scripts[i].getAttribute('type') || 'text/javascript';
 
-            //存储本地的js路径
             if(js && type == 'text/javascript'){
-                if(isLocal(js)){
-                    routes.push(js);
-                }else {
-                    crossRoutes.push(js);
-                }
+                routes.push(js);
+                //存储js节点
                 scriptElements[js] = scripts[i];
             }
         }
@@ -77,28 +86,22 @@ var Auto = {
 
         //监控css
         for(var i=0;i<links.length;i++){
+            debugger;
             var css = links[i].getAttribute('href'),
-                sht = links[i].getAttribute('rel');
+                sht = links[i].getAttribute('rel'),
+                href = pageLinks[i].href;
             if(css && sht && sht == 'stylesheet'){
-                if(isLocal(css)){
-                    routes.push(css);
-                }else {
-                    crossRoutes.push(css);
-                }
-                linkElements[css] = links[i];
+                // routes.push(css);
+                routes.push(href);
+                // 存储link节点
+                linkElements[href] = links[i];
             }
         }
 
-        //请求本地文件的头信息并保存
+        //初始化 请求本地文件的头信息并保存
         for(var i=0;i<routes.length;i++){
             Auto.requestHead(routes[i], function(route, headInfo){
                 fileHead[route] = headInfo;
-            });
-        }
-        //请求跨域文件的头信息并保存
-        for(var i=0;i<crossRoutes.length;i++){
-            Auto.requestHeadCrossDomain(crossRoutes[i], function(route, headInfo){
-                crossHead[route] = headInfo;
             });
         }
 
@@ -132,7 +135,10 @@ var Auto = {
                 }
             }
         }
-        for(var route in fileHead){
+
+        var monitorArr = localStorage['monitor_files'].split(',');
+        for(var i=0; i<monitorArr.length; i++){
+            var route = monitorArr[i];
             if (interruptRequest[route])
                 continue;
 
@@ -142,17 +148,6 @@ var Auto = {
                     fileHead[route] = newHead;
                     monitor(route, newHead, oldHead);
                 });
-        }
-
-        for(var cross in crossHead) {
-            if (interruptRequest[cross])
-                continue;
-            _self.requestHeadCrossDomain(cross,function(route, newCross){
-                var oldHead = crossHead[route],
-                    isChanged = false;
-                crossHead[route] = newCross;
-                monitor(route, newCross, oldHead);
-            });
         }
     },
 
@@ -238,24 +233,10 @@ var Auto = {
         }
     },
 
-    //请求本地文件的HTTP头信息
+    //请求所有文件的HTTP头信息
     requestHead : function(route,callback){
-        /*
-         *
-         * 0: 未初始化 对象已建立尚未初始化,未调用open方法；
-         * 1: 初始化，对象已建立，尚未调用send方法
-         * 2：发送数据，已经调用send方法但当前状态及HTTP头未知
-         * 3：数据传送中，响应和HTTP头信息不全，responseBody和responseText获取部分数据会出现错误
-         * 4：数据接收完毕，responseBody和responseText获取完整数据
-         *
-         *
-         * 304：Not Modified
-         *
-         */
         interruptRequest[route] = true;
-        // var xhr = window.XMLHttpRequest ? new XMLHttpRequest() :  new ActiveXObject("Microsoft.XmlHttp");
         var xhr = new XMLHttpRequest();
-        xhr.open('HEAD', route, true);
         xhr.onreadystatechange = function(){
             delete interruptRequest[route];
             if(xhr.readyState == 4 && xhr.status != 304){
@@ -266,30 +247,13 @@ var Auto = {
                 callback(route,headInfo);
             }
         }
-
+        xhr.open('HEAD', route, true);
         xhr.send();
     },
-    requestHeadCrossDomain: function(route, callback){
-        // interruptRequest[route] = true;
-        // var xhr = new XMLHttpRequest();
-        // xhr.open('get', '../file.php?url='+route, true);
-        // xhr.onreadystatechange = function(){
-        //     delete interruptRequest[route];
-        //     var crossHeadInfo = {}
-        //     if(xhr.readyState == 4 && xhr.status == 200){
-        //         // crossHeadInfo = xhr.responseText;
-        //         crossHeadInfo = eval('('+xhr.responseText+')');
-        //         // callback(route, eval('('+crossHeadInfo+')'));
-        //         callback(route, crossHeadInfo);
-        //     }
-        // }
-        // xhr.send();
-    }
 }
 
 if(document.location.protocol != 'file:'){
     // 设置开关
-    window.chrome_refresh_isOpen = localStorage["chrome_auto_refresh"] || true;
     if(!window.loadOver){
         Auto.init();
     }

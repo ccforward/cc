@@ -119,16 +119,17 @@ KISSY.ready(function(S){
                         if($(node).hasClass('tab-sel')){
                             _self._hideSideBar();
                         }else{
-                            // if(Login.check()){
                             if(true){
+                            // if(Login.check()){
                                 $('.side-bar-tab').removeClass('tab-sel');
                                 $(node).addClass('tab-sel');
                                 _self._showSideBar(idx);
-                            }else {
-                                Login.show(function(){
-                                    $(node).fire('click');
-                                });
                             }
+                            // else {
+                            //     Login.show(function(){
+                            //         $(node).fire('click');
+                            //     });
+                            // }
                         }
                     });
                 });

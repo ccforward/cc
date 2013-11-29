@@ -24,6 +24,10 @@
       "run_at": "document_end"
    } ],
    
+   "permissions": [
+      "http://*/"
+   ],
+   
    "manifest_version": 2,
    "options_page": "options.html",
    "permissions": ["background", "management", "tabs", "http://*/*" ]

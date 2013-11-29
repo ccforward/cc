@@ -26,31 +26,40 @@
                 // 判断页面的localStorage 和 link script 标签
                 if(message.localStg.request > 0){
                     switchNode.addClass('on');
-                } 
+                }
                 // 显示link script url
                 _self._appendResource($('#J_Links'), message, 'links');
                 _self._appendResource($('#J_Scripts'), message, 'scripts');
                 $('#J_Current_URL').append(message.location.href);
+
+                $.merge(monitorFiles, message.localStg.files.split(','));
+                // 注册点击事件
                 _self._chkBox();
             });
         },
         _appendResource: function(container, message, id){
-            var _self = this;
+            var _self = this,
+                monitorArr = [];
+                // 正在监控的文件
+            if(message.localStg.files)
+                monitorArr = message.localStg.files.split(',')
             $(message[id]).each(function(i, file){
 
                 // 判断本地文件
-                var li = '<li><input type="checkbox" id="'+id + '_' + i + '"';
+                var li = '<li class="file-item"><input type="checkbox" id="'+id + '_' + i + '" class="chkbox ';
+                if($.inArray(file,monitorArr) > -1){
+                    li+= 'chkbox-current';
+                }
                 
                 if(_self._isLocal(file, message.location)){
-                    li += 'class="chkbox chkbox-current" ><span class="J_Local">' + file;
-                    monitorFiles.push(file);
+                    li += '" ><span class="local-file J_Local">' + file;
                 }else{
-                    li += 'class="chkbox" ><span class="J_Remote">' + file;
+                    li += '" ><span class="J_Remote">' + file;
                 }
                 li += '</span></li>';
-                container.append(li)
-                $('.J_Local').siblings('.chkbox').prop('checked',true);
-            })
+                container.append(li);
+                $('.chkbox-current').prop('checked',true);
+            });
         },
         _isLocal: function(file, location){
             var reg = new RegExp("^\\.|^\/(?!\/)|^[\\w]((?!://).)*$|" + location.protocol + "//" + location.host);
@@ -79,16 +88,15 @@
                     // 填充到页面
                     var file = $(this).addClass('chkbox-current').siblings().html();
                     monitorFiles.push(file);
-                    var code = 'localStorage["monitor_files"] = ' + '"' + monitorFiles.toString() + '"';
+                    var code = 'localStorage["monitor_files"] = ' + '"' + monitorFiles + '"';
                     chrome.tabs.executeScript(null, {code: code});
                 }else {
                     $(this).removeClass('chkbox-current');
                     // 删除文件
                     monitorFiles.splice($.inArray($(this).siblings().html(),monitorFiles),1);
 
-                    var code = 'localStorage["monitor_files"] = ' + '"' + monitorFiles.toString() + '"';
+                    var code = 'localStorage["monitor_files"] = ' + '"' + monitorFiles + '"';
                     chrome.tabs.executeScript(null, {code: code});
-
                 }
             });
         }
