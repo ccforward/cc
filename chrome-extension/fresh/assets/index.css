@@ -42,6 +42,32 @@ body {
     width: 500px;
     padding: 30px 10px;
 }
+.reload-btn {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    width: 80px;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid #bea280;
+    background-color: #e38d27;
+    color: #693e0a;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+}
+.reload-btn:hover {
+    text-decoration: none;
+}
+.reload-btn:active {
+    text-decoration: none;
+    top: 18px;
+}
+
+
 .slider-btn {
     position: relative;
     display: block;
@@ -92,8 +118,10 @@ body {
 .files .file-item {
     padding-bottom: 3px;
     margin-bottom: 6px;
-    cursor: pointer;
     word-break: break-all;
+}
+.files .file-item label{
+    cursor: pointer;
 }
 .files .file-item .local-file {
     background-color: #DAF8C3;
@@ -113,4 +141,5 @@ body {
 }
 #J_Current_URL {
   color:#4AAF73;
+  cursor: pointer;
 }

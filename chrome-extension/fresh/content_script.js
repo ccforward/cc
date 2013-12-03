@@ -3,9 +3,8 @@ if(!localStorage["send_head_request"] || localStorage["send_head_request"] < 0){
     localStorage["send_head_request"] = -1;
 }
 
-// sessionStorage
+// sessionStorage 第一次加载页面获取资源文件
 if(!sessionStorage['init-file-links'] && !sessionStorage['init-file-scripts'] ){
-    debugger;
     var pageLinks = document.getElementsByTagName('link'),
         pageScripts = document.getElementsByTagName('script'),
         links = [],
@@ -31,8 +30,6 @@ if(!sessionStorage['init-file-links'] && !sessionStorage['init-file-scripts'] ){
 
 
 var firstRender = true,
-    // 可监测文件类型
-    file = {'local':1, 'js':1, 'css':1},
     // 要获取的HTTP头信息
     headerRequest = {'Content-Encoding':1, 'Content-Length':1, 'Content-Type':1, 'Etag':1, 'Last-Modified':1, },
     transition = 'ease',
@@ -78,18 +75,15 @@ var Auto = {
                 scriptElements[js] = scripts[i];
             }
         }
-        if(!file.js)
-            routes = [];
 
         //监控本地文件
-        file.local && routes.push(document.location.href);
+        routes.push(document.location.href);
 
         //监控css
         for(var i=0;i<links.length;i++){
-            debugger;
             var css = links[i].getAttribute('href'),
                 sht = links[i].getAttribute('rel'),
-                href = pageLinks[i].href;
+                href = links[i].href;
             if(css && sht && sht == 'stylesheet'){
                 // routes.push(css);
                 routes.push(href);
@@ -136,7 +130,7 @@ var Auto = {
             }
         }
 
-        var monitorArr = localStorage['monitor_files'].split(',');
+        var monitorArr = localStorage['monitor_files'] ? localStorage['monitor_files'].split(',') : [];
         for(var i=0; i<monitorArr.length; i++){
             var route = monitorArr[i];
             if (interruptRequest[route])
@@ -189,9 +183,12 @@ var Auto = {
                 next ? body.insertBefore(newScript, script):body.appendChild(newScript);
                 scriptElements[route] = newScript;
                 oldScriptElements[route]  = script;
-                Auto.replaceScript();
-
-                document.location.reload();
+                // TODO 添加配置
+                if(false){
+                    // Auto.replaceScript();
+                }else {
+                    document.location.reload();
+                }
         }
     },
     replaceLink: function () {
@@ -203,6 +200,7 @@ var Auto = {
                     html = document.body.parentNode;
                 var sheet = link.sheet || link.styleSheet,
                     rules = sheet.rules || sheet.cssRules;
+                // https://code.google.com/p/chromium/issues/detail?id=224303&q=document.stylesheets&colspec=ID%20Pri%20M%20Iteration%20ReleaseBlock%20Cr%20Status%20Owner%20Summary%20OS%20Modified
                 // if (rules.length >= 0) {  //chrome 读取远程link不能获取rules的bug
                 if (true) {
                     oldLink.parentNode.removeChild(oldLink);
@@ -213,6 +211,7 @@ var Auto = {
                 }
             } catch (e) {
                 pending++;
+                // console.log(e);
                 // throw e;
             }
             if (pending) setTimeout(Auto.replaceLink, 50);

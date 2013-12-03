@@ -11,9 +11,7 @@
         // 数据初始化
         _initData: function(){
             var _self = this;
-            // 注入content_script
-            var status = 'localStorage["load_over_refresh"] = 1;' +
-                         'localStorage["btn_status"]=-1';
+            // 注入content
             chrome.windows.getCurrent(function (currentWindow) {
                 chrome.tabs.query({ active: true, windowId: currentWindow.id }, function (activeTabs) {
                     // 页面中的iframe不执行
@@ -30,19 +28,21 @@
                 // 显示link script url
                 _self._appendResource($('#J_Links'), message, 'links');
                 _self._appendResource($('#J_Scripts'), message, 'scripts');
-                $('#J_Current_URL').append(message.location.href);
+                $('#J_Current_URL').html(message.location.href);
 
-                $.merge(monitorFiles, message.localStg.files.split(','));
+                message.localStg.files && $.merge(monitorFiles, message.localStg.files.split(','));
                 // 注册点击事件
                 _self._chkBox();
             });
         },
         _appendResource: function(container, message, id){
+            // 先清空
+            container.html('');
             var _self = this,
                 monitorArr = [];
                 // 正在监控的文件
             if(message.localStg.files)
-                monitorArr = message.localStg.files.split(',')
+                monitorArr = message.localStg.files.split(',');
             $(message[id]).each(function(i, file){
 
                 // 判断本地文件
@@ -52,11 +52,11 @@
                 }
                 
                 if(_self._isLocal(file, message.location)){
-                    li += '" ><span class="local-file J_Local">' + file;
+                    li += '"><label for="' + id + '_' + i + '" class="local-file J_Local">' + file;
                 }else{
-                    li += '" ><span class="J_Remote">' + file;
+                    li += '"><label for="' + id + '_' + i + '" class="J_Remote">' + file;
                 }
-                li += '</span></li>';
+                li += '</label></li>';
                 container.append(li);
                 $('.chkbox-current').prop('checked',true);
             });
@@ -66,13 +66,24 @@
             return file.match(reg);
         },
         _switch: function(){
+            var _self = this;
+            $('#J_Reload').on('click', function(){
+                // 重置page的sessionStorage
+                var code = 'sessionStorage["init-file-links"] = "";'+
+                           'sessionStorage["init-file-scripts"] = "";'+
+                           'document.location.reload();';
+                console.log(code,chrome.tabs);
+                chrome.tabs.executeScript(null, {code: code});
+
+                // 填充新数据
+                _self._initData();
+            });
+
+            // switch
             switchNode.on('click', function(){
                 $(this).toggleClass('on');
                 if($(this).hasClass('on')){
                     // 开启捕获
-                    $('.chkbox').each(function(i,k){
-                        console.log($(k).attr('data-checked'));
-                    })
                     var code = 'localStorage["send_head_request"] = 1'
                     chrome.tabs.executeScript(null, {code: code});
                 }else {
@@ -83,7 +94,7 @@
             });
         },
         _chkBox: function(){
-            $('.chkbox').on('click', function(){
+            $('.chkbox').on('change', function(){
                 if($(this).prop('checked')){
                     // 填充到页面
                     var file = $(this).addClass('chkbox-current').siblings().html();

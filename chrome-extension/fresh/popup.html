@@ -8,14 +8,17 @@
 <body>
 
 <div class="wrap">
-    
+    <a id="J_Reload" class="reload-btn" href="javascript:;">重新加载文件</a>
     <div class="files">
         <p class="title">css:</p>
         <ul class="link-list" id="J_Links"></ul>
         <p class="title">js:</p>
         <ul class="script-list" id="J_Scripts"></ul>
         <p class="title">URl(html)</p>
-        <p id="J_Current_URL"><input class="chkbox" type="checkbox"></p>
+        <p>
+            <input class="chkbox" id="chk-local" type="checkbox">
+            <label for="chk-local" id="J_Current_URL"></label>
+        </p>
     </div>
 
     <!-- 开关 -->
