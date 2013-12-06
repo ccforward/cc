@@ -9,44 +9,43 @@
             this._initData();
             this._switch();
         },
-        // Êı¾İ³õÊ¼»¯
+        // æ•°æ®åˆå§‹åŒ–
         _initData: function(){
             var _self = this;
-            // ×¢Èëcontent
+            // æ³¨å…¥content
             chrome.windows.getCurrent(function (currentWindow) {
                 chrome.tabs.query({ active: true, windowId: currentWindow.id }, function (activeTabs) {
-                    // Ò³ÃæÖĞµÄiframe²»Ö´ĞĞ
                     chrome.tabs.executeScript(activeTabs[0].id, { file: 'assets/content.js', allFrames: false });
                 });
             });
 
-            // »Øµ÷º¯Êı -- ¼àÌı½ÓÊÕµÄĞÅÏ¢ 
+            // å›è°ƒå‡½æ•° -- ç›‘å¬æ¥æ”¶çš„ä¿¡æ¯ 
             chrome.extension.onMessage.addListener(function (message) {
-                // ÅĞ¶ÏÒ³ÃæµÄlocalStorage ºÍ link script ±êÇ©
+                // åˆ¤æ–­é¡µé¢çš„localStorage å’Œ link script æ ‡ç­¾
                 if(message.localStg.request > 0){
                     switchNode.addClass('on');
                 }
-                // ÏÔÊ¾link script url
+                // æ˜¾ç¤ºlink script url
                 _self._appendResource($('#J_Links'), message, 'links');
                 _self._appendResource($('#J_Scripts'), message, 'scripts');
                 $('#J_Current_URL').html(message.location.href);
 
                 message.localStg.files && $.merge(monitorFiles, message.localStg.files.split(','));
-                // ×¢²áµã»÷ÊÂ¼ş
+                // æ³¨å†Œç‚¹å‡»äº‹ä»¶
                 _self._chkBox();
             });
         },
         _appendResource: function(container, message, id){
-            // ÏÈÇå¿Õ
+            // å…ˆæ¸…ç©º
             container.html('');
             var _self = this,
                 monitorArr = [];
-                // ÕıÔÚ¼à¿ØµÄÎÄ¼ş
+                // æ­£åœ¨ç›‘æ§çš„æ–‡ä»¶
             if(message.localStg.files)
                 monitorArr = message.localStg.files.split(',');
             $(message[id]).each(function(i, file){
 
-                // ÅĞ¶Ï±¾µØÎÄ¼ş
+                // åˆ¤æ–­æœ¬åœ°æ–‡ä»¶
                 var li = '<li class="file-item"><input type="checkbox" id="'+id + '_' + i + '" class="chkbox ';
                 if($.inArray(file,monitorArr) > -1){
                     li+= 'chkbox-current';
@@ -70,12 +69,12 @@
             var _self = this;
             reload.on('click', function(e){
                 // e.preventDefault();
-                // ÖØÖÃpageµÄsessionStorage
+                // é‡ç½®pageçš„sessionStorage
                 var code = 'sessionStorage["init-file-links"] = "";'+
                            'sessionStorage["init-file-scripts"] = "";'+
                            'document.location.reload();';
                 chrome.tabs.executeScript(null, {code: code});
-                // Ìî³äĞÂÊı¾İ
+                // å¡«å……æ–°æ•°æ®
                 _self._initData();
             });
             
@@ -84,11 +83,11 @@
             switchNode.on('click', function(){
                 $(this).toggleClass('on');
                 if($(this).hasClass('on')){
-                    // ¿ªÆô²¶»ñ
+                    // å¼€å¯æ•è·
                     var code = 'localStorage["send_head_request"] = 1'
                     chrome.tabs.executeScript(null, {code: code});
                 }else {
-                    // ¹Ø±Õ²¶»ñ
+                    // å…³é—­æ•è·
                     var code = 'localStorage["send_head_request"] = -1'
                     chrome.tabs.executeScript(null, {code: code});
                 }
@@ -97,14 +96,14 @@
         _chkBox: function(){
             $('.chkbox').on('change', function(){
                 if($(this).prop('checked')){
-                    // Ìî³äµ½Ò³Ãæ
+                    // å¡«å……åˆ°é¡µé¢
                     var file = $(this).addClass('chkbox-current').siblings().html();
                     monitorFiles.push(file);
                     var code = 'localStorage["monitor_files"] = ' + '"' + monitorFiles + '"';
                     chrome.tabs.executeScript(null, {code: code});
                 }else {
                     $(this).removeClass('chkbox-current');
-                    // É¾³ıÎÄ¼ş
+                    // åˆ é™¤æ–‡ä»¶
                     monitorFiles.splice($.inArray($(this).siblings().html(),monitorFiles),1);
 
                     var code = 'localStorage["monitor_files"] = ' + '"' + monitorFiles + '"';
