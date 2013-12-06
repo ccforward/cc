@@ -14,14 +14,14 @@ if(!sessionStorage['init-file-links'] && !sessionStorage['init-file-scripts'] ){
         var css = pageLinks[i].getAttribute('href'),
             sht = pageLinks[i].getAttribute('rel');
         if(css && sht && sht == 'stylesheet'){
-            links.push(pageLinks[i].href);
+            links.push(css);
         }
     }
     for(var i=0;i<pageScripts.length;i++){
         var js  = pageScripts[i].getAttribute('src'),
             type = pageScripts[i].getAttribute('type') || 'text/javascript';
         if(js && type == 'text/javascript'){
-            scripts.push(pageScripts[i].src);
+            scripts.push(js);
         }
     }
     sessionStorage['init-file-links'] = links;
