@@ -3,7 +3,9 @@ if(!localStorage["send_head_request"] || localStorage["send_head_request"] < 0){
     localStorage["send_head_request"] = -1;
 }
 
-// sessionStorage 第一次加载页面获取资源文件
+// 第一次加载页面
+// 1、sessionStorage获取资源文件 
+// 2、重置localStorage
 if(!sessionStorage['init-file-links'] && !sessionStorage['init-file-scripts'] ){
     var pageLinks = document.getElementsByTagName('link'),
         pageScripts = document.getElementsByTagName('script'),
@@ -26,12 +28,16 @@ if(!sessionStorage['init-file-links'] && !sessionStorage['init-file-scripts'] ){
     }
     sessionStorage['init-file-links'] = links;
     sessionStorage['init-file-scripts'] = scripts;
+
+    // 重置监控的文件
+    localStorage['monitor_files'] = '';
 }
 
 
 var firstRender = true,
     // 要获取的HTTP头信息
-    headerRequest = {'Content-Encoding':1, 'Content-Length':1, 'Content-Type':1, 'Etag':1, 'Last-Modified':1, },
+    // headerRequest = {'Content-Encoding':1, 'Content-Length':1, 'Content-Type':1, 'Etag':1, 'Last-Modified':1 },
+    headerRequest = {'Content-Type':1, 'Last-Modified':1 },
     transition = 'ease',
     //存储页面上本地css的路径
     linkElements = {},
@@ -185,7 +191,7 @@ var Auto = {
                 oldScriptElements[route]  = script;
                 // TODO 添加配置
                 if(false){
-                    // Auto.replaceScript();
+                    Auto.replaceScript();
                 }else {
                     document.location.reload();
                 }

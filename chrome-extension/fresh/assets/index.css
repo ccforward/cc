@@ -42,6 +42,7 @@ body {
     width: 500px;
     padding: 30px 10px;
 }
+
 .reload-btn {
     position: absolute;
     right: 10px;
@@ -66,7 +67,10 @@ body {
     text-decoration: none;
     top: 18px;
 }
-
+.replace-js-btn {
+    right: 113px;
+    width: 37px;
+}
 
 .slider-btn {
     position: relative;
@@ -76,7 +80,7 @@ body {
     cursor: pointer;
     border-radius: 1.5em;
     transition: 350ms;
-    background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0)), #dddddd;
+    background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0)), #ddd;
     box-shadow: 0 0.07em 0.1em -0.1em rgba(0, 0, 0, 0.4) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7);
 }
 

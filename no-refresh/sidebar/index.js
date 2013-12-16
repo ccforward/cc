@@ -50,7 +50,7 @@ KISSY.ready(function(S){
                     ].join('');
                 }
                 D.html(node,domArr.join(''));
-                D.addClass(node, 'render-over');
+                // D.addClass(node, 'render-over');
             }
         };
 
@@ -61,8 +61,8 @@ KISSY.ready(function(S){
             },
             _initData: function(){
                 S.one('#J_side_tabs').height(D.viewportHeight());
-                this._changeTop();
                 // ÅÐ¶Ïä¯ÀÀÆ÷¸ß¶È
+                this._changeTop();
             },
             _changeTop: function(){
                 if(D.viewportHeight() < 450){

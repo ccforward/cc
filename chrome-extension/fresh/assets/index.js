@@ -26,9 +26,10 @@
                     switchNode.addClass('on');
                 }
                 // 显示link script url
+                $('#J_Current_URL').html(message.location.href);
                 _self._appendResource($('#J_Links'), message, 'links');
                 _self._appendResource($('#J_Scripts'), message, 'scripts');
-                $('#J_Current_URL').html(message.location.href);
+
 
                 message.localStg.files && $.merge(monitorFiles, message.localStg.files.split(','));
                 // 注册点击事件
@@ -45,7 +46,7 @@
                 monitorArr = message.localStg.files.split(',');
             $(message[id]).each(function(i, file){
 
-                // 判断本地文件
+                // 判断本地js css
                 var li = '<li class="file-item"><input type="checkbox" id="'+id + '_' + i + '" class="chkbox ';
                 if($.inArray(file,monitorArr) > -1){
                     li+= 'chkbox-current';
@@ -59,6 +60,11 @@
                 li += '</label></li>';
                 container.append(li);
                 $('.chkbox-current').prop('checked',true);
+
+                // 判断本地的url
+                if($.inArray(message.location.href, monitorArr) > -1) {
+                    $('#chk-local').prop('checked',true);
+                }
             });
         },
         _isLocal: function(file, location){
@@ -68,7 +74,7 @@
         _switch: function(){
             var _self = this;
             reload.on('click', function(e){
-                // e.preventDefault();
+                e.preventDefault();
                 // 重置page的sessionStorage
                 var code = 'sessionStorage["init-file-links"] = "";'+
                            'sessionStorage["init-file-scripts"] = "";'+
