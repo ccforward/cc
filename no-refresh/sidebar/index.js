@@ -1,16 +1,8 @@
 KISSY.ready(function(S){
-    S.config({
-        packages: [
-            {
-                name: 'tbc',
-                path: 'http://g.tbcdn.cn/',
-                ignorePackageNameInUri: true
-            }
-        ]
-    });
-    var E = S.Event, D = S.DOM, $ = S.all, BODY = S.one("body");
 
-    S.use('tbc/mini-login/1.4.0/',function(S, Login){
+var E = S.Event, D = S.DOM, $ = S.all, BODY = S.one("body");
+
+    S.use('node',function(S, Node){
         var isMouseInSideBar = false;
         var ajaxObj = {
             requestMyAttention: function(){

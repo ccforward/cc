@@ -1,5 +1,6 @@
 html,body {
-    background-color: #834;
+    /*background-color: #834;*/
+    background-color: #fff;
 }
 .clr:before, .clr:after { content: ""; display: table; }
 .clr:after { clear: both; }
