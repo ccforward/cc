@@ -370,8 +370,13 @@ jQuery.fn = jQuery.prototype = {
 };
 
 // Give the init function the jQuery prototype for later instantiation
+// 引用关系
 jQuery.fn.init.prototype = jQuery.fn;
 
+// jQuery中的继承方法  jQuery使用拷贝继承
+// jQuery.extend 扩展静态(工具)方法 $.aa() $.bb()
+// jQuery.fn.extend 扩展实例方法  $().aa() $().bb()
+// jQuery.fn == jQuery.prototype
 jQuery.extend = jQuery.fn.extend = function() {
 	var options, name, src, copy, copyIsArray, clone,
 		target = arguments[0] || {},
@@ -379,25 +384,29 @@ jQuery.extend = jQuery.fn.extend = function() {
 		length = arguments.length,
 		deep = false;
 
+	// 判断是否深浅拷贝 参数灵活转换
 	// Handle a deep copy situation
 	if ( typeof target === "boolean" ) {
 		deep = target;
-		target = arguments[1] || {};
+		target = arguments[1] || {}; 
 		// skip the boolean and the target
 		i = 2;
 	}
 
+	// 判断参数是否正确
 	// Handle case when target is a string or something (possible in deep copy)
 	if ( typeof target !== "object" && !jQuery.isFunction(target) ) {
 		target = {};
 	}
 
+	// 判断插件 根据this判断插件类型
 	// extend jQuery itself if only one argument is passed
 	if ( length === i ) {
 		target = this;
 		--i;
 	}
 
+	// 
 	for ( ; i < length; i++ ) {
 		// Only deal with non-null/undefined values
 		if ( (options = arguments[ i ]) != null ) {
@@ -406,6 +415,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 				src = target[ name ];
 				copy = options[ name ];
 
+				// 防止循环引用 $.extend(a, {obj: a})
 				// Prevent never-ending loop
 				if ( target === copy ) {
 					continue;
@@ -418,6 +428,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 						clone = src && jQuery.isArray(src) ? src : [];
 
 					} else {
+						// 保留原有的对象属性 
 						clone = src && jQuery.isPlainObject(src) ? src : {};
 					}
 
@@ -4414,8 +4425,9 @@ jQuery.event = {
 
 	global: {},
 
+	// 事件注册
 	add: function( elem, types, handler, data, selector ) {
-
+		debugger;
 		var handleObjIn, eventHandle, tmp,
 			events, t, handleObj,
 			special, handlers, type, namespaces, origType,
@@ -4446,6 +4458,7 @@ jQuery.event = {
 			eventHandle = elemData.handle = function( e ) {
 				// Discard the second event of a jQuery.event.trigger() and
 				// when an event is called after a page has unloaded
+				// 事件代理
 				return typeof jQuery !== core_strundefined && (!e || jQuery.event.triggered !== e.type) ?
 					jQuery.event.dispatch.apply( eventHandle.elem, arguments ) :
 					undefined;
@@ -4455,6 +4468,7 @@ jQuery.event = {
 		}
 
 		// Handle multiple events separated by a space
+		// 处理多个以空格分隔的事件
 		types = ( types || "" ).match( core_rnotwhite ) || [""];
 		t = types.length;
 		while ( t-- ) {
@@ -4724,6 +4738,7 @@ jQuery.event = {
 		return event.result;
 	},
 
+	// 事件代理
 	dispatch: function( event ) {
 
 		// Make a writable jQuery.Event from the native event object
@@ -5116,7 +5131,9 @@ if ( !jQuery.support.focusinBubbles ) {
 
 jQuery.fn.extend({
 
+	// on 绑定
 	on: function( types, selector, data, fn, /*INTERNAL*/ one ) {
+		debugger;
 		var origFn, type;
 
 		// Types can be a map of types/handlers

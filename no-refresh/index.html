@@ -10,25 +10,29 @@
 </head>
 <body>
 <div class="wrap clearfix">
-    <h1 class="title">this is title-html</h1>
-    <div class="block fl">
-        <!-- <a href="" id="J_link">link</a> -->
-    </div>
-    <div class="block fl"></div>
-    <div class="block fl"></div>
-    <div class="block fl"></div>
-    <div class="block fl"></div>
-    <div class="block fl"></div>
-    <div class="block fl"></div>
-    <div class="block fl"></div>
-    <div class="block fl"></div>
-    <div class="block fl"></div>
-
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <a id="J_on" href="#">clicl</a>
 </div>
 
 
 
-<script src="index.js"></script>
-<script type="text/javascript" src="refresh.js"></script>
+<script type="text/javascript" src="../jquery-2.0.3.js"></script>
+<script>
+(function($){
+    $(document).on('click', 'li', function(){
+        console.log(123);
+    })
+    $('#J_on').on('click',function(e){
+        e.preventDefault();
+        $('ul').append('<li>111</li>');
+    })
+})(jQuery)
+</script>
 </body>
 </html>
