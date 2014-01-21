@@ -67,7 +67,7 @@
         deltaZ = Math.abs(this.lastZ - current.z);
 
         if (((deltaX > this.threshold) && (deltaY > this.threshold)) || ((deltaX > this.threshold) && (deltaZ > this.threshold)) || ((deltaY > this.threshold) && (deltaZ > this.threshold))) {
-            //calculate time in milliseconds since last shake registered
+            //计算上次shake后的ms值
             currentTime = new Date();
             timeDifference = currentTime.getTime() - this.lastTime.getTime();
 
