@@ -1,0 +1,149 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    margin: 0;
+    padding: 0
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
+    font-weight: 500
+}
+address,caption,cite,code,dfn,em,th,var {
+    font-style: normal;
+    font-weight: 500
+}
+ol,ul {
+    list-style: none
+}
+ins,a {
+    text-decoration: none
+}
+a:hover {
+    text-decoration: underline
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background-color: #CECECE;
+}
+body {
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#f7f7f7), to(#e0e0e0));
+}
+
+.wrap {
+    position: relative;
+    width: 500px;
+    padding: 30px 10px;
+}
+
+.reload-btn {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    width: 80px;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid #bea280;
+    background-color: #e38d27;
+    color: #693e0a;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+}
+.reload-btn:hover {
+    text-decoration: none;
+}
+.reload-btn:active {
+    text-decoration: none;
+    top: 18px;
+}
+.replace-js-btn {
+    right: 113px;
+    width: 37px;
+}
+
+.slider-btn {
+    position: relative;
+    display: block;
+    width: 5.5em;
+    height: 3em;
+    cursor: pointer;
+    border-radius: 1.5em;
+    transition: 350ms;
+    background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0)), #ddd;
+    box-shadow: 0 0.07em 0.1em -0.1em rgba(0, 0, 0, 0.4) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7);
+}
+
+.slider-btn::after {
+    position: absolute;
+    content: '';
+    width: 2em;
+    height: 2em;
+    top: 0.5em;
+    left: 0.5em;
+    border-radius: 50%;
+    transition: 250ms ease-in-out;
+    background: linear-gradient(#f5f5f5 10%, #eeeeee);
+    box-shadow: 0 0.1em 0.15em -0.05em rgba(255, 255, 255, 0.9) inset, 0 0.2em 0.2em -0.12em rgba(0, 0, 0, 0.5);
+}
+.slider-btn::before {
+    position: absolute;
+    content: '';
+    width: 4em;
+    height: 1.5em;
+    top: 0.75em;
+    left: 0.75em;
+    border-radius: 0.75em;
+    transition: 250ms ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0.1)), #d0d0d0;
+    box-shadow: 0 0.08em 0.15em -0.1em rgba(0, 0, 0, 0.5) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7), 0 0 0 0 rgba(68, 204, 102, 0.7) inset;
+}
+.slider-btn.on::before {
+    box-shadow: 0 0.08em 0.15em -0.1em rgba(0, 0, 0, 0.5) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7), 3em 0 0 0 rgba(68, 204, 102, 0.7) inset;
+}
+.slider-btn.on::after {
+    left: 3em;
+}
+
+.files {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+.files .file-item {
+    padding-bottom: 3px;
+    margin-bottom: 6px;
+    word-break: break-all;
+}
+.files .file-item label{
+    cursor: pointer;
+}
+.files .file-item .local-file {
+    background-color: #DAF8C3;
+}
+.files .link-list {
+  color: #35ADF0;
+}
+.files .script-list {
+  color: #FC6C85;
+}
+.files .chkbox {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.files .title {
+  padding: 5px 0;
+}
+#J_Current_URL {
+  color:#4AAF73;
+  cursor: pointer;
+}
