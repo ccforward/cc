@@ -1,0 +1,76 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    margin: 0;
+    padding: 0
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
+    font-weight: 500
+}
+address,caption,cite,code,dfn,em,th,var {
+    font-style: normal;
+    font-weight: 500
+}
+ol,ul {
+    list-style: none
+}
+ins,a {
+    text-decoration: none
+}
+a:hover {
+    text-decoration: underline
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background-color: #CECECE;
+}
+body {
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#f7f7f7), to(#e0e0e0));
+}
+
+.wrap {
+    position: relative;
+    width: 500px;
+    padding: 30px 10px;
+}
+
+.reload-btn {
+    width: 80px;
+    padding: 6px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: #27E369;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+.reload-btn:hover {
+    text-decoration: none;
+}
+.reload-btn:active {
+    text-decoration: none;
+    top: 18px;
+}
+.replace-js-btn {
+    right: 113px;
+    width: 37px;
+}
+.item {
+    font-size: 14px;
+    margin-top: 10px;
+}
+.item input {
+    width: 80%;
+}
