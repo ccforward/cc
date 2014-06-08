@@ -2978,20 +2978,34 @@ function createOptions( options ) {
  *	stopOnFalse:	interrupt callings when a callback returns false
  *
  */
+// once 只执行一次，针对fire方法
+// memory 执行所有add进去的函数。 memory参数作用在add上
+
 jQuery.Callbacks = function( options ) {
 
 	// Convert options from String-formatted to Object-formatted if needed
 	// (we check in cache first)
+	// 参数组合使用 'once memory'
+	// createOptions 把上面的参数转成了 options:{once: true, memory:true}
+	/*              optionsCache: {
+						'once memory': {once: true, memory:true}	
+					}
+	*/
+	//通过字符串在optionsCache寻找有没有相应缓存，如果没有则创建一个，有则引用
+    //如果是对象则通过jQuery.extend深复制后赋给options。
 	options = typeof options === "string" ?
 		( optionsCache[ options ] || createOptions( options ) ) :
-		jQuery.extend( {}, options );
+		jQuery.extend( {}, options ); //没有参数，返回空对象，防止options后面使用出问题
 
 	var // Last fire value (for non-forgettable lists)
-		memory,
+		memory, // 最后一次触发回调时传的参数
+
 		// Flag to know if list was already fired
-		fired,
+		fired, // list中的函数是否已经回调至少一次
+
 		// Flag to know if list is currently firing
-		firing,
+		firing, // list中的函数是否正在回调中
+
 		// First callback to fire (used internally by add and fireWith)
 		firingStart,
 		// End of the loop when firing
@@ -2999,27 +3013,34 @@ jQuery.Callbacks = function( options ) {
 		// Index of currently firing callback (modified by remove if needed)
 		firingIndex,
 		// Actual callback list
-		list = [],
+		list = [], // 回调函数列表
+
 		// Stack of fire calls for repeatable lists
 		stack = !options.once && [],
 		// Fire callbacks
+		// 私有函数fire
 		fire = function( data ) {
+			//如果参数memory为true，则记录data
 			memory = options.memory && data;
 			fired = true;
 			firingIndex = firingStart || 0;
 			firingStart = 0;
 			firingLength = list.length;
 			firing = true;
+			// 循环list数组
 			for ( ; list && firingIndex < firingLength; firingIndex++ ) {
 				if ( list[ firingIndex ].apply( data[ 0 ], data[ 1 ] ) === false && options.stopOnFalse ) {
+					// 阻止后面可能由于add所产生的回调
 					memory = false; // To prevent further calls using add
 					break;
 				}
 			}
+			//标记回调结束
 			firing = false;
 			if ( list ) {
 				if ( stack ) {
 					if ( stack.length ) {
+						//从堆栈头部取出，递归fire
 						fire( stack.shift() );
 					}
 				} else if ( memory ) {
@@ -3030,20 +3051,29 @@ jQuery.Callbacks = function( options ) {
 			}
 		},
 		// Actual Callbacks object
+		// 对外提供的方法和接口
 		self = {
 			// Add a callback or a collection of callbacks to the list
 			add: function() {
+				// list空数组 返回true
 				if ( list ) {
 					// First, we save the current length
+					// 先存储当前列表长度
 					var start = list.length;
 					(function add( args ) {
+						// 遍历参数 针对add(fn1, fn2)方式添加参数
 						jQuery.each( args, function( _, arg ) {
 							var type = jQuery.type( arg );
 							if ( type === "function" ) {
 								if ( !options.unique || !self.has( arg ) ) {
 									list.push( arg );
 								}
+							//如果是类数组或对象,递归
 							} else if ( arg && arg.length && type !== "string" ) {
+								/* 
+									针对add([fn1, fn2])方式添加参数
+									参数写成数组的形式
+								*/ 
 								// Inspect recursively
 								add( arg );
 							}
@@ -3051,11 +3081,17 @@ jQuery.Callbacks = function( options ) {
 					})( arguments );
 					// Do we need to add the callbacks to the
 					// current firing batch?
+					// 如果回调列表中的回调正在执行时，其中的一个回调函数执行了Callbacks.add操作
+                    // 上句话可以简称：如果在执行Callbacks.add操作的状态为firing时
+                    // 那么需要更新firingLength值
 					if ( firing ) {
 						firingLength = list.length;
 					// With memory, if we're not firing then
 					// we should call right away
 					} else if ( memory ) {
+						// 如果options.memory为true，则将memory做为参数，应用最近增加的回调函数
+						// 存在memory参数，再次调用fire
+						// 这样才能保证 add进去的函数都能执行
 						firingStart = start;
 						fire( memory );
 					}
@@ -3067,9 +3103,16 @@ jQuery.Callbacks = function( options ) {
 				if ( list ) {
 					jQuery.each( arguments, function( _, arg ) {
 						var index;
+
+						// while循环的意义在于借助于强大的jQuery.inArray删除函数列表中相同的函数引用（没有设置unique的情况）
+                        // jQuery.inArray将每次返回查找到的元素的index作为自己的第三个参数继续进行查找，直到函数列表的尽头
+                        // splice删除数组元素，修改数组的结构
 						while( ( index = jQuery.inArray( arg, list, index ) ) > -1 ) {
 							list.splice( index, 1 );
+
 							// Handle firing indexes
+							// 在函数列表处于firing状态时，最主要的就是维护firingLength和firgingIndex这两个值
+                            // 保证fire时函数列表中的函数能够被正确执行 fire中的for循环需要这两个值
 							if ( firing ) {
 								if ( index <= firingLength ) {
 									firingLength--;
@@ -3117,23 +3160,29 @@ jQuery.Callbacks = function( options ) {
 			},
 			// Call all callbacks with the given context and arguments
 			fireWith: function( context, args ) {
+				// fired 第一次为undefined
 				if ( list && ( !fired || stack ) ) {
 					args = args || [];
 					args = [ context, args.slice ? args.slice() : args ];
 					if ( firing ) {
+						//将参数推入堆栈，等待当前回调结束再调用
 						stack.push( args );
 					} else {
+						// 调用私有函数fire，不是下面的fire
+						// 参数 args 传给add进去的函数使用
 						fire( args );
 					}
 				}
 				return this;
 			},
 			// Call all the callbacks with the given arguments
+			// 以给定的参数调用所有回调函数
 			fire: function() {
 				self.fireWith( this, arguments );
 				return this;
 			},
 			// To know if the callbacks have already been called at least once
+			// 回调函数list是否至少被调用一次
 			fired: function() {
 				return !!fired;
 			}
@@ -4427,7 +4476,7 @@ jQuery.event = {
 
 	// 事件注册
 	add: function( elem, types, handler, data, selector ) {
-		debugger;
+
 		var handleObjIn, eventHandle, tmp,
 			events, t, handleObj,
 			special, handlers, type, namespaces, origType,
