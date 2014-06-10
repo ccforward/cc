@@ -1,0 +1,65 @@
+{
+   "alt": {
+      "message": "Alt"
+   },
+   "author": {
+      "message": "Dingbao.ai[aka. ehaagwlke]"
+   },
+   "contextMenuStr": {
+      "message": "View Image Info (properties)"
+   },
+   "description": {
+      "message": "Get properties(including dimensions, URL, file size, file type info) of the image your cursor is pointing to via context menu."
+   },
+   "dims": {
+      "message": "Dimensions"
+   },
+   "eTit": {
+      "message": "--"
+   },
+   "ealt": {
+      "message": "--"
+   },
+   "eid": {
+      "message": "n/a"
+   },
+   "eift": {
+      "message": "n/a"
+   },
+   "eifz": {
+      "message": "n/a"
+   },
+   "extName": {
+      "message": "View Image Info (properties)"
+   },
+   "fsize": {
+      "message": "File Size"
+   },
+   "ftype": {
+      "message": "File Type"
+   },
+   "ilam": {
+      "message": "Image loading aborted"
+   },
+   "ilem": {
+      "message": "Image can not be loaded!"
+   },
+   "loc": {
+      "message": "Location"
+   },
+   "osize": {
+      "message": "original size"
+   },
+   "ploc": {
+      "message": "Page Location"
+   },
+   "prev": {
+      "message": "Preview"
+   },
+   "smsg": {
+      "message": "scaled to "
+   },
+   "title": {
+      "message": "Title"
+   }
+}

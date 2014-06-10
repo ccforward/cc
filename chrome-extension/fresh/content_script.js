@@ -91,10 +91,11 @@ var Auto = {
                 sht = links[i].getAttribute('rel'),
                 href = links[i].href;
             if(css && sht && sht == 'stylesheet'){
-                // routes.push(css);
-                routes.push(href);
+                routes.push(css);
+                // routes.push(href);
                 // 存储link节点
-                linkElements[href] = links[i];
+                // linkElements[href] = links[i];
+                linkElements[css] = links[i];
             }
         }
 

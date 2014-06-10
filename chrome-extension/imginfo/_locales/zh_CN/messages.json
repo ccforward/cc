@@ -1,0 +1,65 @@
+{
+   "Title": {
+      "message": "Title"
+   },
+   "alt": {
+      "message": "Alt"
+   },
+   "author": {
+      "message": "艾丁宝[aka. ehaagwlke]"
+   },
+   "contextMenuStr": {
+      "message": "查看图片信息"
+   },
+   "description": {
+      "message": "通过右键菜单获取图片的尺寸，URL，文件大小，文件类型等信息"
+   },
+   "dims": {
+      "message": "图片尺寸"
+   },
+   "eTit": {
+      "message": "--"
+   },
+   "ealt": {
+      "message": "--"
+   },
+   "eid": {
+      "message": "无法获取图片尺寸"
+   },
+   "eift": {
+      "message": "无法获取图片类型"
+   },
+   "eifz": {
+      "message": "无法获取图片大小"
+   },
+   "extName": {
+      "message": "View Image Info (properties)"
+   },
+   "fsize": {
+      "message": "文件大小"
+   },
+   "ftype": {
+      "message": "图片类型"
+   },
+   "ilam": {
+      "message": "图片下载取消"
+   },
+   "ilem": {
+      "message": "图片下载错误"
+   },
+   "loc": {
+      "message": "图片位置"
+   },
+   "osize": {
+      "message": "原始尺寸"
+   },
+   "ploc": {
+      "message": "页面地址"
+   },
+   "prev": {
+      "message": "预览图片"
+   },
+   "smsg": {
+      "message": "显示尺寸:"
+   }
+}
