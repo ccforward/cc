@@ -1,21 +1,18 @@
 {
-   "name": "no-fresh",
-   "version": "1.0",
-   "description": "No F5.",
+   "manifest_version": 2,
+   "name": "Auto-Fresh",
+   "version": "1.0.0",
+   "description": "No F5.修改页面，自动刷新。",
    "icons": {
-      "128": "rubik_128.png",
-      "16": "rubik_16.png",
-      "48": "rubik_48.png",
-      "64": "rubik_64.png"
+      "128": "images/rubik_128.png",
+      "16": "images/rubik_16.png",
+      "48": "images/rubik_48.png",
+      "64": "images/rubik_64.png"
    },
    "browser_action": {
-      "default_icon": "rubik_icon.png",
+      "default_icon": "images/rubik_icon.png",
       "default_popup": "popup.html",
       "default_title": "TMD 我不要去按F5"
-   },
-   "background": {
-      "persistent": false,
-      "scripts": [ "background.js" ]
    },
 
    "content_scripts": [ {
@@ -24,12 +21,7 @@
       "run_at": "document_end"
    } ],
    
-   "permissions": [
-      "http://*/"
-   ],
-   // "content_security_policy": "script-src 'self' http:// ; object-src 'self'",
+   "content_security_policy": "script-src 'self' http:// ; object-src 'self'",
 
-   "manifest_version": 2,
-   "options_page": "options.html",
-   "permissions": ["background", "management", "tabs", "http://*/*" ]
+   "permissions": ["background", "management", "tabs", "http://*/*", "https://*/*" ]
 }

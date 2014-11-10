@@ -90,7 +90,7 @@
                 $(this).toggleClass('on');
                 if($(this).hasClass('on')){
                     // 开启捕获
-                    var code = 'localStorage["send_head_request"] = 1'
+                    var code = 'localStorage["send_head_request"] = 1';
                     chrome.tabs.executeScript(null, {code: code});
                 }else {
                     // 关闭捕获
