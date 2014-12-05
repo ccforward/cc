@@ -1,0 +1,35 @@
+[user]
+	name = name
+	email = xx@email.com
+[core]
+	quotepath = false
+	editor = vim
+	excludesfile = /Users/username/.gitignore
+	safecrlf = false
+	autocrlf = input
+	ignorecase = true
+[i18n]
+	commitEncoding = UTF-8
+	logOutputEncoding = UTF-8
+[color]
+	ui = auto
+	branch = auto
+	status = auto
+	diff = auto
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	mg = merge
+	ci = commit
+	dt = difftool
+	mt = mergetool
+	last = log -1 HEAD
+[commit]
+	template = /Users/username/.gitmessage
+[push]
+	default = matching
+[filter "media"]
+	clean = git media clean %f
+	smudge = git media smudge %f
+	required = true
