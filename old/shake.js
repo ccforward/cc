@@ -1,5 +1,5 @@
 (function (window, document) {
-
+    // @TODO
     function Shake() {
 
         this.hasDeviceMotion = 'ondevicemotion' in window;
