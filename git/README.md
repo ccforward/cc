@@ -8,3 +8,4 @@
   或者在bash_profile文件中加入：  
   `alias github='git config user.email "ccking@foxmail.com"'`  
   最后编译bash文件  source .bash_profile
+* cat .git/logs/HEAD  查看仓库的log信息
