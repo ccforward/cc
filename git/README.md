@@ -26,5 +26,10 @@
   		git merge tmp
   * git pull 也是从远程master分支获取最新版本但是会自动merge
   * git fetch 相对安全点
+
+* 分支操作
+  * 显示本地远程所有分支 git br -a 
+  * 删除本地分支 git br -d daily/0.1.2
+  * 删除远程分支 git push origin :daily/0.2.9
   	
   
