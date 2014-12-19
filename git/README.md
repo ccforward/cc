@@ -5,7 +5,7 @@
 * gitignore文件： 全局文件
 * .git/config 文件可查看仓库位置信息
 * 单独设置一个仓库的email:当前仓库内 git config user.email "ccking@foxmail.com"  
-  或者在bash_profile文件中加入：  
+  或者在 bash_profile 文件中加入：  
   `alias github='git config user.email "ccking@foxmail.com"'`  
   最后编译bash文件  source .bash_profile
 * cat .git/logs/HEAD  查看仓库的log信息
