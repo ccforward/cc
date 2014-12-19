@@ -16,9 +16,9 @@
   		git fetch origin master
   		git log -p master..origin/master
   		git merge origin/master
-  	从远程origin的master分支下载最新版本到 origin/master 分支  
-  	比较本地master分支和远程master分支的区别  
-  	合并代码  
+  	1、从远程origin的master分支下载最新版本到 origin/master 分支  
+  	2、比较本地master分支和远程master分支的区别  
+  	3、合并代码  
   	上述过程的描述:
   	
   		git fetch origin master:tmp
