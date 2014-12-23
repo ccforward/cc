@@ -34,4 +34,6 @@
   * git br -v 查看每一个分至最后一次commit
   * git co -  快速切换到上一个分支
   	
-  
+* 一个自动提交的shell脚本  
+  * 一个命令全部提交，但是，不推荐使用
+  * 地址：[autoPush.sh](https://github.com/ccforward/cc/blob/master/git/autoPush.sh)
