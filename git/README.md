@@ -29,8 +29,8 @@
 
 * 分支操作
   * 显示本地远程所有分支 git br -a 
-  * 删除本地分支 git br -d daily/0.1.2
-  * 删除远程分支 git push origin :daily/0.2.9
+  * 删除本地分支 git br -d dev/0.1.2
+  * 删除远程分支 git push origin :dev/0.2.9
   * git br -v 查看每一个分至最后一次commit
   * git co -  快速切换到上一个分支
   	
