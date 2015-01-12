@@ -31,8 +31,10 @@
   * 显示本地远程所有分支 git br -a 
   * 删除本地分支 git br -d dev/0.1.2
   * 删除远程分支 git push origin :dev/0.2.9
+  * git br -m old new 重命名分支
   * git br -v 查看每一个分至最后一次commit
   * git co -  快速切换到上一个分支
+  * git co -b test dev 基于dev新建test分支，并切换
   	
 * 一个自动提交的shell脚本  
   * 一个命令全部提交，但是，不推荐使用
