@@ -1,7 +1,8 @@
 #grep
 alias grep='grep --color=always'
 alias ls='ls -G'
-alias ll='ls -l'
+alias ll='ls -lGh'
+alias la='ls -lAGh'
 alias vi='mvim'
 
 # show hide files

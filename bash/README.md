@@ -1,1 +1,1 @@
-# .bashrc 文件
+#  MAC下的 .bashrc 文件
