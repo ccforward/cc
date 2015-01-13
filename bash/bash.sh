@@ -1,8 +1,12 @@
-#grep
-alias grep='grep --color=always'
 alias ls='ls -G'
 alias ll='ls -lGh'
 alias la='ls -lAGh'
+# 主机ip
+alias myip='ifconfig | grep inet\ '
+# reload bash_profile文件
+alias rlbs='. ~/.bash_profile'
+#grep
+alias grep='grep --color=always'
 alias vi='mvim'
 
 # show hide files
