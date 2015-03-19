@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name = "viewport" content = "user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>MobileConsole的demo</title>
+    
+</head>
+<body>
+<h2>KMobileConsole的demo</h2>
+<h1 id="J_test" data-some="some_data">this is a test</h1>
+
+
+
+<script src="http://libs.baidu.com/zepto/0.8/zepto.min.js" charset="utf-8"></script>
+<script src="index.js" charset="utf-8"></script>
+<script>
+    var mc = new MobileConsole();
+    mc.init(90);
+    mc.log("Array",[11,22,'javascript is a good language']);
+    mc.log("Object",{dept:'taobao UED', year:2013, array:[1111, 1212, '呵呵',{maomao:'一师是个好学校', huanhuan:'这真真是极好的'}]});
+    mc.log({str:'a String',arr:[100, 500, {num:2046,strs:'another String'}]})
+    mc.log("DOM Element", document.getElementById("J_test"));
+</script>
+</body>
+</html>
