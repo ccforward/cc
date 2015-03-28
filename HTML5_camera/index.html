@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML5 摄像头</title>
+    <meta http-equiv="Content-Type" content="text/html,charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+</head>
+<body>
+    
+    <video id="J_Video" width="600" height="450" autoplay></video>
+    <button id="J_GetIt">拍照</button>
+    <canvas id="J_Canvas" width="600" height="450"></canvas>
+    <img src="" id="J_Pic">
+
+<script>
+(function(){
+    window.addEventListener('DOMContentLoaded', function(){
+        var doc = document,
+            canvas = doc.getElementById('J_Canvas'),
+            context = canvas.getContext('2d'),
+            video = doc.getElementById('J_Video'),
+            finalPic = doc.getElementById('J_Pic'),
+            videoObj = {
+                'video': true
+            },
+            errFn = function(err){
+                console.log('error:' err);
+            };
+
+        var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+        
+        getUserMedia.call(navigator, videoObj, function(stream){
+            if(video.mozSrcObject !== undefined){
+                video.src = stream;
+            }else {
+                video.src = window.URL.createObjectURL(stream);
+            }
+            video.play();
+        },errFn);
+
+        doc.getElementById('J_GetIt').addEventListener('click', function(){
+            context.drawImage(video, 0, 0, 600, 450);
+            var base64Img = canvas.toDataURL("image/png");
+            finalPic.src = base64Img;
+            canvas.style.display = 'none';
+        });
+        
+
+    }, false);
+})();
+</script>
+</body>
+</html>
