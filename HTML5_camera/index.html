@@ -26,11 +26,10 @@
                 'video': true
             },
             errFn = function(err){
-                console.log('error:' err);
+                console.log('error:', err);
             };
 
         var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-        
         getUserMedia.call(navigator, videoObj, function(stream){
             if(video.mozSrcObject !== undefined){
                 video.src = stream;
