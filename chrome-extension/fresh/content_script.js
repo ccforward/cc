@@ -245,7 +245,9 @@ var Auto = {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function(){
             delete interruptRequest[route];
-            if(xhr.readyState == 4 && xhr.status != 304){
+            // 只发送请求头 判断返回的readyState为2更高效
+            
+            if(xhr.readyState == 2 && xhr.status != 304){
                 var headInfo = {};
                 for(var key in headerRequest){
                     headInfo[key]  = xhr.getResponseHeader(key);

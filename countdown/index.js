@@ -108,7 +108,7 @@
 
     var now = Date.now();
 
-    new countDown({});
+    new countDown({fixNowDate:true});
     new countDown({
         endTime: now + 8 * 1000
     });
