@@ -1,1 +1,6 @@
-date
+build
+assets
+node_modules
+*.log
+*.DS_Store
+test.js
