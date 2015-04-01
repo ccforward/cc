@@ -79,9 +79,11 @@
         },
         getNowTime: function(cb) {
             var xhr = new XMLHttpRequest();
-            xhr.open('get', '/', true);
+            xhr.open('HEAD', '/', true);
             xhr.onreadystatechange = function() {
-                if (xhr.readyState === 3) {
+                // 代码中只发送请求头 判断返回的readyState为2更高效
+                // xhr.readyState == 2 表示send()方法已经被调用, 响应头和响应状态已经返回
+                if (xhr.readyState === 2) {
                     var now = xhr.getResponseHeader('Date');
                     cb(new Date(now).valueOf());
                 }
