@@ -22,6 +22,8 @@ console.log(d.now());
     * d.before(2) 基准日期前的2天 忽略初始天数
     * d.after(2) 基准日期后2的天 忽略初始天数
     * d.now() 当前日期
+* 其他
+    * new DateCalc(),无参数实例化时 before() after() 返回当前日期
 
 ## TODO
 * 输入日期模板化  {YYYYMMDD} {YY-MM-DD}

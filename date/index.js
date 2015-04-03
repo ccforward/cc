@@ -1,6 +1,13 @@
-// 日期计算 date: 20150401
+// 日期计算 
+// 格式 date: 20150401
 function DateCalc(date,bef,aft){
-    this.date = date.substr(0,4) + '-' + date.substr(4,2) + '-' + date.substr(-2);
+    if(date){
+        this.date = [date.substr(0,4), '-', date.substr(4,2), '-', date.substr(-2)].join('')
+    }else{
+        var d = new Date(); 
+        this.date = [d.getFullYear(), '-', d.getMonth()+1, '-', d.getDate()].join('')
+    }
+    // this.date = date ? [date.substr(0,4), '-', date.substr(4,2), '-', date.substr(-2)].join('') : (var d = new Date(); return [d.getFullYear(), '-', d.getMonth()+1, '-', d.getDate()].join(''));
     this.bef = bef || 0;
     this.aft = aft || 0;
 }
