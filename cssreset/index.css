@@ -1,0 +1,613 @@
+﻿/**
+* author: cc
+* 基于normalize的 CSS Reset，兼容 IE 6+ 以及其他现代浏览器
+* 参考自阿里妈妈和淘宝UED的 Reset 组件
+*/
+
+/**
+ * 解决的问题
+ * 基于业务需要兼容的浏览器做到以下几点：
+ * 1.解决BUG，特别是低级浏览器的常见BUG；
+ * 2.统一效果，但不盲目追求重置为0；
+ * 3.向后兼容；
+ * 4.考虑响应式；
+ * 5.考虑移动设备。
+ */
+
+
+body, dl, dd, /* dt, 默认没边距 */
+ul, ol, /*li, 默认没边距 */
+h1, h2, h3, h4, h5, h6, pre, /* code, 默认没边距 */
+form, fieldset, legend, input, textarea, optgroup,
+p, blockquote, figure, hr, menu, dir,
+thead, tbody, tfoot, th, td /* th, td 默认 padding:1px */
+{
+    margin:0;
+    padding:0;
+}
+
+/**
+ * 非大面积文字排版网站通常不需要列表项，如果需要可单独设置
+ */
+ul, ol {
+    list-style-type: none;
+    list-style-image: none;
+}
+
+
+/**
+ * 去除链接默认的下划线，提高文字可读性
+ */
+a {
+    text-decoration: none;
+}
+
+/**
+* 去掉 IE 10+ 点击链接时的灰色背景
+*/
+a:active {
+    background-color: transparent;
+}
+
+/**
+ * 去掉点击时的焦点框，同时保证使用键盘可以显示焦点框
+ */
+a:active,
+a:hover {
+    outline: 0 none;
+}
+
+/**
+ * 统一 Chrome 和 Safari 的焦点框样式
+ * Chrome 中 thin 关键字放大页面后焦点框不会放大 http://jsbin.com/ehakom/1
+ * Firefox 中 box-shadow 会导致焦点框位置偏移，需用「outline-offset」修正
+ * 
+ */
+a:focus {
+    outline: 1px dotted;
+}
+
+/*
+  ==================== 字体和排版 ====================
+*/
+
+/**
+ * 1.防止 iOS 横屏字号放大，同时保证在PC上 zoom 功能正常
+ */
+html {
+    -ms-text-size-adjust: 100%; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 1 */
+    text-size-adjust: 100%;
+    font-size: 62.5%; /* 10/16=62.5% */
+}
+
+body {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+
+/**
+ * 所有 font-family 小写，存在空格的字体名加单引号
+ * @default-font: 'helvetica neue', tahoma, \5B8B\4F53, sans-serif;
+ * @heading-font: 'helvetica neue', tahoma, 'hiragino sans gb', stheiti, 
+    \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, 'wenquanyi micro hei', sans-serif;
+ * @code-font: monaco, menlo, consolas, monospace;
+ */
+
+/**
+ * 中文优先使用冬青黑体简体(OS X)、微软雅黑(Windows)和文泉驿微米黑(Linux)
+ * 西文使用 tahoma
+ * 1. 防止元素中「font-family」不能继承
+ * 2. 西文字体和 OS X 字体写在前面
+ * 3. Opera 12.1 之前版本不支持中文字体的英文名称
+ * 4. 微软雅黑「\5FAE\8F6F\96C5\9ED1」,中易宋体「\5B8B\4F53」
+ */
+body,
+button, /* 1 */
+input, /* 1 */
+select, /* 1 */
+textarea  /* 1 */
+{
+    font-family: 'helvetica neue',tahoma,'hiragino sans gb',stheiti,'wenquanyi micro hei',\5FAE\8F6F\96C5\9ED1,\5B8B\4F53,sans-serif;
+    -ms-text-autospace: ideograph-alpha ideograph-numeric ideograph-parenthesis; /* 5 */
+    text-autospace: ideograph-alpha ideograph-numeric ideograph-parenthesis; /* 5 */
+}
+
+/**
+ * 中文小于 12px 可读性很差
+ * 1. 统一 IE 6-7 中字体大小
+ * 2. 统一 Firefox 4+，Safari 5 和 Chrome 中「section」和「article」内的字体大小
+ */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+} 
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 22px;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+h5 {
+    font-size: 14px;
+}
+
+h6 {
+    font-size: 12px;
+}
+
+/**
+ * 修正「abbr」元素在 Firefox 外其他浏览器没有下划线的问题
+ * 添加问号光标，明确语义
+ */
+abbr,
+acronym {
+    border-bottom: 1px dotted; /* 1 */
+    cursor:help; /* 2 */
+}
+
+/**
+ * Firefox3+，Safari4/5 和 Chrome 中统一设置为粗体
+ */
+b,
+strong {
+    font-weight: bold;
+}
+
+/**
+ * 修正 Safari5 和 Chrome 中没有样式的问题
+ */
+dfn {
+    font-style: italic;
+}
+
+/**
+ * 修正 Firefox 和其他浏览器之间的差异
+ */
+hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+}
+
+/**
+ * 网页标记，荧光笔
+ * 修正 IE6-11 中没有样式的问题
+ */
+mark {
+    background-color: #D2E5FF;
+    color: #000;
+}
+
+/**
+ * 统一代码的字体设置
+ * 字体要能明确区分数字 0 和字母 o
+ * Mac 优先使用 Monaco，Windows 优先使用 Consolas
+ * XP自带 Courier New
+ * Windows 7开始自带的 Consolas
+ * Mac上自带的Monaco，Osaka-Mono
+ */
+code,
+kbd,
+pre,
+samp {
+    font-family: monaco, menlo, consolas, 'courier new', courier, monospace;
+}
+
+/**
+ * 增强所有浏览器中 pre 标签中文本的可读性
+ * 1. IE 6-7 不支持 pre-wrap
+ * 2. pre 标签应当包含滚溢出
+ */
+pre {
+    white-space: pre; 
+    white-space: pre-wrap; /* 1 */
+    word-wrap: break-word;
+    overflow: auto;
+}
+
+/**
+ * 行内引用
+ * IE 6-7 不支持 quotes 属性
+ * 现代浏览器去除 quotes 内容
+ */
+q {
+    quotes: none;
+}
+
+/**
+ * Safari 4 不支持<q>标签
+ */
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+
+/**
+ * 中文网页<small>元素字号小于 12px 不易阅读
+ */
+small {
+    font-size: 85.7%; /* 12/14=0.8571428571 */
+}
+
+/**
+ * 防止所有浏览器中的<sub>和<sup>影响行高
+ * http://jsbin.com/usoyal/1/edit
+ */
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+/*
+  ==================== 表格 ====================
+*/
+
+/**
+ * 合并单元格边框
+ */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/**
+ * 修复 IE 中 th 不能继承 text-align 的问题并统一左对齐
+ * http://jsbin.com/evoxif/2/edit
+ */
+th {
+    text-align: left;
+}
+
+/**
+ * 单元格添加边框
+ */
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+}
+
+/**
+ * 表头底部边框
+ */
+table th {
+    font-weight: inherit;
+    border-bottom-width: 2px;
+    border-bottom-color: #ccc;
+}
+
+/*
+  ==================== 嵌入元素 ====================
+*/
+
+/**
+ * 1. 去除 IE6-9 和 Firefox 3 中 a 内部 img 元素默认的边框
+ * 2. 修正 IE8 图片消失bug
+ * 3. 防止 img 指定「height」时图片高度不能按照宽度等比缩放，导致图片变形
+      http://jsbin.com/aJoTUca/2
+ * 4. 让图片支持响应式
+ * 5. 去除现代浏览器图片底部的空隙
+ * 6. 修复 IE7 图片缩放失真
+ */
+img {
+    border: 0 none; /* 1 */
+    width: auto\9; /* 2 */
+    height: auto; /* 3 */
+    max-width: 100%; /* 4 */
+    vertical-align: top;/* 5 */
+    -ms-interpolation-mode: bicubic; /* 6 */
+}
+
+/**
+ * 修复 IE9 中的「overflow」的怪异表现
+ */
+svg:not(:root) {
+    overflow: hidden;
+}
+
+/*
+  ==================== 表单 ====================
+*/
+
+/**
+ * 定义一致的边框、外边距和内边距
+ */
+fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. 修正 IE 6-9 中颜色不能继承的问题
+ * 2. 修正 Firefox3 中文字不换行的问题
+ * 3. 修正 IE6-7 中怪异的对齐方式
+ */
+legend {
+    border: 0 none; /* 1 */
+    white-space: normal; /* 2 */
+    *margin-left: -7px; /* 3 */
+}
+
+/**
+ * 1. 修正所有浏览器中字体不继承的问题
+ * 2. 修正所有浏览器中字号不继承的问题
+ * 3. 修正 Firefox 3+， Safari5 和 Chrome 中外边距不同的问题
+ * 4. 改善在所有浏览器下的垂直对齐方式
+ */
+button,
+input,
+select,
+textarea {
+    font-family: inherit; /* 1 */
+    font-size: 100%; /* 2 */
+    margin: 0; /* 3 */
+    vertical-align: baseline; /* 4 */
+    *vertical-align: middle; /* 4 */
+}
+
+/**
+ * 修正 IE7 随着字数增加边距不断增加的问题
+ */
+input,
+button {
+    *overflow: visible;
+}
+
+/**
+ * 统一各浏览器「text-transform」不会继承的问题
+ * http://jsbin.com/iqecic/1/edit
+ * http://tjvantoll.com/2012/07/10/default-browser-handling-of-the-css-text-transform-property/
+ */
+button,
+select {
+    text-transform: none;
+}
+
+/**
+ * 1. 避免 Android 4.0.* 中的 WebKit bug ，该bug会破坏原生的
+   「audio」 和「video」的控制器
+ * 2. 更正 iOS 中无法设置可点击的「input」的问题
+ * 3. 统一其他类型的「input」的光标样式
+ */
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+}
+
+/**
+ * 重置按钮禁用时光标样式
+ */
+button[disabled],
+input[disabled] {
+    cursor: default;
+}
+
+/**
+ * 1. 修正 IE 8/9 box-sizing 被设置为「content-box」的问题
+ * 2. 移除 IE 8/9 中多余的内边距
+ * 3. 移除 IE7 中多余的内边距(IE6 中任然存在)
+ */
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+    *height: 13px; /* 3 */
+    *width: 13px; /* 3 */
+}
+
+/**
+ * 1. 修正 Safari 5 和 Chrome 中「appearance」被设置为「searchfield」的问题
+ * 2. 修正 Safari 5 和 Chrome 中「box-sizing」被设置为 「border-box」的问题
+ */    
+input[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box; /* 2 */
+    box-sizing: content-box;
+}
+    
+/**
+ * 1.移除 OS X 中 Safari5 和 Chrome 搜索框内侧的左边距
+ * 2.如果需要隐藏清除按钮需要加上
+   input[type="search"]::-webkit-search-cancel-button
+ */
+input[type="search"]::-webkit-search-decoration /* 1 */
+{
+    -webkit-appearance: none;
+}
+    
+/**
+ * 移除 Firefox 3+ 的内边距
+ */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/**
+ * 修正 Chrome 中 input [type="number"] 在特定高度和 font-size 时,
+ * 下面一个箭头光标变成「cursor: text」
+ * @demo: http://jsfiddle.net/FFXEc/
+ * 动画演示：http://gtms04.alicdn.com/tps/i4/T18kd8FCtaXXc_FhcF-330-350.gif
+ */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+}
+
+/**
+ * 1. 移除 IE6-11 中默认的垂直滚动条
+ * 2. 禁止水平拖动，防止破坏布局
+ */
+textarea {
+    overflow: auto; /* 1 */
+    resize: vertical; /* 2 */
+}
+
+/**
+ * 修正 Chrome 30- option 中文字无法显示的问题
+ * http://jsbin.com/avujas/1/edit 
+ */
+select:disabled option:checked,
+option:disabled:checked {
+    color: #D2D2D2;
+}
+
+/**
+ * 修正 Safari 3+, Chrome 1+ Placeholder 居中问题
+ */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input {
+        line-height: normal !important;
+    }
+}
+
+/**
+ * 修正 Firefox 19+ Placeholder 设置了opacity 的问题
+ */
+input::-moz-placeholder, textarea::-moz-placeholder {
+    color: darkGray;
+    opacity: 1;
+}
+
+/**
+ * label 元素给予手型，暗示此处可点击
+ */
+label {
+    cursor: pointer;
+}
+
+/**
+ * 统一 select 样式, Firefox 中有 padding:1px 0
+ * http://jsbin.com/avujas/1/edit
+ */
+select[size],
+select[multiple],
+select[size][multiple] {
+    border: 1px solid #AAA;
+    padding:0;
+}
+
+/*
+  ==================== HTML5元素 ====================
+*/
+
+/**
+ * 修正未定义为「block」的元素
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+    display: block;
+}
+
+/**
+ * 1. 修正未定义为「inline-block」的元素
+ * 2. 修正 Chrome、Firefox、Opera 中 「progress」元素 vertical-align 默认值不一致
+ */
+audio,
+canvas,
+video,
+progress {
+    display: inline-block; /* 1 */
+    vertical-align: baseline; /* 2 */
+}
+
+/**
+ * 1.防止现代浏览器将没有「controls」属性的 「audio」元素显示出来
+ * 2.去掉 iOS 5 中多余的高度
+ */
+audio:not([controls]) {
+    display: none; /* 1 */
+    height: 0; /* 2 */
+}
+
+/**
+ * 修复 IE 7/8/9，Firefox 3 和 Safari 4 中 「hidden」属性不起作用的问题
+ * 在IE、Safari、Firefox 22- 中隐藏「template」元素
+ */
+[hidden], template {
+    display: none;
+}
+
+/**
+ * 为可拖动元素添加拖动的光标
+ * http://jsbin.com/apavod/1/edit
+ */
+[draggable] {
+    cursor: move;
+}
+
+/**
+ * 居中 HTML5 dialog 元素
+ * Chrome 31 支持，需开启 chrome://flags/#enable-experimental-web-platform-features
+ * Chrome 28 之前、Firefox 中不支持 height:fit-content; 
+   https://src.chromium.org/viewvc/blink?revision=148314&view=revision
+ * ::backdrop 定义遮罩样式
+ * @demo: http://jsbin.com/iPACab/1
+ */
+dialog {
+    border: 1px solid;
+    padding: 0;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
+    width: fit-content;
+    height: -moz-fit-content;
+    height: -webkit-fit-content;
+    height: fit-content;
+}
+
+dialog::backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .3);
+}
