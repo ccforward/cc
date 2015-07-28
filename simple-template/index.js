@@ -14,3 +14,8 @@ var TemplateEngine = function(html, options) {
     code += 'return r.join("");';
     return new Function(code.replace(/[\r\t\n]/g, '')).apply(options);
 }
+
+/* 具体示例:
+ * https://github.com/ccforward/C-Header/blob/master/assets/option.js#L26
+ * https://github.com/ccforward/C-Header/blob/master/option.html#L31
+ */
