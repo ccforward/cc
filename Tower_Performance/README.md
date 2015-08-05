@@ -1,5 +1,6 @@
 # 对[Tower网站](https://tower.im)浅显的性能分析
 
+[本文所在博客目录](https://github.com/ccforward/cc/issues?q=is%3Aopen#issue_24)
 
 ## 性能分析主要从以下几点出发
 1. 加载
@@ -41,7 +42,9 @@ webpagetest站点给出了比较详细的性能分析说明，我们不再深入
   TTFB 74ms 下载用了140ms  
   ![](assets/timing_css.png)
   可以权衡只加载首屏和框架的通用样式，组件的样式可以模块化懒加载，但是会增加请求数，增加服务器压力，增加流量、成本自然会增加；但如果样式分离有性能上质的飞跃还是可以考虑的。
-* 看上面的 HTML 源码可知 application.js 文件放在了页面顶部，会阻塞页面的加载，因此感到很奇怪。
+* 看上面的 HTML 源码可知 application.js 文件放在了页面顶部，会阻塞页面的加载，因此感到很奇怪。  
+  如果一定要都放在页面的顶部 可以对 script 标签添加 async `<script async src="application.js"><script>`  
+  使用上面这种方式时，脚本的加载是异步的，不会影响到这之后的页面解析，脚本会在下载完之后立即执行。
 * js文件的加载如图：
   ![](assets/timing_js.png)
   * 不知为什么还会有 7ms 的 DNS 查询时间
@@ -59,7 +62,7 @@ webpagetest站点给出了比较详细的性能分析说明，我们不再深入
   DNS 查询竟然很恐怖的用了 31ms，但是gzip压缩后自由13K所以下载只用了1.95ms，超级快。  
   再看HTTP请求和响应头：
   ![](assets/header_push.png)
-  响应头的 `Last-Modified:Wed, 28 Jan 2015 05:19:32 GMT`,估计这个独立的推送文件长时间不会修改，如果放入cdn中加载缓存效果可能会更好。单独放在push这个域名下个人猜测是为了方便对推送功能做统一管理  
+  响应头的 `Last-Modified:Wed, 28 Jan 2015 05:19:32 GMT`,估计这个独立的推送文件长时间不会修改，如果放入 cdn 中加载缓存效果可能会更好。单独放在 push 这个域名下个人猜测是为了方便对推送功能做统一管理  
   虽然有`Cache-Control:max-age=86400`而且做为一个长时间不修改的文件，如果像微信把js放入 localStorage 中缓存，应该会大大减少服务器请求次数 而且会减少一个相对比较大的请求
 * 除了个人上传的图片需要单独请求之外，看到页面还有大量的 `/assets/` 下的小图片，好多不足1K 最大的 loading gif 图有14K大小，有些 icon 图片建议还是做sprite 图合并来减少请求
 * 有两个应该是做统计用的js请求 其中一个域名是 `timing_nr-data.net` 在系统未设置翻墙时有时候会无法请求，翻墙后请求时间超长，如图：
