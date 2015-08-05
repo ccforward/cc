@@ -1,5 +1,4 @@
 build
-assets
 node_modules
 *.log
 *.DS_Store
