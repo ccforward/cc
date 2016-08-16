@@ -1,3 +1,4 @@
+// 这是基于ES6的 Promise 完成的例子
 var Fn = {
     a: function(aid){
         return new Promise(function(resolve, reject){
