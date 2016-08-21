@@ -1,6 +1,6 @@
 {
   "name": "vue-range",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "a vue input-range component ",
   "main": "index.js",
   "scripts": {

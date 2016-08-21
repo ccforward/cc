@@ -8,7 +8,7 @@ Inspired by [mint-UI Range](https://github.com/ElemeFE/mint-ui/tree/master/packa
 [https://www.npmjs.com/package/vue-range](https://www.npmjs.com/package/vue-range)
 
 ## Screenshot
-![range](./img/range.png)
+![range](https://raw.githubusercontent.com/ccforward/cc/master/vue-range/img/range.png)
 
 ## Usage
 
