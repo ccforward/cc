@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/ccforward/cc/tree/master/vue-range"
   },
   "devDependencies": {
     "vue": "^1.0.26",

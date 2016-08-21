@@ -4,8 +4,11 @@ similar input-range component for Vue
 
 Inspired by [mint-UI Range](https://github.com/ElemeFE/mint-ui/tree/master/packages/range)
 
+## npm package
+[https://www.npmjs.com/package/vue-range](https://www.npmjs.com/package/vue-range)
+
 ## Screenshot
-![demo](http://ww3.sinaimg.cn/large/72f96cbajw1f71coi4cyhj20s70j9dh0.jpg)
+![range](./img/range.png)
 
 ## Usage
 
@@ -16,7 +19,7 @@ var Vue = require('vue')
 var vueRange = require('../src/index.vue')
 
 // or ES2015
-import vueRange from 'vue-range'
+// import vueRange from 'vue-range'
 
 new Vue({
   el: '#app',
