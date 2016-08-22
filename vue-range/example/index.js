@@ -9,6 +9,11 @@ new Vue({
     valStep: 10,
     max: 80
   },
+  methods: {
+    endFn(){
+      alert('end at: ' + this.val)
+    }
+  },
   components: {
     vueRange
   }

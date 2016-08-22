@@ -12,7 +12,7 @@
 </head>
 <body>
   <div id="app">
-    <vue-range :value.sync="val" ></vue-range>
+    <vue-range :value.sync="val" :end-func="endFn"></vue-range>
     {{ val }}
     <br>
     <br>
