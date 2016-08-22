@@ -71,5 +71,5 @@ $ npm run dev
 
 ## Version
 
-#### 0.1.0
+#### 1.0.0
 fixbug & add a callback function
