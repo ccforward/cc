@@ -2,6 +2,11 @@
 
 A simple date calculator from my personal project [Zhihu-Spider](https://github.com/ccforward/zhihu)
 
+
+## NPM
+
+[DateCalc](https://www.npmjs.com/package/date-calc)
+
 ## Usage
 
 ``` js
