@@ -1,5 +1,3 @@
-// 日期计算 
-// 格式 date: 20460101
 function DateCalc(date, bef, aft){
     if(date){
         this.date = [date.substr(0,4), '-', date.substr(4,2), '-', date.substr(-2)].join('')
@@ -65,8 +63,6 @@ DateCalc.prototype = {
             d = dtime.substr(6,2)+'日';
         return y+m+d;
     },
-    // days 前后的天数
-    // type before 或 after
     _calc: function(days, type){
         var d = new Date(this.date),
             input = 0;
