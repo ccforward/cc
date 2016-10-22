@@ -7,6 +7,32 @@ A simple date calculator from my personal project [Zhihu-Spider](https://github.
 
 [DateCalc](https://www.npmjs.com/package/date-calc)
 
+## update
+
+@v1.0.1
+
+* update: method `now()` can receive a parameter like `now(20161001)`
+
+``` js
+  const DateCalc = require('date-calc')
+  let d = new DateCalc();
+  console.log(d.now()) // returns now date
+  d.now('20161002')  // changs DateCalc's inner data
+  console.log(d.now()) // returns 20161002
+  console.log(d.before()) // returns 20161001
+  console.log(d.after(10)) // returns 20161012
+```
+
+* add: method `weekDay()`
+  
+returns an Object of weekdays info
+
+``` js
+  const DateCalc = require('date-calc')
+  let d = new DateCalc('20161001');
+  d.weekDay() // returns { day: 6, en: 'Sat', cn: '六' }
+```
+
 ## Usage
 
 ``` js
