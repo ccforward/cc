@@ -23,6 +23,10 @@ module.exports = {
       }
     })
   ],
+  babel: {
+    presets: ['es2015'],
+    plugins: ['transform-runtime']
+  },
   vue: {
     loaders: {
       babel:'babel-loader',
