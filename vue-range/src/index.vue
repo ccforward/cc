@@ -1,10 +1,10 @@
 <template>
     <div class="vue-range">
         <slot name="start"></slot>
-        <div class="vue-range-content" v-el:content>
+        <div class="vue-range-content" ref="content">
             <div class="vue-range-railway" :style="{'border-top-width': barHeight + 'px'}"></div>
             <div class="vue-range-bar" :style="{width: progress + '%', 'height': barHeight + 'px'}"></div>
-            <div class="vue-range-handle" v-el:handle :style="{left: progress + '%'}"></div>
+            <div class="vue-range-handle" ref="handle" :style="{left: progress + '%'}"></div>
         </div>
         <slot name="end"></slot>
     </div>
@@ -96,17 +96,19 @@ export default {
         progress() {
             const value = this.value;
             if(typeof value === 'undefined' || value == null) return 0;
+            if(value <= this.min){
+              return 0
+            }
             return Math.floor((value - this.min) / (this.max - this.min) * 100)
         }
     },
-    ready(){
+    mounted(){
         const _self = this;
-        const {content, handle} = this.$els;
+        const { content, handle } = this.$refs;
 
         const handlePos = () => {
             const contentBox = content.getBoundingClientRect();
             const handleBox = handle.getBoundingClientRect();
-
             return {
                 left: handleBox.left - contentBox.left,
                 top: handleBox.top - contentBox.top
@@ -139,8 +141,8 @@ export default {
                 }else if(newProgress > 1) {
                     newProgress = 1;
                 }
-
-                this.value = Math.round(this.min + newProgress * (this.max-this.min))
+                
+                this.$emit('input', Math.round(this.min + newProgress * (this.max - this.min)));
             },
             end: () => {
                 if(this.disabled) return;

@@ -1,13 +1,18 @@
 var Vue = require('vue')
 var vueRange = require('../src/index.vue')
 
+
 new Vue({
-  el: '#app',
-  data: {
-    val: 100,
-    val2: 100,
-    valStep: 10,
-    max: 80
+  data() {
+    return {
+      val: 90,
+      val2: 100,
+      val3: 30,
+      val4: 20,
+      val5: -10,
+      valStep: 10,
+      max: 80
+    }
   },
   methods: {
     endFn(){
@@ -17,4 +22,4 @@ new Vue({
   components: {
     vueRange
   }
-})
+}).$mount('#app')

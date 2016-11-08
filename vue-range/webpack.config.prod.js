@@ -25,6 +25,7 @@ module.exports = {
   ],
   vue: {
     loaders: {
+      babel:'babel-loader',
       scss: 'style!css',
       exclude: 'node_modules'
     }
