@@ -1,6 +1,6 @@
 # vue-pages
 
-A Vue Pagination Component
+A Vue Pagination Component Using Bootstrap Style
 
 support vue 2.0+
 
@@ -9,9 +9,60 @@ support vue 2.0+
 [https://www.npmjs.com/package/vue-pages](https://www.npmjs.com/package/vue-pages)
 
 ## Screenshot
-![range]()
+![range](https://raw.githubusercontent.com/ccforward/cc/master/vue-pages/img/pages.png)
 
 ## Usage
+
+js code
+
+```js
+const vuePages = require('vue-pages')
+// or ES6
+// import vuePages from 'vue-pages'
+
+new Vue({
+  el: '#app',
+  data() {
+    return {
+      url1: '#',
+      url2: '?param=pages',
+      pageName:'p',
+      total: 27,
+      counts: 10,
+      current1: 11,
+      current2: 5
+    }
+  },
+  methods: {
+    fn1(d, e){
+      this.current1 = d
+    },
+    fn2(d, e){
+      e.preventDefault()
+      this.current2 = d
+    }
+  },
+  components: {
+    vuePages
+  }
+})
+```
+
+HTML code
+
+```html
+<vue-pages :url="url1" :total="total" :counts="counts" :current="current1" :fn="fn1"></vue-pages>
+      
+<vue-pages :url="url2" :total="total" :counts="counts" :current="current2" :fn="fn2"></vue-pages>
+```
+
+## Parameters
+* url: URL
+* pageName:  paramter's Name
+* counts: the count of page numbers that can show
+* total 
+* current: the current page number
+* fn: the click hanlder
 
 
 ## Development
@@ -20,6 +71,5 @@ support vue 2.0+
 $ npm install
 
 $ npm run dev
-
 # open 'http://localhost:5000'
 ```

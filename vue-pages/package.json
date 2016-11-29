@@ -1,7 +1,7 @@
 {
   "name": "vue-pages",
   "version": "0.0.1",
-  "description": "A Vue Pagination Component",
+  "description": "A Vue Pagination Component Using Bootstrap Style",
   "main": "index.js",
   "scripts": {
     "test": "npm test",
@@ -31,13 +31,15 @@
   "keywords": [
     "vue",
     "pagination",
-    "vue-pagination",
-    "vue-page",
-    "vue-pages",
+    "bootstrap pagination",
+    "vue pagination",
+    "vue page",
+    "vue pages",
+    "page",
     "pager"
   ],
-  "author": "cc <ccking@foxmail.com>",
-  "license": "ISC",
+  "author": "ccforward <ccking@foxmail.com>",
+  "license": "MIT",
   "dependencies": {
     "babel-runtime": "^6.18.0",
     "vue-hot-reload-api": "^2.0.6",

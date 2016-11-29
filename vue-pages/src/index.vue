@@ -1,58 +1,57 @@
 <template>
-    <div class="vue-pages">
-        <slot name="start"></slot>
-          <ul class="pagination">
-            <li v-if="start > counts">
-              <a :href="prev" @click="fn(current-1, $event)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-            </li>
-            <li v-for="p in pageCounts" :class="p == c ? 'active' : ''">
-              <a :href="link(p)" @click="p == c ? null : fn(p, $event)">{{ p }}</a>
-            </li>
-            <li v-if="end!=total">
-              <a :href="next" @click="fn(current+1, $event)" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-            </li>
-          </ul>
-        <slot name="end"></slot>
-    </div>
+  <div class="vue-pages">
+    <ul class="pagination">
+      <li v-if="start > counts">
+        <a :href="prev" @click="fn(current-1, $event)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li v-for="p in pageCounts" :class="p == c ? 'active' : ''">
+        <a :href="link(p)" @click="p == c ? null : fn(p, $event)">{{ p }}</a>
+      </li>
+      <li v-if="end!=total">
+        <a :href="next" @click="fn(current+1, $event)" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 
 <script>
 
 /**
- * url 链接
- * pageName  分页参数名
- * counts 可显示的页码个数
- * total 总页数
- * current 当前第几页
+ * url: URL
+ * pageName:  paramter's Name
+ * counts: the count of page numbers that can show
+ * total 
+ * current: the current page number
+ * fn: the click hanlder
 **/
 export default {
     name: 'vue-pages',
     props: {
-        url: {
-            type: String,
-            default: ''
-        },
-        pageName: {
-            type: String,
-            default: 'p'
-        },
-        counts: {
-            type: Number,
-            default: 10
-        },
-        total: {
-            type: Number,
-            default: 1
-        },
-        current: {
-            type: Number,
-            default: 1
-        },
-        fn:{
-          type: Function,
-          default: function(){}
-        }
+      url: {
+        type: String,
+        default: ''
+      },
+      pageName: {
+        type: String,
+        default: 'p'
+      },
+      counts: {
+        type: Number,
+        default: 10
+      },
+      total: {
+        type: Number,
+        default: 1
+      },
+      current: {
+        type: Number,
+        default: 1
+      },
+      fn:{
+        type: Function,
+        default: function(){}
+      }
     },
     computed: {
       c(){
