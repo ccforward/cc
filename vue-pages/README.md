@@ -1,4 +1,4 @@
-![NPM version][npm-image]][npm-url]
+[![NPM version][npm-image]][npm-url]
 
 # vue-pages
 
@@ -76,5 +76,6 @@ $ npm run dev
 # open 'http://localhost:5000'
 ```
 
-npm[npm-url]: https://www.npmjs.com/package/vue-pages
+[downloads-image]: https://img.shields.io/npm/dm/vue-pages.svg
+[npm-url]: https://www.npmjs.com/package/vue-pages
 [npm-image]: https://img.shields.io/npm/v/vue-pages.svg
