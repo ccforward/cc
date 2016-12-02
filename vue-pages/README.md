@@ -1,4 +1,4 @@
-[![NPM version][npm-image]][npm-url]
+![NPM version][npm-image]][npm-url]
 
 # vue-pages
 
