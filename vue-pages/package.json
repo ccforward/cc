@@ -1,6 +1,6 @@
 {
   "name": "vue-pages",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A Vue Pagination Component Using Bootstrap Style",
   "main": "index.js",
   "scripts": {

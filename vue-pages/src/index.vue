@@ -7,7 +7,7 @@
       <li v-for="p in pageCounts" :class="p == c ? 'active' : ''">
         <a :href="link(p)" @click="p == c ? null : fn(p, $event)">{{ p }}</a>
       </li>
-      <li v-if="end!=total">
+      <li v-if="end != total">
         <a :href="next" @click="fn(current+1, $event)" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
       </li>
     </ul>
@@ -49,8 +49,7 @@ export default {
         default: 1
       },
       fn:{
-        type: Function,
-        default: function(){}
+        type: Function
       }
     },
     computed: {
@@ -94,7 +93,7 @@ export default {
     },
     methods: {
       link(page){
-        let connector = this.url.indexOf('?')>-1 ? '&' : '?'
+        let connector = this.url.indexOf('?') > -1 ? '&' : '?'
         return this.url + connector + this.pageName + '=' + page
       }
     }

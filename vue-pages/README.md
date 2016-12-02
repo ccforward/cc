@@ -1,3 +1,5 @@
+[![NPM version][npm-image]][npm-url]
+
 # vue-pages
 
 A Vue Pagination Component Using Bootstrap Style
@@ -57,12 +59,12 @@ HTML code
 ```
 
 ## Parameters
-* url: URL
-* pageName:  paramter's Name
-* counts: the count of page numbers that can show
-* total 
-* current: the current page number
-* fn: the click hanlder
+* `url`: URL
+* `pageName`:  paramter's Name
+* `counts`: the count of page numbers that can show
+* `total`: total pages 
+* `current`: the current page number
+* `fn`: the click hanlder
 
 
 ## Development
@@ -73,3 +75,6 @@ $ npm install
 $ npm run dev
 # open 'http://localhost:5000'
 ```
+
+npm[npm-url]: https://www.npmjs.com/package/vue-pages
+[npm-image]: https://img.shields.io/npm/v/vue-pages.svg
