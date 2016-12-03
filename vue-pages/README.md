@@ -2,10 +2,13 @@
 
 # vue-pages
 
-A Vue Pagination Component Using Bootstrap Style
+A Dead Simple Vue Pagination Component Using Bootstrap Style
 
 support vue 2.0+
 
+## demo
+[demo](http://ccforward.github.io/demos/vue-pages/index.html)
+[demo's code](https://github.com/ccforward/ccforward.github.io/tree/master/demos/vue-pages)
 
 ## npm package
 [https://www.npmjs.com/package/vue-pages](https://www.npmjs.com/package/vue-pages)
