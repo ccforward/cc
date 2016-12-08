@@ -8,7 +8,7 @@ new Vue({
     return {
       url1: '#',
       url2: '?param=pages',
-      pageName:'p',
+      pageParam:'page',
       total: 27,
       counts: 10,
       current1: 11,

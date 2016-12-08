@@ -4,8 +4,8 @@
       <li v-if="start > counts">
         <a :href="prev" @click="fn(current-1, $event)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
       </li>
-      <li v-for="p in pageCounts" :class="p == c ? 'active' : ''">
-        <a :href="link(p)" @click="p == c ? null : fn(p, $event)">{{ p }}</a>
+      <li v-if="pageCounts.length" v-for="p in pageCounts" :class="p == c ? 'active' : ''">
+        <a :href="link(p)" @click="p == c ? null : fn(p, $event)" v-text="p"></a>
       </li>
       <li v-if="end != total">
         <a :href="next" @click="fn(current+1, $event)" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
@@ -19,7 +19,7 @@
 
 /**
  * url: URL
- * pageName:  paramter's Name
+ * pageParam: paramter's Name
  * counts: the count of page numbers that can show
  * total 
  * current: the current page number
@@ -32,7 +32,7 @@ export default {
         type: String,
         default: ''
       },
-      pageName: {
+      pageParam: {
         type: String,
         default: 'p'
       },
@@ -93,8 +93,12 @@ export default {
     },
     methods: {
       link(page){
-        let connector = this.url.indexOf('?') > -1 ? '&' : '?'
-        return this.url + connector + this.pageName + '=' + page
+        if(!this.url){
+          return ''
+        }else {
+          let connector = this.url.indexOf('?') > -1 ? '&' : '?'
+          return this.url + connector + this.pageParam + '=' + page
+        }
       }
     }
 }
