@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Gomoku</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+    #app {
+      text-align: center;
+    }
+    h1 {
+      font-size: 20px;
+      text-align: center;
+    }
+    .chess {
+      margin-bottom: 30px;
+      font-size: 0;
+    }
+    
+    /* 坐标 */
+    i {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      text-align: left;
+    }
+    /* 白棋 */
+    i.w,
+    i.w::before,
+    i.w::after {
+      background-color: #f00;
+      border-color: #f00;
+    }
+    
+    /* 黑棋 */
+    i.b,
+    i.b::before,
+    i.b::after {
+      background-color: #333;
+    }
+    /* - 横线 */
+    i::before,
+    i::after {
+      content: ' ';
+      position: absolute;
+      top: 20px;
+      width: 40px;
+      height: 0;
+      border-top: 1px solid #333;
+    }
+    /* | 竖线 */
+    i::after {
+      top: 0;
+      right: 20px;
+      width: 0;
+      height: 40px;
+      border-top: 0 none;
+      border-right: 1px solid #333;
+    }
+    button {
+      margin-right: 5px
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <h1>Vue 五子棋</h1>
+    <div class="chess">
+      <template v-for="(p,y) in pieces.len">
+        <template v-for="(p,x) in pieces.len">
+          <i :class="pieces[_cover(x)+_cover(y)]" @click="tick(x,y)"></i>
+          <br v-if="x == pieces.len-1">
+        </template>
+      </template> 
+    </div>
+    <button @click="init">重新开局</button>
+    <button @click="undo">悔棋</button>
+  </div>
+
+<script src="//cdn.bootcss.com/vue/2.1.4/vue.min.js"></script>
+<script>
+  new Vue({
+      el: '#app',
+      name: 'chess',
+      data: {
+        gameOver: false, // 游戏结束
+        boardWidth: 11, // 正方形棋盘长宽
+        last: '', // 上一步的坐标
+        pieces: {},
+        pieceClass:{ b: 'b', w: 'w' },
+        player: 0, // 1:player1 class==b  0:player2 class==w
+      },
+      created(){
+        this.init()
+      },
+      methods: {
+        // 初始化棋盘 和 坐标数据
+        init(){
+          this.gameOver = false
+          this.player = 0
+          const center = parseInt(this.boardWidth/2)
+          let pieces = {
+            len: this.boardWidth  // 长 == 宽 == this.boardWidth
+          }
+          // 初始化所有坐标 
+          for(let x=0; x<pieces.len; x++){
+            for(let y=0; y<pieces.len; y++){
+              let player = '';
+              // 设定中间棋子为黑棋
+              if(x == center && y == center) player = this.pieceClass.b
+              pieces[this._cover(x) + this._cover(y)] = player
+            }
+          }
+          this.pieces = pieces
+        },
+        
+        tick(x, y){
+          const coordinate = this._cover(x) + this._cover(y);
+          if(!this.pieces[coordinate] && !this.gameOver){
+            this.pieces[coordinate] = this.player ? this.pieceClass.b : this.pieceClass.w;
+            this.last = coordinate
+            if(!this.check(x, y)){
+              this.player = !this.player
+            }
+          }
+        },
+        undo(){
+          if(!this.gameOver && this.last){
+            this.pieces[this.last] = ''
+            this.player = !this.player
+          }
+        },
+        // 判断输赢
+        check(x, y){
+          // 横向
+          const cx = this._cover(x)
+          const cy = this._cover(y)
+          const curPiece = this.pieces[cx+cy]
+          let count = 0
+          for(let i=0,l=this.boardWidth; i<l; i++){
+            if(curPiece == this.pieces[cx+this._cover(i)])
+              count++
+            else
+              count = 0
+
+            if(count == 5){
+              alert('win')
+              this.gameOver = true
+              return true
+            }
+          }
+
+          // 纵向
+          count = 0
+          for(let i=0,l=this.boardWidth; i<l; i++){
+            if(curPiece == this.pieces[this._cover(i) + cy])
+              count++
+            else
+              count = 0
+
+            if(count == 5){
+              alert('win')
+              this.gameOver = true
+              return true
+            }
+          }
+
+          // \ 方向
+          count = 0
+          let sub = Math.min(x, y)
+          sub = sub > 5 ? 5 : sub
+
+          // \ 方向上
+          // 从当前落子点往左上方后退sub(最大5)个位置后的坐标(_x,_y)
+          let _x = x - sub
+          let _y = y - sub
+
+          // (this.boardWidth - Math.abs(x - y)):  该方向上最多棋子数目
+          // 从(_x,_y)开始往右下角方向逐一的比较
+          // 根据该方向上是否有连续5个相同的棋子判断结果
+          for (let i=0, l=this.boardWidth - Math.abs(x - y); i<l; i++) {
+              if (curPiece == this.pieces[this._cover(_x)+this._cover(_y)])
+                count++
+              else
+                count = 0
+
+              _y++
+              _x++
+              if (count == 5){
+                alert('win')
+                this.gameOver = true
+                return true;
+              }
+          }
+
+          // / 方向  想象成 \方向 的镜像
+          count = 0
+          _x = this.boardWidth - x - 1 
+          _y = y 
+          sub = Math.min(_x, _y)
+
+          sub = sub > 5 ? 5 : sub
+
+          _y = _y - sub
+          _x = _x - sub
+          // / 方向上
+          // 从当前落子点往左下方后退sub (最大5) 个位置后的坐标 (_y, this.boardWidth - _x - 1)
+          // 相当于的 \ 方向的镜像
+
+          // this.boardWidth - Math.abs(_x - _y) : 该方向上最多棋子数目
+          // 从(_y, this.boardWidth - _x - 1)开始往右上角方向逐一的比较
+          // 根据该方向上是否有连续5个相同的棋子判断结果
+          for (let i=0, l=this.boardWidth - Math.abs(_x - _y); i<l; i++) {
+            if (curPiece == this.pieces[this._cover(_y) + this._cover(this.boardWidth - _x - 1)])
+              count++
+            else
+              count = 0
+
+            _y++
+            _x++
+
+            if (count == 5){
+              alert('win')
+              this.gameOver = true
+              return true;
+            }
+          }
+
+
+          return false
+        },
+
+        _cover(m){ return m < 10 ? `0${m}` : ''+m}
+      }
+  })
+</script>
+</body>
+
+</html>
