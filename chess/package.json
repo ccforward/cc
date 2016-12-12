@@ -1,0 +1,22 @@
+{
+  "name": "cc",
+  "version": "1.0.0",
+  "description": "chess",
+  "main": "socket.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccforward/cc.git"
+  },
+  "dependencies": {
+    "socket.io": "^1.7.2"
+  },
+  "author": "cc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ccforward/cc/issues"
+  },
+  "homepage": "https://github.com/ccforward/cc#readme"
+}
