@@ -1,4 +1,4 @@
-# 代码片段库
-====
+# 代码库
 
-### 代码和博客(戳向地址)：[Github 目录](https://github.com/ccforward/Catalogue)
+## [博客](https://github.com/ccforward/cc/issues)
+## 代码库：[Github 目录](https://github.com/ccforward/Catalogue)
