@@ -15,7 +15,7 @@
 let isDragging = false;
 const supportTouch = 'ontouchstart' in window;
 
-let draggable = function(element, options) {
+const draggable = function(element, options) {
   const moveFn = function(event) {
     if (options.drag) {
       options.drag(supportTouch ? event.changedTouches[0] || event.touches[0] : event);
@@ -59,7 +59,7 @@ let draggable = function(element, options) {
     element.addEventListener('touchend', endFn);
     element.addEventListener('touchcancel', endFn);
   }
-};
+}
 
 export default {
     name: 'vue-range',
