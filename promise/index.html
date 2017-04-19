@@ -10,10 +10,8 @@
 <script>
 
     function start () {
-        var p = new Promise();
         console.log('start');
-        p.resolve();
-        return p;
+        return new Promise().resolve();
     }
 
     function test1() {
@@ -26,7 +24,7 @@
         setTimeout( function(){
             console.log('sleep1');
             p.resolve();
-        }, 200);
+        }, 2000);
 
         return p;
     }
@@ -69,9 +67,9 @@
  start().then( test1, null )
         .then( sleep1(), null )
         .then( test2, null )
-        .then( sleep2(), null )
-        .then( test3, null )
-        .then( sleep3(), null );
+        // .then( sleep2(), null )
+        // .then( test3, null )
+        // .then( sleep3(), null );
 
 </script>
 </body>

@@ -15,23 +15,11 @@
     }
 
     /*
-     *给一个promise添加成功和失败回调函数
+     * 给一个promise添加成功和失败回调函数
      * @param {Function}
      * @param {Function}
      * @return {Obejct} 返回一个Promise对象
      **/
-    // Promise.prototype = {
-    //     constructor: Promise,
-    //     then: function(resolve, reject){
-
-    //     },
-    //     resolve: function(){
-
-    //     },
-    //     reject: function(){
-
-    //     }
-    // }
     Promise.prototype.then = function(resolve, reject) {
 
         if (resolve instanceof global.Promise) return resolve;
@@ -79,6 +67,8 @@
             this._resolves[i].apply(null);
         }
 
+        return this;
+
     };
 
     /*
@@ -93,6 +83,8 @@
         for (; i < len; i++) {
             this._rejects[i].apply(null);
         }
+
+        return this;
     };
 
     global.Promise = Promise;
@@ -100,16 +92,16 @@
 
     /****************功能函数*********************/
     function proxy(fun, context) {
-        var source = context || this;
+        var _self = context || this;
 
-        return fun.bind ? fun.bind(source) : function() {
-            fun.apply(source, arguments);
+        return fun.bind ? fun.bind(_self) : function() {
+            fun.apply(_self, arguments);
         };
     }
 
     function type(obj) {
         var o = {};
-        return o.toString.call(obj).replace(/^\[ Object (\w+)\]$/, '$1').toLowerCase();
+        return Object.toString.call(obj).replace(/^\[ Object (\w+)\]$/, '$1').toLowerCase();
     }
 
     function isFunc(obj) {
