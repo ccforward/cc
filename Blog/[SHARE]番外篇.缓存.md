@@ -1,4 +1,4 @@
-#关于缓存 （大纲）
+# 关于缓存 （大纲）
 
 > 存储很便宜 但是流量太贵
 
@@ -86,7 +86,7 @@ self.addEventListener('install', event => {
 ## 其他的缓存
 
 1. localStorage sessionStorage 
-2. [HTTP2](https://github.com/ccforward/cc/issues/36)
+2. [HTTP2 + Node.js](https://github.com/ccforward/cc/issues/36)
 3. 新版本提前下发资源
 
 ### 常用缓存淘汰算法
