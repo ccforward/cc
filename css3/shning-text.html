@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Shining Text</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(rgba(16, 16, 16, 0.8), rgba(16, 16, 16, 0.8));
+      background-size: cover;
+    }
+
+    p {
+      margin: 0em 5em 4em 5em;
+    }
+
+    h1,
+    p {
+      text-align: left;
+      line-height: 1.8;
+    }
+
+    .glowIn {
+      color: white;
+    }
+    .glowIn span {
+      animation: glow-in 0.8s both;
+    }
+
+    @keyframes glow-in {
+      from {
+        opacity: 0;
+      }
+      65% {
+        opacity: 1;
+        text-shadow: 0 0 25px white;
+      }
+      75% {
+        opacity: 1;
+      }
+      to {
+        opacity: 0.7;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1 class="glowIn">Hello World</h1>
+  <p class="glowIn">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis pellentesque id nibh tortor. Suspendisse ultrices gravida dictum fusce ut placerat orci nulla. A lacus vestibulum sed arcu.</p>
+</body>
+
+<script>
+  var glowInTexts = document.querySelectorAll(".glowIn");
+  glowInTexts.forEach(function (glowInText) {
+    var letters = glowInText.textContent.split("");
+    glowInText.textContent = "";
+    letters.forEach(function (letter, i) {
+      var span = document.createElement("span");
+      span.textContent = letter;
+      span.style.animationDelay = i * 0.05 + "s";
+      glowInText.append(span);
+    });
+  });
+</script>
+
+</html>
