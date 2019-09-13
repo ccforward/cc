@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Fill Hover</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
+
+    body {
+      display: -webkit-box;
+      display: flex;
+      height: 100vh;
+      -webkit-box-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      align-items: center;
+      text-align: center;
+      background: #1A1E23;
+    }
+
+    ul {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      flex-direction: column;
+      -webkit-box-align: start;
+      align-items: start;
+      list-style-type: none;
+    }
+
+    ul li {
+      padding: 6px 0;
+    }
+
+    ul li a {
+      --fill-color: #198CE6;
+      position: relative;
+      display: block;
+      padding: 4px 0;
+      font: 700 3rem Raleway, sans-serif;
+      text-decoration: none;
+      text-transform: uppercase;
+      -webkit-text-stroke: 2px var(--fill-color);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0, var(--fill-color))) left/0 no-repeat;
+      background: linear-gradient(var(--fill-color) 0 100%) left/0 no-repeat;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-transition: 0.5s linear;
+      transition: 0.5s linear;
+    }
+
+    ul li a:hover {
+      background-size: 100%;
+    }
+
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li><a href="#">home</a></li>
+    <li><a href="#">archives</a></li>
+    <li><a href="#">tags</a></li>
+    <li><a href="#">categories</a></li>
+    <li><a href="#">about</a></li>
+  </ul>
+</body>
+
+
+</html>
