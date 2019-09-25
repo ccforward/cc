@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Fill Hover</title>
+  <style>
+    @font-face {
+      font-family: Biko;
+      src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/biko-black.woff");
+    }
+    body {
+      display: -webkit-box;
+      display: flex;
+      height: 100vh;
+      -webkit-box-pack: center;
+              justify-content: center;
+      -webkit-box-align: center;
+              align-items: center;
+      overflow: hidden;
+    }
+
+    video,
+    h1 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    video {
+      -o-object-fit: cover;
+         object-fit: cover;
+    }
+
+    h1 {
+      font-size: 20vw;
+      font-family: Biko, sans-serif;
+      font-weight: 700;
+      line-height: 100vh;
+      text-transform: uppercase;
+      text-align: center;
+      background: white;
+      mix-blend-mode: screen;
+    }
+
+  </style>
+</head>
+
+<body>
+  <video autoplay muted loop preload poster="https://gw.alipayobjects.com/mdn/rms_68d5f2/afts/img/A*BUULR7QvldIAAAAAAAAAAABkARQnAQ">
+    <source src="https://gw.alipayobjects.com/mdn/rms_68d5f2/afts/file/A*2e88RoLaN9sAAAAAAAAAAABkARQnAQ" />
+  </video>
+  <h1>ocean</h1>
+</body>
+
+
+</html>
