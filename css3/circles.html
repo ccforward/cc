@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Fill Hover</title>
+  <style>
+    body {
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background: #b3e5fc;
+    }
+
+    .circle-wrap {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .circle-wrap .circle {
+      position: absolute;
+      background: conic-gradient(var(--color1) var(--pos), var(--color2) 0);
+      border-radius: 50%;
+    }
+
+    .circle-wrap .circle:nth-child(1) {
+      --color1: #50514F;
+      z-index: 7;
+      width: 4em;
+      height: 4em;
+      animation: pos 0.6s linear, color1 1.2s step-end, color2-1 1.2s step-end;
+      animation-iteration-count: 2;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes color2-1 {
+      50% {
+        --color2: #50514F;
+      }
+    }
+
+    .circle-wrap .circle:nth-child(2) {
+      --color1: #F25F5C;
+      z-index: 6;
+      width: 8em;
+      height: 8em;
+      animation: pos 0.6s linear, color1 1.2s step-end, color2-2 1.2s step-end;
+      animation-iteration-count: 2;
+      animation-delay: 0.8s;
+    }
+
+    @keyframes color2-2 {
+      50% {
+        --color2: #F25F5C;
+      }
+    }
+
+    .circle-wrap .circle:nth-child(3) {
+      --color1: #FFE066;
+      z-index: 5;
+      width: 12em;
+      height: 12em;
+      animation: pos 0.6s linear, color1 1.2s step-end, color2-3 1.2s step-end;
+      animation-iteration-count: 2;
+      animation-delay: 1.2s;
+    }
+
+    @keyframes color2-3 {
+      50% {
+        --color2: #FFE066;
+      }
+    }
+
+    .circle-wrap .circle:nth-child(4) {
+      --color1: #247BA0;
+      z-index: 4;
+      width: 16em;
+      height: 16em;
+      animation: pos 0.6s linear, color1 1.2s step-end, color2-4 1.2s step-end;
+      animation-iteration-count: 2;
+      animation-delay: 1.6s;
+    }
+
+    @keyframes color2-4 {
+      50% {
+        --color2: #247BA0;
+      }
+    }
+
+    .circle-wrap .circle:nth-child(5) {
+      --color1: #70C1B3;
+      z-index: 3;
+      width: 20em;
+      height: 20em;
+      animation: pos 0.6s linear, color1 1.2s step-end, color2-5 1.2s step-end;
+      animation-iteration-count: 2;
+      animation-delay: 2s;
+    }
+
+    @keyframes color2-5 {
+      50% {
+        --color2: #70C1B3;
+      }
+    }
+
+    .circle-wrap .circle:nth-child(6) {
+      --color1: #1D3557;
+      z-index: 2;
+      width: 24em;
+      height: 24em;
+      animation: pos 0.6s linear, color1 1.2s step-end, color2-6 1.2s step-end;
+      animation-iteration-count: 2;
+      animation-delay: 2.4s;
+    }
+
+    @keyframes color2-6 {
+      50% {
+        --color2: #1D3557;
+      }
+    }
+
+    .circle-wrap .circle:nth-child(7) {
+      --color1: #88ABC0;
+      z-index: 1;
+      width: 28em;
+      height: 28em;
+      animation: pos 0.6s linear, color1 1.2s step-end, color2-7 1.2s step-end;
+      animation-iteration-count: 2;
+      animation-delay: 2.8s;
+    }
+
+    @keyframes color2-7 {
+      50% {
+        --color2: #88ABC0;
+      }
+    }
+
+    .circle-wrap .circle:nth-child(8) {
+      --color1: #FFCDB2;
+      z-index: 0;
+      width: 32em;
+      height: 32em;
+      animation: pos 0.6s linear, color1 1.2s step-end, color2-8 1.2s step-end;
+      animation-iteration-count: 2;
+      animation-delay: 3.2s;
+    }
+
+    @keyframes color2-8 {
+      50% {
+        --color2: #FFCDB2;
+      }
+    }
+
+    @keyframes pos {
+      to {
+        --pos: 100%;
+      }
+    }
+
+    @keyframes color1 {
+      50% {
+        --color1: transparent;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="circle-wrap">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
+</body>
+
+<script>
+  "use strict";
+  CSS.registerProperty({
+    name: '--color1',
+    syntax: '<color>',
+    initialValue: 'transparent',
+    inherits: true
+  });
+
+  CSS.registerProperty({
+    name: '--color2',
+    syntax: '<color>',
+    initialValue: 'transparent',
+    inherits: true
+  });
+
+  CSS.registerProperty({
+    name: '--pos',
+    syntax: '<length-percentage>',
+    initialValue: '0',
+    inherits: true
+  });
+
+</script>
+
+
+</html>
