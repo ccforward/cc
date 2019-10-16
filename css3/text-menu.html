@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Shinchou Menu</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #fafafa;
+    }
+
+    .shinchou-menu {
+      --highlight-text-color: #00ACF0;
+      display: flex;
+      flex-direction: column;
+      list-style-type: none;
+    }
+    .shinchou-menu li {
+      margin: 6px;
+    }
+    .shinchou-menu li a {
+      position: relative;
+      display: inline-flex;
+      padding: 6px 2px 6px 2px;
+      color: black;
+      font-size: 1.6em;
+      font-weight: 700;
+      line-height: 1;
+      text-decoration: none;
+      overflow: hidden;
+    }
+    .shinchou-menu li a::before {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      background: black;
+    }
+    .shinchou-menu li a:hover span {
+      color: white !important;
+      text-shadow: 0 0 10px var(--highlight-text-color);
+    }
+    .shinchou-menu li a span {
+      position: relative;
+      margin: 0 5px 0 4px;
+      transition: 0.3s;
+    }
+    .shinchou-menu li a span.highlight::before {
+      position: absolute;
+      content: '';
+      top: -3px;
+      left: -3px;
+      bottom: -3px;
+      right: -3px;
+      z-index: -1;
+      background: var(--highlight-text-color);
+    }
+    .shinchou-menu li a span:not(.highlight) {
+      color: var(--highlight-text-color);
+    }
+
+  </style>
+</head>
+
+<body>
+  <ul class="shinchou-menu">
+    <li><a href="#">ニュース</a></li>
+    <li><a href="#">ストーリー</a></li>
+    <li><a href="#">スターフ＆キャスト</a></li>
+    <li><a href="#">キャラクター</a></li>
+    <li><a href="#">放送·配信情報</a></li>
+  </ul>
+</body>
+
+<script>
+  var shinchouMenuLinks = document.querySelectorAll(".shinchou-menu li a");
+  shinchouMenuLinks.forEach(function (link) {
+    var letters = link.textContent.split("");
+    link.textContent = "";
+    letters.forEach(function (letter, i) {
+      var span = document.createElement("span");
+      span.textContent = letter;
+      if (i < 2) {
+        span.className = "highlight";
+      }
+      span.style.transitionDelay = i / 10 + "s";
+      link.append(span);
+    });
+  });
+</script>
+
+</html>
