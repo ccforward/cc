@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css-mask</title>
+  <style>
+    div {
+      position: relative;
+      width: 874px;
+      height: 437px;
+      border-radius: 6px;
+      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f3c5bd+0,ff6600+53,c72200+100 */
+      background: #f3c5bd;
+      /* Old browsers */
+      background: -moz-linear-gradient(left, #f3c5bd 0%, #ff6600 53%, #c72200 100%);
+      /* FF3.6-15 */
+      background: -webkit-linear-gradient(left, #f3c5bd 0%, #ff6600 53%, #c72200 100%);
+      /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to right, #f3c5bd 0%, #ff6600 53%, #c72200 100%);
+      /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f3c5bd', endColorstr='#c72200', GradientType=1);
+      /* IE6-9 */
+      -webkit-mask: url(https://img.alicdn.com/tfs/TB1wsrFdjMZ7e4jSZFOXXX7epXa-874-437.png) no-repeat top right;
+      mask: url(https://img.alicdn.com/tfs/TB1wsrFdjMZ7e4jSZFOXXX7epXa-874-437.png) no-repeat top right;
+      -webkit-mask-size: cover;
+      mask-size: cover;
+    }
+
+    div~div {
+      width: 500px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>试试</div>
+  <br>
+  <br>
+  <br>
+  <div>试试</div>
+</body>
+
+</html>
