@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Gradient Shadow</title>
+  <style>
+    :root {
+      --gradient-shadow: linear-gradient(
+        45deg,
+        #fb0094,
+        #0000ff,
+        #00ff00,
+        #ffff00,
+        #ff0000,
+        #fb0094,
+        #0000ff,
+        #00ff00,
+        #ffff00,
+        #ff0000
+      );
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .shadow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      color: #fff;
+      text-align: center;
+      font-size: 50px;
+      font-weight: bold;
+      width: 400px;
+      height: 250px;
+      background: linear-gradient(0deg, #000, #262626);
+    }
+    .shadow:before,
+    .shadow:after {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      background: var(--gradient-shadow);
+      background-size: 400%;
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      z-index: -1;
+      animation: animate 20s linear infinite;
+    }
+
+    .shadow:after {
+      filter: blur(20px);
+    }
+
+    @keyframes animate {
+      0% {
+        background-position: 0 0;
+      }
+      50% {
+        background-position: 300% 0;
+      }
+      100% {
+        background-position: 0 0;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="shadow">Welcome</div>
+</body>
+
+</html>
