@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>css binary</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      height: 100%;
+      margin: 0;
+      color: #635274;
+      background-color: #d0e0eb;
+      font: 1.5rem/1 'Roboto', sans-serif;
+    }
+
+    .wrapper {
+      padding: 20px 40px;
+      border-radius: 15px;
+      background-color: #ebf7f8;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.25rem;
+      line-height: 1;
+    }
+
+    .widget-wrapper {
+      display: grid;
+      grid-template-columns: repeat(6, auto);
+      grid-template-rows: repeat(2, auto);
+      grid-auto-flow: column;
+      column-gap: 20px;
+      row-gap: 10px;
+      margin-top: 20px;
+      text-align: center;
+      counter-reset: sum; /* sum starts at 0 */
+    }
+
+    .digit, .decimal-output {
+      padding: 10px;
+      border: 3px dashed #88abc2;
+      border-radius: 3px;
+      color: #f57576;
+      background-color: #fff;
+      font-size: 2.5rem;
+    }
+
+    .label {
+      align-self: end;
+    }
+
+    .digit-4 { --increment: 8; }
+    .digit-3 { --increment: 4; }
+    .digit-2 { --increment: 2; }
+    .digit-1 { --increment: 1; }
+
+    .digit::before {
+      content: '0'; /* content needs an initial value for animation to work */
+      animation: flip-digit step-end infinite;
+      animation-duration: calc(var(--increment) * 2s);
+    }
+
+    @keyframes flip-digit {
+      50% {
+        content: '1';
+        counter-increment: sum var(--increment);
+      }
+    }
+
+    .equals {
+      align-self: center;
+      font-size: 3rem;
+    }
+
+    /* display sum, which now has all the increments made by the binary digits */
+    .decimal-output::before {
+      content: counter(sum);
+    }
+
+    /* decrease a bunch of font sizes and padding on smaller screens */
+    @media (max-width: 540px) {
+      body {
+        font-size: 1.25rem;
+      }
+
+      .wrapper {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      .widget-wrapper {
+        column-gap: 10px;
+        margin-top: 15px;
+      }
+
+      .digit, .decimal-output {
+        padding: 5px;
+        font-size: 2.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1>CSS Binary Counter</h1>
+    <div class="widget-wrapper">
+      <div class="digit digit-4"></div>
+      <div class="label">2<sup>3</sup></div>
+
+      <div class="digit digit-3"></div>
+      <div class="label">2<sup>2</sup></div>
+
+      <div class="digit digit-2"></div>
+      <div class="label">2<sup>1</sup></div>
+
+      <div class="digit digit-1"></div>
+      <div class="label">2<sup>0</sup></div>
+
+      <div class="equals">=</div>
+      <div><!-- empty --></div>
+
+      <div class="decimal-output"></div>
+      <div class="label">decimal</div>
+    </div>
+  </div>
+</body>
+
+</html>
