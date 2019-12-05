@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reverse Ordered List</title>
+  <style>
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background: #eef;
+      font-family: "Helvetica Neue", "Arial";
+    }
+
+    body {
+      background-color: #fff;
+      margin: 100px;
+      padding: 20px;
+    }
+
+    ol.numbered {
+      border-left: 3px solid #b3b3b3;
+      counter-reset: numbered-list 7;
+      margin-left: 10px;
+      position: relative;
+    }
+    ol.numbered li {
+      font-size: 16px;
+      line-height: 1.2;
+      margin-bottom: 30px;
+      padding-left: 30px;
+    }
+    ol.numbered li:last-child {
+      border-left: 3px solid white;
+      margin-left: -3px;
+    }
+    ol.numbered li:before {
+      background-color: #b3b3b3;
+      border: 3px solid white;
+      border-radius: 50%;
+      color: white;
+      content: counter(numbered-list,decimal);
+      counter-increment: numbered-list -1;
+      display: block;
+      font-weight: bold;
+      width: 30px;
+      height: 30px;
+      margin-top: -0.5em;
+      line-height: 30px;
+      position: absolute;
+      left: -19.5px;
+      text-align: center;
+    }
+
+  </style>
+</head>
+
+<body>
+  <ol class="numbered reversed">
+    <li>List item one</li>
+    <li>List item two</li>
+    <li>List item three</li>
+    <li>List item four<br>and a new line</li>
+    <li>List item five</li>
+    <li>List item six</li>
+  </ol>
+</body>
+
+</html>
