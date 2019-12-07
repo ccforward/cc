@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>text overflow move</title>
+  <style>
+    .wrap {
+      position: relative;
+      width: 200px;
+      height: 100vh;
+      background: #ddd;
+      overflow: hidden;
+    }
+
+    span {
+      display: inline-block;
+      white-space: nowrap;
+      padding: 5px;
+      line-height: 24px;
+      cursor: pointer;
+    }
+
+    .one:hover {
+      -webkit-animation: move 2s infinite alternate linear;
+              animation: move 2s infinite alternate linear;
+    }
+
+    @-webkit-keyframes move {
+      0% {
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+      }
+      100% {
+        -webkit-transform: translate(calc(-100% + 200px), 0);
+                transform: translate(calc(-100% + 200px), 0);
+      }
+    }
+
+    @keyframes move {
+      0% {
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+      }
+      100% {
+        -webkit-transform: translate(calc(-100% + 200px), 0);
+                transform: translate(calc(-100% + 200px), 0);
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+      <span class="one" title="Overflow scorll left to right Overflow">Overflow scorll left to right Overflow</span>
+      <span class="one" title="AAA BBB CCC DDD EEE FFF DDD GGG">AAA BBB CCC DDD EEE FFF DDD GGG</span>
+      <span class="" title="AAA BBB CCC">AAA BBB CCC</span>
+      <span class="one" title="AAA BBB CCC DDD EEE FFF DDD GGG HHH III">AAA BBB CCC DDD EEE FFF DDD GGG HHH III</span>
+  </div>
+</body>
+
+</html>
