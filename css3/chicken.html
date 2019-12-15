@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chicken</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      margin: 0;
+      font: 1.5rem/1 'Roboto', sans-serif;
+      text-align: center;
+    }
+
+    .wrapper {
+      padding: 25px;
+    }
+
+    .nugget {
+      width: 150px;
+    }
+
+    .nugget:hover {
+      animation: rotate 4s linear infinite;
+    }
+
+    @keyframes rotate {
+      to {
+        transform: rotate(1turn);
+      }
+    }
+
+    .words {
+      margin: 20px 0;
+      font-family: 'Passion One', cursive;
+      font-size: 5rem;
+      text-transform: uppercase;
+    }
+
+    .words span {
+      text-shadow: 5px 5px 0 #ccc;
+    }
+
+    .nugget:hover ~ .words span {
+      animation-name: pop-word;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes pop-word {
+      to {
+        text-shadow:
+          5px 5px 0 yellow,
+          10px 10px 0 orange,
+          15px 15px 0 red,
+          20px 20px 0 brown;
+      }
+    }
+
+    .words span:nth-child(2) { animation-delay: 0.5s; }
+    .words span:nth-child(3) { animation-delay: 1s; }
+    .words span:nth-child(4) { animation-delay: 1.5s; }
+    .words span:nth-child(5) { animation-delay: 2s; }
+
+    .help {
+      color: #999;
+    }
+
+    /* cluck cluck font sizes bawk bagawk smaller screens */
+    @media (max-width: 620px) {
+      body {
+        font-size: 1.25rem;
+      }
+
+      .words {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <img class="nugget" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/77020/chicken-nugget.png">
+    <div class="words">
+      <span>look</span>
+      <span>at</span>
+      <span>that</span>
+      <span>chicken</span>
+      <span>nugget</span>
+    </div>
+    <div class="help">
+      (hover/tap that chicken nugget)
+    </div>
+  </div>
+</body>
+
+</html>
