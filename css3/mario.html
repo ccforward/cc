@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Super Mario</title>
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --size: 180;
+      --unit: calc((var(--size) / 383) * 1vmin);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mario {
+      height: calc(383 * var(--unit));
+      width: calc(250 * var(--unit));
+      position: fixed;
+      top: 15%;
+    }
+    .mario * {
+      position: absolute;
+    }
+    .mario .hat {
+      height: 26%;
+      width: 52%;
+      background: #ff8185;
+      background: linear-gradient(90deg, #ff8185 0%, #fc1c23 17%, #cd1d22 100%);
+      top: 0%;
+      left: 24%;
+      border-radius: 50% 50% 40% 40% / 70% 70% 30% 30%;
+      z-index: 4;
+    }
+    .mario .hat .logo {
+      width: 34%;
+      height: 38%;
+      background: linear-gradient(180deg, white 60%, #757575 100%);
+      left: 33%;
+      top: 12%;
+      border-radius: 50%;
+      box-shadow: inset 1px 1px 5px #757575;
+      border: 2px solid #cccccc;
+    }
+    .mario .hat .logo span:nth-of-type(1) {
+      width: 45%;
+      height: 65%;
+      background: #cd1d22;
+      left: 11%;
+      top: 10%;
+      z-index: 10;
+      transform: rotate(30deg);
+      clip-path: polygon(25% 100%, 20% 10%, 40% 20%, 65% 100%);
+      -webkit-clip-path: polygon(25% 100%, 20% 10%, 40% 20%, 65% 100%);
+    }
+    .mario .hat .logo span:nth-of-type(2) {
+      width: 45%;
+      height: 65%;
+      background: #cd1d22;
+      left: 30%;
+      top: 0%;
+      z-index: 10;
+      transform: rotate(-30deg);
+      clip-path: polygon(25% 80%, 15% 20%, 34% 5%, 54% 67%);
+      -webkit-clip-path: polygon(29% 80%, 12% 24%, 33% 5%, 59% 70%);
+    }
+    .mario .hat .logo span:nth-of-type(3) {
+      width: 45%;
+      height: 65%;
+      background: #cd1d22;
+      left: 35%;
+      top: 0%;
+      z-index: 10;
+      transform: rotate(30deg);
+      clip-path: polygon(60% 85%, 30% 75%, 49% 11%, 74% 30%);
+      -webkit-clip-path: polygon(60% 85%, 30% 72%, 50% 13%, 74% 30%);
+    }
+    .mario .hat .logo span:nth-of-type(4) {
+      width: 45%;
+      height: 65%;
+      background: #cd1d22;
+      right: 6%;
+      top: 10%;
+      z-index: 10;
+      transform: rotate(-30deg);
+      clip-path: polygon(70% 95%, 30% 100%, 50% 30%, 75% 5%);
+      -webkit-clip-path: polygon(70% 95%, 30% 100%, 50% 30%, 72% 5%);
+    }
+    .mario .hat .peak {
+      height: 38%;
+      width: 86%;
+      top: 43%;
+      left: 7%;
+      background: linear-gradient(90deg, #f85e63 2%, #bd171d 10%, #cd1d22 100%);
+      border-top: solid 5px #ff5555;
+      border-radius: 50% 50% 0% 0%/ 100% 100% 0% 0%;
+    }
+    .mario .face {
+      width: 38%;
+      height: 27%;
+      background: #b37963;
+      background: linear-gradient(276deg, #b37963 25%, #fbbca4 54%, #ffd4c3 80%);
+      left: 31%;
+      top: 14.5%;
+      border-radius: 50% 50% 50% 50% / 22% 22% 70% 70%;
+      z-index: 5;
+      overflow: hidden;
+      box-shadow: inset 0px 2px 2px #865b49;
+    }
+    .mario .face #overlay {
+      width: 100%;
+      height: 20%;
+      background: rgba(48, 37, 33, 0.2);
+      filter: blur(1px);
+      top: 0%;
+      z-index: 20;
+    }
+    .mario .face .brow {
+      width: 26%;
+      height: 18%;
+      left: 12%;
+      top: 0%;
+      background: #0f0613;
+      border-radius: 32% 80% 0% 0% / 100% 100% 0% 0%;
+    }
+    .mario .face .brow span:nth-of-type(1) {
+      width: 94%;
+      height: 76%;
+      border-radius: 50%;
+      left: 3%;
+      top: 70%;
+      background: #b37963;
+      background: linear-gradient(276deg, #fbbca4 54%, #ffd4c3 80%);
+    }
+    .mario .face .brow-right {
+      width: 26%;
+      height: 18%;
+      right: 12%;
+      top: 0%;
+      background: #0f0613;
+      border-radius: 32% 80% 0% 0% / 100% 100% 0% 0%;
+      transform: scaleX(-1);
+    }
+    .mario .face .brow-right span:nth-of-type(1) {
+      width: 94%;
+      height: 76%;
+      border-radius: 50%;
+      right: 3%;
+      top: 70%;
+      background: #b37963;
+      background: linear-gradient(-276deg, #b37963 86%, #e9ad96 100%);
+    }
+    .mario .chin {
+      width: 42%;
+      height: 20%;
+      background: #b37963;
+      background: linear-gradient(276deg, #b37963 25%, #fbbca4 54%, #ffd4c3 80%);
+      top: 21%;
+      left: 29%;
+      border-radius: 100% 100% 100% 100%;
+      z-index: 5;
+    }
+    .mario .chin .nose {
+      width: 45%;
+      height: 50%;
+      top: 14%;
+      left: 28%;
+      border: calc(var(--unit) * 0.3) #f8c6b2 solid;
+      background: #b37963;
+      background: radial-gradient(circle at 32% 22%, #ffd4c3 1%, #fbbca4 54%, #b37963 80%);
+      border-radius: 50%;
+    }
+    .mario .chin .nose .tash {
+      width: 170%;
+      height: 100%;
+      top: -38%;
+      left: -35%;
+      background: #b37963;
+      background: linear-gradient(276deg, #b37963 25%, #fbbca4 54%, #ffd4c3 80%);
+      z-index: -2;
+      border-radius: 50%;
+    }
+    .mario .chin .nose span:nth-of-type(1) {
+      width: 49%;
+      height: 78%;
+      border-radius: 50%;
+      left: -38%;
+      top: 11%;
+      transform: rotate(50deg);
+      background: linear-gradient(0deg, #0f0613 3%, #2c1a1d 25%, #0f0613 100%);
+      z-index: -10;
+    }
+    .mario .chin .nose span:nth-of-type(2) {
+      width: 49%;
+      height: 78%;
+      border-radius: 50%;
+      left: -18%;
+      top: 33%;
+      transform: rotate(30deg);
+      background: linear-gradient(5deg, #0f0613 18%, #2c1a1d 29%, #0f0613 90%);
+      z-index: -10;
+    }
+    .mario .chin .nose span:nth-of-type(3) {
+      width: 49%;
+      height: 78%;
+      border-radius: 50%;
+      left: 10%;
+      top: 42%;
+      transform: rotate(0deg);
+      background: linear-gradient(0deg, #0f0613 18%, #2c1a1d 35%, #0f0613 90%);
+      z-index: -10;
+    }
+    .mario .chin .nose span:nth-of-type(4) {
+      width: 49%;
+      height: 78%;
+      border-radius: 50%;
+      left: 40%;
+      top: 42%;
+      transform: rotate(0deg);
+      background: #0f0613;
+      z-index: -10;
+    }
+    .mario .chin .nose span:nth-of-type(5) {
+      width: 40%;
+      height: 70%;
+      border-radius: 50%;
+      right: -13%;
+      top: 40%;
+      transform: rotate(-30deg);
+      background: linear-gradient(0deg, #0f0613 48%, #2c1a1d 80%, #0f0613 50%);
+      z-index: -10;
+    }
+    .mario .chin .nose span:nth-of-type(6) {
+      width: 49%;
+      height: 78%;
+      border-radius: 50%;
+      right: -38%;
+      top: 11%;
+      transform: rotate(-50deg);
+      background: radial-gradient(circle at 100% 0%, #0f0613 18%, #2c1a1d 25%, #0f0613 90%);
+      z-index: -11;
+    }
+    .mario .chin .mouth {
+      width: 40%;
+      height: 30%;
+      top: 47%;
+      left: 30%;
+      border-radius: 0% 0% 35% 35%;
+      border-bottom: 2px #8f5540 solid;
+      filter: blur(0.4px);
+      z-index: -11;
+    }
+    .mario .chin .mouth span:nth-of-type(1) {
+      width: 80%;
+      height: 56%;
+      border-radius: 0% 0% 35% 35%;
+      left: 10%;
+      top: 80%;
+      border-bottom: 2px rgba(136, 93, 77, 0.3) solid;
+      filter: blur(1px);
+    }
+    .mario .chin .eye {
+      width: 22%;
+      height: 42%;
+      border-radius: 50%;
+      left: 20%;
+      top: -10%;
+      background: linear-gradient(0deg, white 87%, #757575 100%);
+      z-index: -1;
+      overflow: hidden;
+      box-shadow: -1px -1px 2px #8f5540, 1px 2px 2px #8f5540;
+    }
+    .mario .chin .eye span:nth-of-type(1) {
+      width: 79%;
+      height: 76%;
+      border-radius: 50%;
+      left: 25%;
+      top: 13%;
+      border: calc(var(--unit) * 0.5) #4e4ebe solid;
+      background: radial-gradient(circle at 70% 60%, #2eceff 50%, #4f36ff 80%);
+    }
+    .mario .chin .eye span:nth-of-type(2) {
+      width: 45%;
+      height: 46%;
+      border-radius: 50%;
+      left: 45%;
+      top: 33%;
+      background: radial-gradient(circle at 60% 70%, #130866 20%, black 30%);
+    }
+    .mario .chin .eye span:nth-of-type(3) {
+      width: 12%;
+      height: 10%;
+      border-radius: 50%;
+      left: 62%;
+      top: 36%;
+      background: white;
+      filter: blur(1px);
+    }
+    .mario .chin .eye-right {
+      width: 22%;
+      height: 42%;
+      border-radius: 50%;
+      top: -10%;
+      background: linear-gradient(0deg, white 87%, #757575 100%);
+      z-index: -1;
+      overflow: hidden;
+      right: 20%;
+      transform: scaleX(-1);
+      box-shadow: -1px -1px 2px #8f5540, 1px 2px 2px #8f5540;
+    }
+    .mario .chin .eye-right span:nth-of-type(1) {
+      width: 79%;
+      height: 76%;
+      border-radius: 50%;
+      left: 25%;
+      top: 13%;
+      border: calc(var(--unit) * 0.5) #4e4ebe solid;
+      background: radial-gradient(circle at 70% 60%, #2eceff 50%, #4f36ff 80%);
+    }
+    .mario .chin .eye-right span:nth-of-type(2) {
+      width: 45%;
+      height: 46%;
+      border-radius: 50%;
+      left: 45%;
+      top: 33%;
+      background: radial-gradient(circle at 60% 70%, #130866 20%, black 30%);
+    }
+    .mario .chin .eye-right span:nth-of-type(3) {
+      width: 12%;
+      height: 10%;
+      border-radius: 50%;
+      left: 62%;
+      top: 36%;
+      background: white;
+      filter: blur(1px);
+    }
+    .mario #hair-left, .mario #hair-right {
+      height: 10%;
+      width: 4%;
+      background: #802f2b;
+      background: linear-gradient(90deg, #802f2b 0%, #55100c 48%, #230705 86%);
+      z-index: 4;
+      top: 19%;
+      border-radius: 80% 0% 0% 50% / 80% 10% 0% 20%;
+    }
+    .mario #hair-left {
+      left: 28%;
+    }
+    .mario #hair-right {
+      right: 28%;
+      transform: scaleX(-1);
+    }
+    .mario #ear-left, .mario #ear-right {
+      height: 11%;
+      width: 7%;
+      background: #b37963;
+      top: 22%;
+      z-index: -1;
+      border-radius: 50% 0% 0% 100% / 22% 0% 0% 62%;
+    }
+    .mario #ear-left {
+      left: 23%;
+      background: linear-gradient(276deg, #b37963 25%, #fbbca4 54%, #ffd4c3 80%);
+    }
+    .mario #ear-left span:nth-of-type(1) {
+      width: 65%;
+      height: 56%;
+      border-radius: 50% 100% 0% 100%;
+      left: 20%;
+      top: 17%;
+      background: linear-gradient(-150deg, #b37963 25%, #fbbca4 54%, rgba(255, 212, 195, 0.1) 80%);
+      border-left: 2px rgba(143, 85, 64, 0.2) solid;
+      filter: blur(0.4px);
+    }
+    .mario #ear-left span:nth-of-type(2) {
+      width: 35%;
+      height: 36%;
+      border-radius: 50% 100% 0% 100%;
+      left: 50%;
+      top: 37%;
+      background: linear-gradient(-150deg, #b37963 25%, #fbbca4 54%, rgba(255, 212, 195, 0.1) 80%);
+      border-top: 2px rgba(143, 85, 64, 0.4) solid;
+      border-left: 2px rgba(143, 85, 64, 0.4) solid;
+      filter: blur(0.4px);
+    }
+    .mario #ear-right {
+      right: 23%;
+      transform: scaleX(-1);
+      background: linear-gradient(-276deg, #b37963 25%, #d89d86 54%);
+    }
+    .mario #ear-right span:nth-of-type(1) {
+      width: 65%;
+      height: 56%;
+      border-radius: 50% 100% 0% 100%;
+      left: 20%;
+      top: 17%;
+      background: linear-gradient(-150deg, #b37963 25%, #fbbca4 54%, rgba(255, 212, 195, 0.1) 80%);
+      border-left: 2px rgba(143, 85, 64, 0.2) solid;
+      filter: blur(0.4px);
+    }
+    .mario #ear-right span:nth-of-type(2) {
+      width: 35%;
+      height: 36%;
+      border-radius: 50% 100% 0% 100%;
+      left: 50%;
+      top: 37%;
+      background: linear-gradient(-150deg, #b37963 25%, #fbbca4 54%, rgba(255, 212, 195, 0.1) 80%);
+      border-top: 2px rgba(143, 85, 64, 0.4) solid;
+      border-left: 2px rgba(143, 85, 64, 0.4) solid;
+      filter: blur(0.4px);
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <body>
+    <div class="mario">
+      <div class="hat">
+        <div class="logo">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="peak"></div>
+      </div>
+      <div class="face">
+        <div id="overlay"></div>
+        <div class="brow">
+          <span></span>
+        </div>
+        <div class="brow-right">
+          <span></span>
+        </div>
+      </div>
+      <div class="chin">
+        <div class="nose">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <div class="tash"></div>
+        </div>
+        <div class="mouth"><span></span></div>
+        <div class="eye">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="eye-right">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div id="hair-left"></div>
+      <div id="hair-right"></div>
+      <div id="ear-left">
+        <span></span>
+        <span></span>
+      </div>
+      <div id="ear-right">
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </body>
+</body>
+
+</html>
