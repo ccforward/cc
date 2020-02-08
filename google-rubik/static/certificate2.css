@@ -58,7 +58,7 @@
 #larrySignature{
  width: 1000px;
  height: 300px;
- background-image: url("../media/Larry_Signature_400x120.png");
+ background-image: url("./Larry_Signature_400x120.png");
  background-size: 700px 210px;
  background-repeat:no-repeat;
  background-position:center;
@@ -66,7 +66,7 @@
 #ernoSignature{
  width: 1000px;
  height: 300px;
- background-image: url("../media/Erno_Signature_400x120.png");
+ background-image: url("./Erno_Signature_400x120.png");
  background-size: 700px 210px;
  background-repeat:no-repeat;
  background-position:center;
@@ -76,7 +76,7 @@
  height: 10px;
  background-color: #000;
  display: inline-block;
- background-image: url("../media/LogoFaces_0002_white.png");
+ background-image: url("./LogoFaces_0002_white.png");
  background-repeat: no-repeat;
  background-position: 100px 100px;
 }
@@ -95,13 +95,13 @@
   -o-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg);
-  background-image: url("../media/LogoFaces_0002_white.png");
+  background-image: url("./LogoFaces_0002_white.png");
 }
 .faceRight .logoFace{
-  background-image:url("../media/LogoFaces_0000_Goo.png");
+  background-image:url("./LogoFaces_0000_Goo.png");
 }
 .faceDown .logoFace{
-  background-image:url("../media/LogoFaces_0001_gle.png");
+  background-image:url("./LogoFaces_0001_gle.png");
 }
 .faceDown .logoFace.ie{
   -webkit-transform: rotate(180deg);
