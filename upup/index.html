@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta content='UPUP 舉牌加油小人產生器 - Haniboi' name='title' />
+  <meta content='UPUP 舉牌加油小人產生器 - Haniboi' name='og:title' />
+  <meta content="//goupup.co/images/output.png" property="og:image" />
+  <meta name="description" content="UPUP 舉牌加油小人產生器！現在就一起來讓加油小人說出你的心聲！">
+  <title>UPUP 舉牌加油小人產生器 - Haniboi</title>
+  <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css' />
+  <link href='materials/fav.png' rel='shortcut icon'>
+  <meta content='width=680, maximum-scale=1' name='viewport'>
+  <meta content='text/html; charset=utf-8' http-equiv='content-type' />
+  <link href="./upup/clear_default.css" rel="stylesheet" type="text/css" />
+  <link href="./upup/up_style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="./upup/fonts.css" media="screen" />
+  <link rel="stylesheet" href="./upup/style.css" media="screen" />
+  <script src='./upup/jquery.js' type='text/javascript'></script>
+  <script>
+    // document.domain = "upuptoyou.com";
+    $().ready(function () {
+      $('a.bg-block, a.button-sharp, #save img').click(function (e) {
+        $('#output, .sth').show();
+      });
+      $('#words').keydown(function (e) {
+        $('#output, .sth').show();
+      });
+      $('body').click(function () {
+        $('#pop_play', window.parent.document).hide();
+      });
+      $('.wrapper').click(function (e) {
+        e.stopPropagation()
+      });
+    })
+  </script>
+  <script src='./upup/jquery.scrollTo.min.js' type='text/javascript'></script>
+  <script src='./upup/modernizr.custom.js' type='text/javascript'></script>
+  <script src='./upup/binary.js' type='text/javascript'></script>
+  <script src='./upup/stuff.js' type='text/javascript'></script>
+</head>
+
+<body>
+  <div id="fb-root"></div>
+  <!--auto_root_box_st-->
+  <div id="auto_root_box">
+    <div class="wrapper main">
+      <h1>
+        <img src="./upup/logo.png" alt="UPUP 舉牌加油小人產生器 - Haniboi" width="280" />
+      </h1>
+      <h3 data-lang="your_message_here">YOUR MESSAGE HERE</h3>
+      <textarea id="words" placeholder="寫些想說的話...用空白、斷行排列小人！"></textarea>
+      <h3 data-lang="background_colors">BACKGROUND COLORS</h3>
+      <a data-color="#E50012" class="bg-block"></a>
+      <a data-color="#EA5415" class="bg-block"></a>
+      <a data-color="#f49ec0" class="bg-block"></a>
+      <a data-color="#f6f08b" class="bg-block"></a>
+      <a data-color="#c1d540" class="bg-block"></a>
+      <a data-color="#60c3ba" class="bg-block"></a>
+      <a data-color="#77cff0" class="bg-block"></a>
+      <a data-color="#980c7e" class="bg-block"></a>
+      <br />
+      <h3 class="inline">SIZE</h3>
+      <a class="button-sharp" data-size="facebook" data-lang="facebook_cover">FACEBOOK COVER</a>
+      <a class="button-sharp" data-size="square" data-lang="square">SQUARE</a>
+      <br />
+      <div id="save" class="inline">
+        <img src="./upup/refresh.png" alt="refresh" />
+        <img src="./upup/make.png" alt="make" /><br />
+      </div>
+      <img id="output" style="display: none;" />
+
+      <div class="sth" style="display: none;">
+        <a id="download" class="button green" download="upup.jpg" target="_blank" data-lang="download_this_pic">DOWNLOAD
+          THIS PIC</a>
+        <h3 class="inline" data-lang="or_share_it_on">
+        <!--
+        <a id="twitter-upload" class="button image" target="_blank"><img src="materials/twitter.png" alt="share on twitter" /></a>
+        <a id="pin-upload" class="button image" target="_blank"><img src="materials/pinterest.png" alt="share on pinterest" /></a>
+        <a id="plus-upload" class="button image" target="_blank"><img src="materials/google-plus.png" alt="share on google plus" /></a>
+        -->
+      </div>
+
+      <canvas width="850" height="315" id="canvas-bg"></canvas>
+      <canvas width="850" height="315" id="canvas-people"></canvas>
+      <canvas width="850" height="315" id="canvas-text"></canvas>
+      <canvas width="850" height="315" id="canvas-mark"></canvas>
+    </div>
+
+  </div>
+  <!--auto_root_box_end-->
+
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+@charset "utf-8";
+/* CSS Document */
+#auto_root_box {
+	width:1024px;
+	margin:28px auto 82px auto;
+	clear:both;
+	overflow:hidden;
+}
+
+#nav {
+	float:left;
+	width:166px;
+	margin-top: 68px;
+}
+#nav ul li{
+	width:166px;
+}
+
+#auto_root {
+	float:left;
+	width:646px;
+	margin:0 0 0 11px;
+	padding-top: 30px;
+}
+
+#news {
+	position:relative;
+	width:904px;
+	margin:0 auto;
+}
+h1 {
+	width:904px;
+	height:88px;
+	background-image:url(../../images/site/title_border_bottom_line.gif);
+	background-repeat:no-repeat;
+	background-position:0px 121px;
+	margin-top: 0;
+	padding-top: 45px;
+}
+h1 img {
+	margin:0 0 0 112px;
+}
+
+.main h1 {
+	width: 600px;
+	height: 87px;
+	background: none;
+	font-size: 26px;
+}
+
+.main h1 img {
+	margin: 0 auto;
+}
+
+.btn_prev {
+	position:absolute;
+	top:331px;
+	left:28px;
+}
+.btn_next {
+	position:absolute;
+	top:331px;
+	right:28px;
+}
+
+#up_photo {
+	width:660px;
+	/*
+	height:495px;
+	*/
+}
+
+#news_content_box {
+	width:660px;
+	padding:22px 0 0 0px;
+	margin:0 auto;
+}
+#news_content_box h2 {
+	margin:32px 0 0 0;
+	font-weight:bold;
+}
+#news_content_box p {
+	margin:10px 0 0px 0;
+}
+#about {
+	position:relative;
+	width:904px;
+	margin:85px auto 0 auto;
+}
+
+#about_content_box {
+	width:660px;
+	margin:0 auto;
+}
+#about_content_box h2 {
+	padding:32px 0 0 20px;
+}
+#about_content_box p {
+	margin:23px 0 0 0px;
+}
+#img {
+	margin:40px 0 0 0px;
+}
+
+#store {
+	position:relative;
+	width:904px;
+	margin:85px auto 0 auto;
+}
+
+
+#store_content_box {
+	width:650px;
+	overflow:hidden;
+	clear:both;
+	margin:25px auto 0 auto;
+	/*
+	border:5px solid #41220f;
+	*/
+}
+ul.gallery li {
+	float:left;
+	width:273px;
+	height:343px;
+	margin:0 20px 20px 0;
+	position:relative;
+	border:6px solid #000;
+}
+
+#gallery_last {
+	margin:0 0px 20px 0;
+}
+ul.gallery img {
+	display:block;
+}
+ul.gallery span {
+	width:263px;
+	position:absolute;
+	bottom:0;
+	left:0;
+	background-color:#000;
+	color:#FFF;
+	padding:9px 0px 4px 12px;
+	font-size:24px;
+}
+
+#footer {
+	width:295px;
+	margin:10px auto 20px auto;
+}
