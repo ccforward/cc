@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>polygon text</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Josefin+Sans:400,700&display=swap");
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: black;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      --low: 20%;
+      --high: 80%;
+      --gap: 0.9rem;
+      --offset: calc(var(--gap) / 2);
+      --clip1: polygon(calc(var(--high) + var(--offset)) 0, 100% 0, 100% 100%, calc(var(--low) + var(--offset)) 100%);
+      --clip2: polygon(calc(var(--high) - var(--offset)) 0, calc(var(--low) - var(--offset)) 100%, 0 100%, 0 0);
+      text-align: center;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 3rem;
+      line-height: 1;
+      text-transform: uppercase;
+      position: relative;
+      max-width: 30rem;
+      color: transparent;
+    }
+    @media (min-width: 40rem) {
+      h1 {
+        font-size: 5rem;
+      }
+    }
+    h1 span {
+      color: white;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    h1::before, h1::after {
+      content: var(--text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: white;
+      z-index: -1;
+    }
+    h1::after {
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      -webkit-clip-path: var(--clip1);
+      clip-path: var(--clip1);
+    }
+    h1::before {
+      font-weight: 400;
+      -webkit-clip-path: var(--clip2);
+      clip-path: var(--clip2);
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1 style="--text: 'His Dark Materials';"><span>His</span> Dark Materials</h1>
+</body>
+
+</html>
