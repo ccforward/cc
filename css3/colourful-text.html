@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>彩色文字</title>
+  <style>
+    .txt {
+      font-size: 42px;
+      background: linear-gradient(120deg, #27bff9 0%, #27bff9 25%, #4e04ff 40%, #9600d2 52%, #db0161 72%, #f52222 80%, #f52222 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: #0000;
+    }
+    .bg {
+      display: inline-block;
+      margin-top: 13px;
+      margin-bottom: -10px;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 14px;
+      background: linear-gradient(90deg, #27bff9 0%, #27bff9 5%, #4e04ff 40%, #9600d2 52%, #ff0171 100%);
+      padding: 2px 10px 3px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+  <span class="txt">ABCD12345文字</span>
+  <div>
+    <div class="bg">限时八五折优惠</div>
+  </div>
+</body>
+
+</html>
