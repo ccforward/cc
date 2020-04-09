@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Tokyo Tower</title>
+  <style>
+    body {
+      font-size: 1em;
+      margin: 0;
+      background: #f2f0ed;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      align-items: center;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .link {
+      z-index: 1;
+      position: relative;
+      display: inline-block;
+      font-size: 3em;
+      color: #808080;
+      text-transform: uppercase;
+      -webkit-transition: color 275ms ease;
+      transition: color 275ms ease;
+    }
+    .link:hover {
+      color: #333;
+    }
+    .link:hover ~ .hover-container .link-text {
+      opacity: 1;
+    }
+    .link:hover ~ .hover-container .image-container {
+      opacity: 1;
+    }
+
+    .link-text {
+      z-index: 2;
+      position: absolute;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      align-items: center;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 3em;
+      color: #fff;
+      text-transform: uppercase;
+      pointer-events: none;
+      -webkit-clip-path: circle(75px at var(--x) var(--y));
+      clip-path: circle(75px at var(--x) var(--y));
+      opacity: 0;
+      -webkit-transition: opacity 250ms ease;
+      transition: opacity 250ms ease;
+    }
+
+    .image-container {
+      z-index: -2;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 150px;
+      height: 150px;
+      opacity: 0;
+      -webkit-transition: opacity 250ms ease;
+      transition: opacity 250ms ease;
+    }
+
+    .image-inner {
+      position: absolute;
+      top: -75px;
+      left: -75px;
+      width: 150px;
+      height: 150px;
+    }
+
+    .link-image {
+      display: block;
+      max-width: 100%;
+      width: 150px;
+      height: 150px;
+      -o-object-fit: cover;
+      object-fit: cover;
+      -o-object-position: center;
+      object-position: center;
+      border-radius: 50%;
+      -webkit-filter: brightness(0.9);
+      filter: brightness(0.9);
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <a class="link" href="#">Tokyo Tower</a>
+    <span class="hover-container">
+      <span class="link-text" aria-hidden="true">Tokyo Tower</span>
+      <span class="image-container">
+        <span class="image-inner">
+          <img class="link-image" src="https://img.alicdn.com/tfs/TB1Ih87RFY7gK0jSZKzXXaikpXa-1920-2400.jpg" alt="Tokyo Tower" />
+        </span>
+      </span>
+    </span>
+  </div>
+
+  <script>
+    const linkText = document.querySelector('.link-text');
+    const linkImage = document.querySelector('.link-image');
+
+    function showImgContent(e) {
+      x = e.clientX;
+      y = e.clientY;
+      linkImage.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      linkText.style.setProperty('--x',(x)+'px');
+      linkText.style.setProperty('--y',(y)+'px');
+    }
+
+    document.addEventListener('mousemove', showImgContent);
+  </script>
+</body>
+
+</html>
