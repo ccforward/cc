@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Full Moon</title>
+  <template>
+    /* Utils */
+
+    // Colors
+    $dark-blue: #251f31;
+    $pale-yellow: #f0f0e3;
+    $light-blue: #6cbee8;
+    $purple: #7947c5;
+
+
+    // Vars
+    $color_sky: $dark-blue;
+    $color_moon: #fff;
+    $color_meteor: #fff;
+    $color_carter: $pale-yellow;
+    $size_moon: 250px;
+    $count_star: 25;
+    $color_planet_up: $light-blue;
+    $color_planet_middle: $purple;
+    $color_planet_bottom: transparent;
+    $color_mountain_dark: darken($dark-blue, 10%);
+    $color_mountain_light: $dark-blue;
+    $color_mountain_silhouette: $purple;
+
+
+    // Mixins
+    @mixin translate_center {
+        transform: translate(-50%, -50%);
+    }
+
+
+    @mixin iterate_stars {
+      @for $i from 1 through $count_star {
+        &:nth-child(#{$i}) {
+          opacity: random() + 0.1;
+          transform: scale(random() + 0.1);
+          &:after {
+          transform: translate(random() * -100 + px, random() * -120 + px) scale(random() * 1.2);
+          }
+
+          &:before {
+            transform: translate(random() * 80 + px, random() * 60 + px) scale(random() * 1.2);
+          }
+        }
+      }
+    }
+
+
+    /* Style */
+
+    body {
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Roboto, sans-serif;
+    }
+
+
+    .container {
+      width: 500px;
+      height: 500px;
+      position: relative;
+      border-radius: 50%;
+      background-color: $color_sky;
+      overflow: hidden;
+      z-index: -100;
+      border: 20px solid white;
+      box-shadow: 0 8px 20px rgba(darken($purple, 20%), 0.2);
+
+
+      *,
+      *:before,
+      *:after{
+        position: absolute;
+        box-sizing: border-box;
+      }
+    }
+
+    .moon {
+      width: $size_moon;
+      height: $size_moon;
+      z-index: 4;
+      box-shadow: 0 0 10px rgba($color_moon, 0.5);
+      background-color: $color_moon;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      @include translate_center;
+
+      .carter {
+        width: 70px;
+        height: 70px;
+        background-color: $color_carter;
+        border-radius: 50%;
+        left: 60%;
+        top: 50%;
+        @include translate_center;
+        z-index: 3;
+
+        &.second {
+          width: 27px;
+          height: 27px;
+          left: 84%;
+          top: 55%;
+          z-index:2;
+        }
+
+        &.third {
+          width: 40px;
+          height: 40px;
+          left: 65%;
+          top: 75%;
+          z-index: 1;
+        }
+      }
+
+      .moon-halo {
+        &:after,
+        &:before {
+          content: '';
+          display: inline-block;
+        }
+
+        &,
+        &:after,
+        &:before {
+          top: 50%;
+          left: 50%;
+          @include translate_center;
+          background-color: #fff;
+          opacity: 0.2;
+          width: $size_moon + 50;
+          height: $size_moon + 50;
+          border-radius: 50%;
+          transform-origin: 0 0;
+          animation: shine 1s ease-in-out infinite alternate;
+        }
+
+        &:before {
+          width: $size_moon + 100;
+          height: $size_moon + 100;
+          animation-delay: 200ms;
+
+        }
+
+        &:after {
+          width: $size_moon + 150;
+          height: $size_moon + 150;
+          animation-delay: 400ms;
+        }
+      }
+    }
+
+    .meteors {
+      z-index: -10;
+      width: 100%;
+      height: 100%;
+
+      .meteor {
+        width: 0;
+        height: 0;
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+        border-right: 90px solid $color_meteor;
+        border-image: linear-gradient(
+          to left,
+          $color_meteor,
+          transparent
+        ) 1 100%;
+        border-radius: 0 2px 2px 0;
+        transform: rotate(30deg);
+        position: absolute;
+        top: 23%;
+        left: 70%;
+        opacity: 0;
+        animation: shooting 4s linear infinite;
+        animation-delay: 1s;
+
+        &:nth-child(2) {
+          top: 13%;
+          left: 64%;
+          border-right-width: 80px;
+          animation-delay: 2s;
+        }
+
+        &:nth-child(3) {
+          top: 23%;
+          left: 62%;
+          border-right-width: 50px;
+          animation-delay: 2.5s;
+        }
+
+        &:nth-child(4) {
+          top: 64%;
+          left: 72%;
+          border-right-width: 50px;
+          animation-delay: 1.3s;
+        }
+      }
+    }
+
+    .stars {
+      z-index: -11;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      grid-gap: 1em;
+
+      .star {
+        position: relative;
+
+        &:after,
+        &:before {
+          content: '';
+          display: inline-block;
+        }
+
+        &,
+        &:after,
+        &:before {
+          width: 4px;
+          height: 4px;
+          background-color: #fff;
+          border-radius: 50%;
+        }
+
+        @include iterate_stars;
+      }
+    }
+
+
+    .planet {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient($color_planet_up, $color_planet_middle, $color_planet_bottom);
+      top: 14%;
+      left: 6%;
+      animation: breathe 1.5s ease-in-out infinite alternate;
+    }
+
+    .mountains {
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      z-index: 5;
+
+      &:before,
+      &:after {
+        content: "";
+        background: linear-gradient(to bottom, $color_mountain_dark 5%, $color_mountain_light);
+        display: inline-block;
+        width: 400px;
+        height: 400px;
+        border-radius: 40px;
+        transform: rotate(45deg);
+        box-shadow: 2px -2px 0 $color_mountain_silhouette;
+      }
+
+      &:before {
+        left: -15%;
+        top: 40%;
+      }
+
+      &:after {
+        left: 33%;
+        top: 55%;
+      }
+
+
+    }
+
+    /* Animations */
+
+    @keyframes breathe {
+      from {
+        transform: translate(0, -2%);
+      }
+
+      to {
+        transform: translate(0, 2%);
+      }
+    }
+
+    @keyframes shine {
+      from {
+        transform: scale(1) translate(-50%, -50%);
+      }
+
+      to {
+        transform: scale(1.02) translate(-50%, -50%);
+      }
+    }
+
+    @keyframes shooting {
+      0% {
+        transform: rotate(30deg) translate(-100%, -100%);
+        opacity: 1;
+      }
+
+      20% {
+        transform: rotate(30deg) translate(100%, 100%);
+        opacity: 0;
+      }
+      100% {
+        transform: rotate(30deg) translate(100%, 100%);
+        opacity: 0;
+      }
+    }
+  </template>
+  <style>
+    /* Utils */
+    /* Style */
+    body {
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Roboto, sans-serif;
+    }
+
+    .container {
+      width: 500px;
+      height: 500px;
+      position: relative;
+      border-radius: 50%;
+      background-color: #251f31;
+      overflow: hidden;
+      z-index: -100;
+      border: 20px solid white;
+      box-shadow: 0 8px 20px rgba(74, 40, 126, 0.2);
+    }
+    .container *,
+    .container *:before,
+    .container *:after {
+      position: absolute;
+      box-sizing: border-box;
+    }
+
+    .moon {
+      width: 250px;
+      height: 250px;
+      z-index: 4;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      background-color: #fff;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .moon .carter {
+      width: 70px;
+      height: 70px;
+      background-color: #f0f0e3;
+      border-radius: 50%;
+      left: 60%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+    }
+    .moon .carter.second {
+      width: 27px;
+      height: 27px;
+      left: 84%;
+      top: 55%;
+      z-index: 2;
+    }
+    .moon .carter.third {
+      width: 40px;
+      height: 40px;
+      left: 65%;
+      top: 75%;
+      z-index: 1;
+    }
+    .moon .moon-halo:after, .moon .moon-halo:before {
+      content: '';
+      display: inline-block;
+    }
+    .moon .moon-halo, .moon .moon-halo:after, .moon .moon-halo:before {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      opacity: 0.2;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      transform-origin: 0 0;
+      animation: shine 1s ease-in-out infinite alternate;
+    }
+    .moon .moon-halo:before {
+      width: 350px;
+      height: 350px;
+      animation-delay: 200ms;
+    }
+    .moon .moon-halo:after {
+      width: 400px;
+      height: 400px;
+      animation-delay: 400ms;
+    }
+
+    .meteors {
+      z-index: -10;
+      width: 100%;
+      height: 100%;
+    }
+    .meteors .meteor {
+      width: 0;
+      height: 0;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      border-right: 90px solid #fff;
+      border-image: linear-gradient(to left, #fff, transparent) 1 100%;
+      border-radius: 0 2px 2px 0;
+      transform: rotate(30deg);
+      position: absolute;
+      top: 23%;
+      left: 70%;
+      opacity: 0;
+      animation: shooting 4s linear infinite;
+      animation-delay: 1s;
+    }
+    .meteors .meteor:nth-child(2) {
+      top: 13%;
+      left: 64%;
+      border-right-width: 80px;
+      animation-delay: 2s;
+    }
+    .meteors .meteor:nth-child(3) {
+      top: 23%;
+      left: 62%;
+      border-right-width: 50px;
+      animation-delay: 2.5s;
+    }
+    .meteors .meteor:nth-child(4) {
+      top: 64%;
+      left: 72%;
+      border-right-width: 50px;
+      animation-delay: 1.3s;
+    }
+
+    .stars {
+      z-index: -11;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      grid-gap: 1em;
+    }
+    .stars .star {
+      position: relative;
+    }
+    .stars .star:after, .stars .star:before {
+      content: '';
+      display: inline-block;
+    }
+    .stars .star, .stars .star:after, .stars .star:before {
+      width: 4px;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+    .stars .star:nth-child(1) {
+      opacity: 0.5171731811;
+      transform: scale(0.3131816063);
+    }
+    .stars .star:nth-child(1):after {
+      transform: translate(-66.6268647938px, -92.3545462986px) scale(0.3385050033);
+    }
+    .stars .star:nth-child(1):before {
+      transform: translate(78.6348538952px, 45.0117461582px) scale(0.0761808587);
+    }
+    .stars .star:nth-child(2) {
+      opacity: 1.0882527862;
+      transform: scale(0.5464772593);
+    }
+    .stars .star:nth-child(2):after {
+      transform: translate(-72.413326711px, -60.0295417022px) scale(0.7190172335);
+    }
+    .stars .star:nth-child(2):before {
+      transform: translate(13.6574702583px, 23.4264133357px) scale(0.4639123046);
+    }
+    .stars .star:nth-child(3) {
+      opacity: 0.6759063318;
+      transform: scale(0.9030539208);
+    }
+    .stars .star:nth-child(3):after {
+      transform: translate(-73.8810492421px, -94.9423439941px) scale(0.0057849784);
+    }
+    .stars .star:nth-child(3):before {
+      transform: translate(41.412652051px, 24.15837957px) scale(0.5832466462);
+    }
+    .stars .star:nth-child(4) {
+      opacity: 0.5538655758;
+      transform: scale(0.6596752564);
+    }
+    .stars .star:nth-child(4):after {
+      transform: translate(-29.0001645043px, -108.2118495234px) scale(0.0277873594);
+    }
+    .stars .star:nth-child(4):before {
+      transform: translate(18.5825380386px, 25.8475287405px) scale(0.4747799105);
+    }
+    .stars .star:nth-child(5) {
+      opacity: 1.0412565293;
+      transform: scale(0.5053144418);
+    }
+    .stars .star:nth-child(5):after {
+      transform: translate(-10.6537167823px, -22.1489234722px) scale(1.0586209791);
+    }
+    .stars .star:nth-child(5):before {
+      transform: translate(44.8271040946px, 44.5554882183px) scale(0.1443008889);
+    }
+    .stars .star:nth-child(6) {
+      opacity: 0.6826109213;
+      transform: scale(0.3309731284);
+    }
+    .stars .star:nth-child(6):after {
+      transform: translate(-43.2247413693px, -89.5790725661px) scale(0.1341822073);
+    }
+    .stars .star:nth-child(6):before {
+      transform: translate(77.6413130743px, 4.9336436162px) scale(0.3781441597);
+    }
+    .stars .star:nth-child(7) {
+      opacity: 0.3265152599;
+      transform: scale(0.6845431744);
+    }
+    .stars .star:nth-child(7):after {
+      transform: translate(-54.5915669449px, -74.252476684px) scale(1.1162503894);
+    }
+    .stars .star:nth-child(7):before {
+      transform: translate(38.9525862636px, 9.8373836909px) scale(1.0765378635);
+    }
+    .stars .star:nth-child(8) {
+      opacity: 0.9071056089;
+      transform: scale(0.2543180428);
+    }
+    .stars .star:nth-child(8):after {
+      transform: translate(-42.8979499454px, -109.9256982561px) scale(1.0751779741);
+    }
+    .stars .star:nth-child(8):before {
+      transform: translate(56.8867869914px, 58.5983489093px) scale(0.5700853025);
+    }
+    .stars .star:nth-child(9) {
+      opacity: 0.5296314968;
+      transform: scale(0.9177510791);
+    }
+    .stars .star:nth-child(9):after {
+      transform: translate(-15.6516682771px, -70.944719333px) scale(0.8140714123);
+    }
+    .stars .star:nth-child(9):before {
+      transform: translate(10.0916408574px, 40.7643774637px) scale(0.6651263622);
+    }
+    .stars .star:nth-child(10) {
+      opacity: 0.8448791853;
+      transform: scale(1.0740287382);
+    }
+    .stars .star:nth-child(10):after {
+      transform: translate(-99.6861020906px, -66.0639355154px) scale(0.647201444);
+    }
+    .stars .star:nth-child(10):before {
+      transform: translate(77.7527380436px, 0.4263448874px) scale(0.3857865056);
+    }
+    .stars .star:nth-child(11) {
+      opacity: 0.4342773913;
+      transform: scale(0.6943992836);
+    }
+    .stars .star:nth-child(11):after {
+      transform: translate(-68.3319852554px, -29.7976884834px) scale(1.0136088371);
+    }
+    .stars .star:nth-child(11):before {
+      transform: translate(18.4111283252px, 19.6130471355px) scale(0.4218712137);
+    }
+    .stars .star:nth-child(12) {
+      opacity: 0.393900366;
+      transform: scale(0.2285200641);
+    }
+    .stars .star:nth-child(12):after {
+      transform: translate(-90.9089837884px, -95.0460333416px) scale(1.1238462448);
+    }
+    .stars .star:nth-child(12):before {
+      transform: translate(6.4330755127px, 59.3152456672px) scale(0.0328817297);
+    }
+    .stars .star:nth-child(13) {
+      opacity: 0.4029187551;
+      transform: scale(0.9186835939);
+    }
+    .stars .star:nth-child(13):after {
+      transform: translate(-48.9373084462px, -116.386963166px) scale(0.6560851182);
+    }
+    .stars .star:nth-child(13):before {
+      transform: translate(53.6965376908px, 56.944286648px) scale(1.0391990488);
+    }
+    .stars .star:nth-child(14) {
+      opacity: 0.678202273;
+      transform: scale(0.6778874829);
+    }
+    .stars .star:nth-child(14):after {
+      transform: translate(-40.3646618645px, -60.5156071446px) scale(0.7186936276);
+    }
+    .stars .star:nth-child(14):before {
+      transform: translate(19.8591112618px, 56.7028996609px) scale(0.4625968641);
+    }
+    .stars .star:nth-child(15) {
+      opacity: 0.8040696872;
+      transform: scale(0.2908735517);
+    }
+    .stars .star:nth-child(15):after {
+      transform: translate(-20.7453624883px, -99.19455256px) scale(0.9087228703);
+    }
+    .stars .star:nth-child(15):before {
+      transform: translate(44.4019350374px, 14.4883044834px) scale(0.4309117442);
+    }
+    .stars .star:nth-child(16) {
+      opacity: 0.8924976232;
+      transform: scale(1.0195187176);
+    }
+    .stars .star:nth-child(16):after {
+      transform: translate(-70.2005113694px, -18.2434333608px) scale(0.2485883784);
+    }
+    .stars .star:nth-child(16):before {
+      transform: translate(45.2924958295px, 47.1404862327px) scale(0.6700559009);
+    }
+    .stars .star:nth-child(17) {
+      opacity: 0.9839231461;
+      transform: scale(0.1289734834);
+    }
+    .stars .star:nth-child(17):after {
+      transform: translate(-18.7762691449px, -5.9746484481px) scale(0.5236422073);
+    }
+    .stars .star:nth-child(17):before {
+      transform: translate(64.0024590616px, 50.1714351617px) scale(0.6172582802);
+    }
+    .stars .star:nth-child(18) {
+      opacity: 0.2367728734;
+      transform: scale(0.3921818563);
+    }
+    .stars .star:nth-child(18):after {
+      transform: translate(-0.9570979914px, -72.1159030006px) scale(0.5711679158);
+    }
+    .stars .star:nth-child(18):before {
+      transform: translate(8.9761986193px, 42.6541661921px) scale(1.0952374081);
+    }
+    .stars .star:nth-child(19) {
+      opacity: 0.3873795171;
+      transform: scale(0.7694405045);
+    }
+    .stars .star:nth-child(19):after {
+      transform: translate(-12.5819725124px, -51.1709343661px) scale(1.1827807532);
+    }
+    .stars .star:nth-child(19):before {
+      transform: translate(79.3311013728px, 14.2494214717px) scale(0.6294542478);
+    }
+    .stars .star:nth-child(20) {
+      opacity: 0.4124487906;
+      transform: scale(0.8103124399);
+    }
+    .stars .star:nth-child(20):after {
+      transform: translate(-80.706422943px, -51.774233605px) scale(0.402445665);
+    }
+    .stars .star:nth-child(20):before {
+      transform: translate(45.1942072143px, 10.5309625657px) scale(0.167516544);
+    }
+    .stars .star:nth-child(21) {
+      opacity: 0.5199157537;
+      transform: scale(0.8799506258);
+    }
+    .stars .star:nth-child(21):after {
+      transform: translate(-63.5106688252px, -99.9364842298px) scale(1.0131728184);
+    }
+    .stars .star:nth-child(21):before {
+      transform: translate(35.7018951422px, 43.1608665203px) scale(0.0319916216);
+    }
+    .stars .star:nth-child(22) {
+      opacity: 0.2019581908;
+      transform: scale(0.3329964179);
+    }
+    .stars .star:nth-child(22):after {
+      transform: translate(-60.610347619px, -51.3445248827px) scale(0.8579803754);
+    }
+    .stars .star:nth-child(22):before {
+      transform: translate(59.4577320934px, 23.1339707242px) scale(0.4763350084);
+    }
+    .stars .star:nth-child(23) {
+      opacity: 0.2149054488;
+      transform: scale(0.8614227759);
+    }
+    .stars .star:nth-child(23):after {
+      transform: translate(-56.6281464707px, -10.4987568447px) scale(0.3295012287);
+    }
+    .stars .star:nth-child(23):before {
+      transform: translate(1.748600123px, 48.6737298426px) scale(0.7902063627);
+    }
+    .stars .star:nth-child(24) {
+      opacity: 0.5754255063;
+      transform: scale(0.7686271516);
+    }
+    .stars .star:nth-child(24):after {
+      transform: translate(-60.1490729931px, -50.753048447px) scale(0.7170001832);
+    }
+    .stars .star:nth-child(24):before {
+      transform: translate(32.0825405236px, 51.8653045807px) scale(0.5126888679);
+    }
+    .stars .star:nth-child(25) {
+      opacity: 0.8120616551;
+      transform: scale(0.5415103601);
+    }
+    .stars .star:nth-child(25):after {
+      transform: translate(-11.5794226038px, -29.0194110365px) scale(0.9340622114);
+    }
+    .stars .star:nth-child(25):before {
+      transform: translate(57.4473376351px, 49.5098963295px) scale(0.3400848027);
+    }
+
+    .planet {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(#6cbee8, #7947c5, transparent);
+      top: 14%;
+      left: 6%;
+      animation: breathe 1.5s ease-in-out infinite alternate;
+    }
+
+    .mountains {
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      z-index: 5;
+    }
+    .mountains:before, .mountains:after {
+      content: "";
+      background: linear-gradient(to bottom, #0d0b12 5%, #251f31);
+      display: inline-block;
+      width: 400px;
+      height: 400px;
+      border-radius: 40px;
+      transform: rotate(45deg);
+      box-shadow: 2px -2px 0 #7947c5;
+    }
+    .mountains:before {
+      left: -15%;
+      top: 40%;
+    }
+    .mountains:after {
+      left: 33%;
+      top: 55%;
+    }
+
+    /* Animations */
+    @keyframes breathe {
+      from {
+        transform: translate(0, -2%);
+      }
+      to {
+        transform: translate(0, 2%);
+      }
+    }
+    @keyframes shine {
+      from {
+        transform: scale(1) translate(-50%, -50%);
+      }
+      to {
+        transform: scale(1.02) translate(-50%, -50%);
+      }
+    }
+    @keyframes shooting {
+      0% {
+        transform: rotate(30deg) translate(-100%, -100%);
+        opacity: 1;
+      }
+      20% {
+        transform: rotate(30deg) translate(100%, 100%);
+        opacity: 0;
+      }
+      100% {
+        transform: rotate(30deg) translate(100%, 100%);
+        opacity: 0;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="moon">
+      <div class="carter first"></div>
+      <div class="carter second"></div>
+      <div class="carter third"></div>
+      <div class="moon-halo"></div>
+    </div>
+    <div class="meteors">
+      <div class="meteor"></div>
+      <div class="meteor"></div>
+      <div class="meteor"></div>
+      <div class="meteor"></div>
+    </div>
+    <div class="stars">
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+    </div>
+    <div class="planet"></div>
+    <div class="mountains"></div>
+  </div>
+</body>
+
+</html>
