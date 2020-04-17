@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Drag And Drop</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      padding: 0 20px;
+      line-height: 1.4;
+    }
+
+    main {
+      text-align: center;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    p {
+      text-align: left;
+      padding: 0 20px;
+    }
+
+    code {
+      color: firebrick;
+    }
+
+    .box {
+      width: 200px;
+      height: 200px;
+      background: thistle;
+      float: left;
+      border-radius: 20px;
+    }
+
+    .dropzone {
+      width: 400px;
+      height: 400px;
+      background: deepskyblue;
+      float: right;
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    .draggable {
+      cursor: move;
+    }
+
+    .droppable {
+      background-color: black;
+    }
+
+  </style>
+</head>
+
+<body>
+  <main>
+    <h2>Drag and Drop API <code>setDragImage()</code></h2>
+    <div class="box draggable" id="box" draggable="true"></div>
+    <div class="dropzone" id="dropzone"></div>
+
+  </main>
+  <script>
+    const box = document.getElementById('box')
+    const dropzone = document.getElementById('dropzone')
+    const img = new Image();
+
+    img.src = 'https://img.alicdn.com/tfs/TB1nP7.QiLaK1RjSZFxXXamPFXa-256-256.png';
+
+    box.addEventListener('dragstart', e => {
+      e.dataTransfer.setDragImage(img, 92, 92);
+    });
+
+    dropzone.addEventListener('dragover', e => {
+      e.preventDefault();
+      e.target.classList.add('droppable');
+    });
+
+    dropzone.addEventListener('drop', e => {
+      e.target.appendChild(box);
+      box.draggable = false;
+      box.classList.remove('draggable');
+    });
+
+    box.addEventListener('dragend', _ => {
+      dropzone.classList.remove('droppable');
+    });
+  </script>
+</body>
+
+</html>
