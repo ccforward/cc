@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>css shape-outside</title>
+  <style>
+    body {
+      background-color: #eee;
+      color: #434344;
+      font-weight: 400;
+    }
+
+    /* Page Layout */
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+    }
+
+    /* Main Section */
+
+    .wrapper {
+      display: flex;
+    }
+
+    .main {
+      flex: 3;
+    }
+
+    .main h2 {
+      font-size: 32px;
+      margin: 1rem 0;
+      color: #764ABC;
+    }
+
+    .main p {
+      font-size: 1rem;
+      margin-bottom: .75rem;
+    }
+
+    .circle {
+      width: 200px;
+      height: 200px;
+      background-color: #764ABC;
+      float: left;
+      border-radius: 50%;
+      shape-outside: circle(50%);
+    }
+
+    /* Sidebar */
+
+    .logo {
+      font-size: 2rem;
+      margin-right: 1.5rem;
+      color: #764ABC;
+    }
+    @media (max-width: 600px) {
+      .wrapper {
+        flex-direction: column;
+      }
+
+      .main {
+        margin-right: 0;
+        margin-bottom: 60px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <section class="main">
+        <h2>Text wrap around the circle by using the shape-outside property</h2>
+        <div class="circle"></div>
+        <p>Starting from the outside and working in, adding display: flex; to the container is the first step in any
+          flexbox layout. The flex-direction is column, so this will position all sections under each other. </p>
+        <p>One handy thing is how easy it is to align text. In the navigation, with align-items: baseline, all
+          navigation items are aligned to the baseline of the text so they look more uniform. </p>
+      </section>
+    </div>
+  </div>
+</body>
+
+</html>
