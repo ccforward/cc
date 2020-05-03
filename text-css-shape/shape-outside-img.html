@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>css shape-outside</title>
+  <style>
+    body {
+      background-color: #eee;
+      color: #434344;
+      font-weight: 400;
+    }
+
+    /* Page Layout */
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+    }
+
+    /* Main Section */
+
+    .wrapper {
+      display: flex;
+    }
+
+    .main {
+      flex: 3;
+    }
+
+    .main h2 {
+      font-size: 32px;
+      margin: 1rem 0;
+      color: #764ABC;
+    }
+
+    .main p {
+      font-size: 1rem;
+      margin-bottom: .75rem;
+    }
+
+    .intro-img {
+      width: 250px;
+      height: 250px;
+      float: left;
+      shape-outside: circle() margin-box;
+      shape-margin: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .wrapper {
+        flex-direction: column;
+      }
+
+      .main {
+        margin-right: 0;
+        margin-bottom: 60px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <section class="main">
+        <h2>Text wrap around the PNG image by using the shape-outside property</h2>
+
+        <img class="intro-img" src="https://img.alicdn.com/tfs/TB1QaaheipE_u4jSZKbXXbCUVXa-233-177.svg">
+
+        <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to
+          corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow
+          the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
+
+        <p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going
+          forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud
+          solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
+
+        <p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the
+          digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information
+          highway will close the loop on focusing solely on the bottom line.</p>
+
+      </section>
+    </div>
+  </div>
+</body>
+
+</html>
