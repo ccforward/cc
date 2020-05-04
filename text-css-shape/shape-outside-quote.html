@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>css shape-outside</title>
+  <style>
+    body {
+      background-color: #eee;
+      color: #434344;
+      font-weight: 400;
+    }
+
+    /* Page Layout */
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+    }
+
+    /* Main Section */
+
+    .wrapper {
+      display: flex;
+    }
+
+    .main {
+      flex: 3;
+    }
+
+    .main h2 {
+      font-size: 32px;
+      margin: 1rem 0;
+      color: #764ABC;
+    }
+
+    .main p {
+      font-size: 1rem;
+      margin-bottom: .75rem;
+    }
+
+    .pull-quote {
+      width: 200px;
+      height: 200px;
+      shape-outside: content-box;
+      shape-margin: 15px;
+      margin-top: 35px;
+      margin-left: 15px;
+      float: right;
+      font-size: 14px;
+      color: #764ABC;
+      font-style: italic;
+      border-top: 3px solid purple;
+    }
+
+    @media (max-width: 600px) {
+      .wrapper {
+        flex-direction: column;
+      }
+
+      .main {
+        margin-right: 0;
+        margin-bottom: 60px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <section class="main">
+        <h2>Text wrap around the pull-quote by using the shape-outside property</h2>
+
+        <div class="pull-quote">Completely synergize resource taxing relationships via premier niche markets.
+          Professionally cultivate one-to-one customer service with robust ideas.
+          Dynamically innovate resource-leveling customer service for state of the art customer service.</div>
+
+        <p>Starting from the outside and working in, adding display: flex; to the container is the first step in any
+          flexbox layout. The flex-direction is column, so this will position all sections under each other. </p>
+
+        <p>One handy thing is how easy it is to align text. In the navigation, with align-items: baseline, all
+          navigation items are aligned to the baseline of the text so they look more uniform. </p>
+
+        <p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the
+          digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information
+          highway will close the loop on focusing solely on the bottom line.</p>
+
+        <p>Objectively innovate empowered manufactured products whereas parallel platforms. Holisticly predominate
+          extensible testing procedures for reliable supply chains. Dramatically engage top-line web services vis-a-vis
+          cutting-edge deliverables.</p>
+
+      </section>
+    </div>
+  </div>
+</body>
+
+</html>
