@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>css shape-outside</title>
+  <style>
+    body {
+      background-color: #eee;
+      color: #434344;
+      font-weight: 400;
+    }
+
+    /* Page Layout */
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+    }
+
+    /* Main Section */
+
+    .wrapper {
+      display: flex;
+    }
+
+    .main {
+      flex: 3;
+    }
+
+    .main h2 {
+      font-size: 32px;
+      margin: 1rem 0;
+      color: #764ABC;
+    }
+
+    .main p {
+      font-size: 1rem;
+      margin-bottom: .75rem;
+    }
+
+    .polygon {
+      width: 310px;
+      height: 300px;
+      float: left;
+      background-color: #764ABC;
+      shape-outside: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+      clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+      margin: 15px;
+    }
+
+    @media (max-width: 600px) {
+      .wrapper {
+        flex-direction: column;
+      }
+
+      .main {
+        margin-right: 0;
+        margin-bottom: 60px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <section class="main">
+        <h2>Text wrap around the polygon by using the shape-outside property</h2>
+
+        <div class="polygon"></div>
+
+        <p>Starting from the outside and working in, adding display: flex; to the container is the first step in any
+          flexbox layout. The flex-direction is column, so this will position all sections under each other. </p>
+
+        <p>One handy thing is how easy it is to align text. In the navigation, with align-items: baseline, all
+          navigation items are aligned to the baseline of the text so they look more uniform. </p>
+
+        <p>Podcasting operational change management inside of workflows to establish a framework. Taking seamless key
+          performance indicators offline to maximise the long tail. Keeping your eye on the ball while performing a deep
+          dive on the start-up mentality to derive convergence on cross-platform integration.</p>
+
+        <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C
+          users after installed base benefits. Dramatically visualize customer directed convergence without
+          revolutionary ROI.</p>
+
+        <p>Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables
+          for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions. </p>
+
+      </section>
+    </div>
+  </div>
+</body>
+
+</html>
