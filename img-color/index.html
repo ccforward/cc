@@ -23,7 +23,13 @@
       margin: 20px 0;
     }
 
-
+    .color-box {
+      margin-bottom: 20px;
+    }
+    .colorful {
+      width: 100px;
+      height: 100px;
+    }
     .img-box {
       max-width: 500px;
     }
@@ -40,7 +46,10 @@
   <div class="container">
     <input class="file" type="file" id="fileInput"/>
 
-
+    <div class="color-box">
+      图片主色调：<span id="main-color"></span>
+      <div class="colorful"></div>
+    </div>
     <div class="img-box">
       <img src="" id="img">
     </div>
@@ -56,7 +65,8 @@
           const img = new Image();
           img.onload = function() {
             const imgColor = getAverageRGB(img, true, 200);
-            console.log(imgColor)
+            document.querySelector('#main-color').innerHTML = imgColor;
+            document.querySelector('.colorful').setAttribute('style', `background-color: ${imgColor}`)
           }
           img.src = this.result;
           document.querySelector('#img').setAttribute('src', this.result)
