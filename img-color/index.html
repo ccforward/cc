@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Image Main Color</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      color: #fff;
+      background: rgb(19, 18, 51);
+    }
+
+    .container {
+      width: 80%;
+      margin: 50px auto;
+    }
+
+    .file {
+      margin: 20px 0;
+    }
+
+
+    .img-box {
+      max-width: 500px;
+    }
+
+    .img-box img {
+      max-width: 100%;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <input class="file" type="file" id="fileInput"/>
+
+
+    <div class="img-box">
+      <img src="" id="img">
+    </div>
+
+  </div>
+
+  <script src="./index.js"></script>
+  <script>
+    (function(){
+      document.querySelector('#fileInput').addEventListener('change', function(e) {
+        const reader = new FileReader();
+        reader.onload = function() {
+          const img = new Image();
+          img.onload = function() {
+            const imgColor = getAverageRGB(img, true, 200);
+            console.log(imgColor)
+          }
+          img.src = this.result;
+          document.querySelector('#img').setAttribute('src', this.result)
+        }
+        reader.readAsDataURL(e.target.files[0]);
+      })
+    })()
+  </script>
+</body>
+
+</html>
