@@ -5,6 +5,440 @@
   <meta charset="UTF-8">
   <title>Summer</title>
   <style>
+    /*
+
+    $baseColor: #D9845D;
+    $subColor: #DEAD5E;
+    $hatColor: #F0F09E;
+    $footColor: #0849A3;
+    $waterColor: #2BE3FA;
+    $fishColor: #1971B3;
+    $speed: 1;
+
+    body {
+      background: #fff;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      font-family: 'Anton', sans-serif;
+      justify-content: center;
+      align-items: center;
+      perspective: 500px;
+    }
+
+    div {
+      transform-style: preserve-3d;
+    }
+
+    .sea {
+      position: absolute;
+      left: -300px;
+      top: -300px;
+
+      .surface {
+        position: absolute;
+        height: 600px;
+        width: 600px;
+        background: $waterColor;
+        overflow: hidden;
+        animation:
+          surface 13000ms ease-in-out infinite alternate,
+          rotateZ 20000ms linear infinite;
+
+        .inner {
+          width: 600px;
+          height: 600px;
+          animation: rotateZ 20000ms linear infinite reverse;
+        }
+      }
+    }
+
+    .fish {
+      position: absolute;
+      top: 100px;
+      left: 200px;
+
+      .body {
+        position: absolute;
+        width: 20px;
+        height: 5px;
+        background: $fishColor;
+        border-radius: 100%;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: -3px;
+          left: 12px;
+          width: 2px;
+          height: 5px;
+          background: $fishColor;
+          border-radius: 100% 100% 0 0;
+          transform: rotateZ(-30deg);
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 3px;
+          left: 12px;
+          width: 2px;
+          height: 5px;
+          background: $fishColor;
+          border-radius: 100% 100% 0 0;
+          transform: rotateZ(30deg);
+        }
+      }
+    }
+
+    .ship {
+      position: absolute;
+      top: -15px;
+      left: -50px;
+      filter: drop-shadow(-30px 40px 0 rgba(#000, 0.1));
+
+      .rotate {
+        transform: rotateZ(10deg);
+        animation: ship 30000ms linear infinite alternate;
+      }
+
+      .move {
+        // animation: move 1000ms / $speed ease-in-out infinite alternate;
+      }
+
+      .human {
+        position: absolute;
+        top: 0;
+        left: 40px;
+
+        .hat {
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          background: $hatColor;
+          border-radius: 100%;
+          animation: hat 1000ms / $speed ease-in-out infinite alternate;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 7px;
+            left: 7px;
+            width: 16px;
+            height: 16px;
+            border: 1px solid $baseColor;
+            border-radius: 100%;
+            box-sizing: border-box;
+            transform: translateZ(5px);
+            transform-style: preserve-3d;
+          }
+        }
+
+        .leg {
+          position: absolute;
+          width: 20px;
+          height: 8px;
+          background: $footColor;
+          border-radius: 40%;
+
+          &::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            width: 5px;
+            height: 7px;
+            background: #fff;
+            border-radius: 40%;
+          }
+
+          &.-left {
+            top: 16px;
+            left: -10px;
+            transform: rotateZ(-5deg);
+
+            &::before {
+              top: 1px;
+            }
+          }
+
+          &.-right {
+            top: 6px;
+            left: -10px;
+            transform: rotateZ(5deg);
+
+            &::before {
+              top: -1px;
+            }
+          }
+        }
+      }
+
+      .body {
+        position: relative;
+
+        .base {
+          width: 100px;
+          height: 30px;
+          background: $baseColor;
+          border-radius: 45% 45% 45% 45%;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 96px;
+            height: 26px;
+            background: $subColor;
+            border-radius: 100%;
+            border-radius: 45% 45% 45% 45%;
+          }
+        }
+
+        .board {
+          position: absolute;
+          top: 5px;
+          width: 10px;
+          height: 20px;
+          background: $baseColor;
+          border-radius: 2px;
+
+          &.-front {
+            right: 20px;
+          }
+
+          &.-back {
+            left: 20px;
+          }
+        }
+
+        .waves {
+          position: absolute;
+
+          .wave {
+            position: absolute;
+            animation: wave 2000ms / $speed linear infinite;
+
+            .graphic {
+              background: #fff;
+              animation:
+                surface 2000ms ease-in-out infinite alternate,
+                rotateZ 6000ms linear infinite;
+            }
+          }
+
+          .bodywaves {
+            .wave {
+              @for $i from 1 through 50 {
+                &:nth-child(#{$i}) {
+                  top: random(20) * 1px - 3px;
+                  left: random(50) * 1px + 10px;
+                  animation-delay: (random(4000) * -1ms) / $speed;
+
+                  .graphic {
+                    width: random(10) + 8px;
+                    height: random(10) + 8px;
+                  }
+                }
+              }
+            }
+          }
+
+          .oarwaves {
+            &.-left {
+              .wave {
+                @for $i from 1 through 50 {
+                  &:nth-child(#{$i}) {
+                    top: random(20) * 1px - 30px;
+                    left: random(10) * 1px + 40px;
+                    animation-delay: (random(800) * -1ms - 1000ms) / $speed;
+
+                    .graphic {
+                      width: random(5) + 5px;
+                      height: random(5) + 5px;
+                    }
+                  }
+                }
+              }
+            }
+
+            &.-right {
+              .wave {
+                @for $i from 1 through 50 {
+                  &:nth-child(#{$i}) {
+                    top: random(20) * 1px + 35px;
+                    left: random(10) * 1px + 40px;
+                    animation-delay: (random(800) * -1ms - 1000ms) / $speed;
+
+                    .graphic {
+                      width: random(5) + 5px;
+                      height: random(5) + 5px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .oars {
+        position: absolute;
+        top: -30px;
+        left: 50px;
+        transform: translateZ(10px);
+
+        .graphic {
+          position: relative;
+          width: 3px;
+          height: 40px;
+          background: $baseColor;
+          animation: oarGraphic 1000ms / $speed ease-in-out infinite alternate;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -3px;
+            width: 9px;
+            height: 15px;
+            background: $baseColor;
+            border-radius: 5px 5px 100% 100%;
+          }
+        }
+
+        .oar {
+          position: absolute;
+          top: 0;
+          left: 50%;
+
+          &.-right {
+            transform-origin: 50% 45px;
+            transform: scaleY(-1);
+          }
+        }
+
+        .row {
+          position: absolute;
+          animation: row 1000ms / $speed ease-in-out infinite alternate;
+          transform-origin: 50% 35px;
+        }
+
+        .depth {
+          animation: depth 1000ms / $speed ease-in-out infinite alternate;
+          transform-origin: 50% 35px;
+          animation-delay: -500ms / $speed;
+        }
+      }
+    }
+
+
+    @keyframes surface {
+      0% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      }
+
+      25% {
+        border-radius: 65% 35% 51% 49% / 49% 52% 48% 51%;
+      }
+
+      50% {
+        border-radius: 42% 58% 28% 72% / 65% 34% 66% 35%;
+      }
+
+      75% {
+        border-radius: 34% 66% 63% 37% / 77% 38% 62% 23%;
+      }
+
+      100% {
+        border-radius: 24% 76% 72% 28% / 53% 68% 32% 47%;
+      }
+    }
+
+    @keyframes rotateZ {
+      0% {
+        transform: rotateZ(0deg);
+      }
+
+      100% {
+        transform: rotateZ(360deg);
+      }
+    }
+
+    @keyframes ship {
+      0% {
+        transform: rotateZ(20deg);
+      }
+
+      100% {
+        transform: rotateZ(-20deg);
+      }
+    }
+
+    @keyframes move {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(5px);
+      }
+    }
+
+    @keyframes wave {
+      0% {
+        transform: translateX(0) scale(0);
+      }
+
+      10% {
+        transform: translateX(-10px) scale(1);
+      }
+
+      100% {
+        transform: translateX(-130px) scale(0);
+      }
+    }
+
+    @keyframes depth {
+      0% {
+        transform: rotateX(-20deg);
+      }
+
+      100% {
+        transform: rotateX(50deg);
+      }
+    }
+
+    @keyframes row {
+      0% {
+        transform: rotateZ(20deg);
+      }
+
+      100% {
+        transform: rotateZ(-50deg);
+      }
+    }
+
+    @keyframes oarGraphic {
+      0% {
+        transform: rotateY(-60deg);
+      }
+
+      100% {
+        transform: rotateY(-110deg);
+      }
+    }
+
+    @keyframes hat {
+      0% {
+        transform: translateZ(30px) translateX(-5px) rotateY(-20deg);
+      }
+
+      100% {
+        transform: translateZ(30px) translateX(0) rotateY(20deg);
+      }
+    }
+     */
     body {
       background: #fff;
       height: 100vh;
@@ -1965,6 +2399,49 @@
 </head>
 
 <body>
+  <!-- pug file
+    .summerdream
+    .sea
+      .surface
+        //- .inner
+        //-   .fishes
+        //-     .fish
+        //-       .body
+    .ship
+      .rotate
+        .move
+          .body
+            .waves
+              .bodywaves
+                - for (i = 0; i < 50; i++)
+                  .wave
+                    .graphic
+              .oarwaves.-left
+                - for (i = 0; i < 20; i++)
+                  .wave
+                    .graphic
+              .oarwaves.-right
+                - for (i = 0; i < 20; i++)
+                  .wave
+                    .graphic
+            .base
+            .board.-front
+            .board.-back
+          .oars
+            .oar.-left
+              .row.-left
+                .depth.-left
+                  .graphic.-left
+            .oar.-right
+              .row.-right
+                .depth.-right
+                  .graphic.-right
+          .human
+            .legs
+              .leg.-left
+              .leg.-right
+            .hat
+   -->
   <div class="summerdream">
     <div class="sea">
       <div class="surface"></div>
