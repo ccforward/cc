@@ -17,7 +17,7 @@ alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false'
 alias fk='cd /Library/WebServer/Documents/'
 
 # 工具启动
-alias fire='open /Applications/Sublime\ Text\ 2.app/ & open /Applications/Google\ Chrome.app'
+alias fire='open /Applications/Visual\ Studio\ Code.app/ & open /Applications/Google\ Chrome.app & open /Applications/Notes.app & open /Applications/ShadowsocksX.app & open /Applications/DingTalk.app & open /Applications/Dash.app'
 
 #mysql
 alias mysql=/usr/local/mysql/bin/mysql
