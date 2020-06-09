@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Loader</title>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic);
+
+    body {
+      min-height:2000px;
+      background-color:#f1f1f1;
+      font-family: 'Lato', sans-serif;
+      font-size: 1em;
+      line-height: 1;
+      color: #666666;
+      padding: 1% 0;
+    }
+
+    h1, h2 {
+      text-align:center;
+    }
+
+    .loader-container {
+      float:left;
+      width:25%;
+    }
+
+    .loader-container:nth-child(6) {
+      clear:both;
+    }
+
+    .container {
+      margin: 20px auto;
+      margin-bottom:100px;
+      width: 70px;
+      text-align: center;
+    }
+
+    h1 {
+      color:#2c3e50;
+    }
+
+    /* rounded diamond loader */
+    .diamond {
+      margin: 20px auto;
+      margin-bottom:100px;
+      width: 70px;
+      text-align: center;
+      -ms-transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    .diamond > div {
+      width: 25px;
+      height: 25px;
+      background-color: #2980b9;
+      display: inline-block;
+      border-radius:50%;
+      -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+      animation: bouncedelay 1.4s infinite ease-in-out;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+
+    .diamond .bounce1 {
+      -webkit-animation-delay: -0.32s;
+      animation-delay: -0.32s;
+    }
+
+    .diamond .bounce2 {
+      -webkit-animation-delay: -0.16s;
+      animation-delay: -0.16s;
+    }
+
+    .diamond .bounce3 {
+      -webkit-animation-delay: -0.8s;
+      animation-delay: -0.8s;
+    }
+
+    @-webkit-keyframes bouncedelay {
+      0%, 80%, 100% { -webkit-transform: scale(0.0) }
+      40% { -webkit-transform: scale(1.0) }
+    }
+
+    @keyframes bouncedelay {
+      0%, 80%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+      } 40% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+      }
+    }
+
+    /* line loader */
+    .line {
+      margin: 20px auto;
+      margin-bottom:100px;
+      width: 120px;
+      text-align: center;
+    }
+
+    .line > div {
+      width: 25px;
+      height: 25px;
+      display: inline-block;
+      border-radius:50%;
+      -webkit-animation: fadeOut 1.4s infinite ease-in-out;
+      animation: fadeOut 1.4s infinite ease-in-out;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+
+    .line .circle1 {
+      background-color: #FF6B57;
+      -webkit-animation-delay: -0.60s;
+      animation-delay: -0.60s;
+    }
+
+    .line .circle2 {
+       background-color: #FF884D;
+      -webkit-animation-delay: -0.40s;
+      animation-delay: -0.40s;
+    }
+
+    .line .circle3 {
+      background-color:#32526E;
+      -webkit-animation-delay: -0.20s;
+      animation-delay: -0.0s;
+    }
+
+    .line .circle4 {
+      background-color:#FFFFFF;
+    }
+
+    @-webkit-keyframes fadeOut {
+      0%, 80%, 100% {
+        -webkit-transform: scale(0.0)
+      } 40% {
+        -webkit-transform: scale(1.0)
+      }
+    }
+
+    @keyframes fadeOut {
+      0%, 80%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+      } 40% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+      }
+    }
+
+    /* circle spinners - container up top*/
+    .circle {
+      border: 2px solid #ecf0f1;
+      border-top-color:#7f8c8d;
+      border-right-color:#7f8c8d;
+      margin: 0 auto;
+      margin-bottom:100px;
+      width: 60px;
+      height: 60px;
+      -webkit-border-radius: 100%;
+      -moz-border-radius: 100%;
+      border-radius: 100%;
+      -webkit-animation:spin .5s linear infinite;
+      -moz-animation:spin .5s linear infinite;
+      animation:spin .5s linear infinite;
+      opacity: .7;
+    }
+
+    @-webkit-keyframes spin {
+        0%{
+          -webkit-transform: rotate(0deg);
+        } 100% {
+          -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+      0%{
+          -webkit-transform: rotate(0deg);
+      } 100% {
+          -webkit-transform: rotate(360deg);
+      }
+    }
+
+    /* square to circle - container up top*/
+    .square-circle {
+      margin-bottom:100px;
+      width: 70px;
+      text-align: center;
+      margin: 0 auto;
+      margin-bottom:100px;
+      width: 60px;
+      height: 60px;
+      -webkit-animation:squareTocircle 1s linear infinite;
+      -moz-animation:squareTocircle 1s linear infinite;
+      animation:squareTocircle 1s linear infinite;
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+    }
+
+    @-webkit-keyframes squareTocircle {
+        0%{
+          background-color:#9b59b6;
+          -webkit-transform: rotate(0deg);
+        } 20% {
+          border-radius:20%;
+          background-color:#2980b9;
+        } 40% {
+          border-radius:80%;
+          background-color:#c0392b;
+        } 60% {
+          border-radius:60%;
+          background-color:#e67e22;
+        } 80% {
+          border-radius:80%;
+          background-color:#34495e;
+        } 100% {
+          border-radius:0;
+          background-color:#f1c40f;
+          -webkit-transform: rotate(360deg);
+        }
+    }
+
+    /*icon spin*/
+    .icon-container {
+      text-align:center;
+      margin: 0 auto;
+      width:100%;
+    }
+
+    .icon {
+      width:50px;
+      -webkit-animation:spin 1s linear infinite;
+      -moz-animation:spin 1s linear infinite;
+      animation:spin 1s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+        0%{
+          -webkit-transform: rotate(0deg);
+        } 100% {
+          -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+      0%{
+          -webkit-transform: rotate(0deg);
+      } 100% {
+          -webkit-transform: rotate(360deg);
+      }
+    }
+
+    /* pulse */
+    .icon-container {
+        width:100%;
+        text-align:center;
+    }
+
+    .icon {
+        width:30px;
+        height:30px;
+        -webkit-animation:pulse 2.5s linear infinite;
+        -moz-animation:pulse 2.5s linear infinite;
+        animation:pulse 2.5s linear infinite;
+    }
+
+    @-webkit-keyframes pulse {
+        0%{
+
+        } 25% {
+          transform: scale(.5);
+        } 50% {
+            transform: scale(1);
+        } 75% {
+            transform: scale(.5);
+        } 100% {
+
+        }
+    }
+
+    @keyframes pulse {
+        0%{
+
+        } 25% {
+            transform: scale(.5);
+        } 50% {
+            transform: scale(1);
+        } 75% {
+            transform: scale(.5);
+        } 100% {
+
+        }
+    }
+
+    /* circle rotate */
+    .container-circles {
+      margin-top:80px;
+      text-align:center;
+      position:relative;
+      width:100%;
+      animation: rotate 2s ease infinite;
+    }
+
+    .circle-el {
+        width:20px;
+        height:20px;
+        border-radius:100%;
+        background:#e74c3c;
+        display:inline-block;
+    }
+
+    .container-circles .circle-el:first-child {
+        animation: move-left 2s ease infinite;
+    }
+
+    .container-circles .circle-el:last-child {
+        animation: move-right 2s ease infinite;
+    }
+
+    @keyframes move-left {
+      50% {
+         transform: translate(-50px, 0);
+      }
+    }
+
+    @keyframes move-right {
+      50% {
+         transform: translate(50px, 0);
+      }
+    }
+
+    @keyframes rotate {
+      50% {
+         transform: rotate(180deg);
+        } 100% {
+         transform: rotate(360deg);
+        }
+    }
+
+    /*circle out*/
+    .circle-out {
+      margin-top:100px;
+      margin-left:60%;
+      text-align:center;
+      position:relative;
+      width:1px;
+    }
+
+    .circle-els {
+        width:20px;
+        height:20px;
+        border-radius:100%;
+        background:#e74c3c;
+        margin:0;
+        padding:0;
+        display:inline-block;
+        float:left;
+    }
+
+    .circle-out .circle-els:first-child {
+        margin-left:-40px;
+        animation: move-left 2s ease infinite;
+    }
+
+    .circle-out .circle-els:last-child {
+        margin-left:-40px;
+        animation: move-right 2s ease infinite;
+    }
+
+    .circle-out .circle-els:nth-child(2) {
+        margin-left:-40px;
+        animation: move-up 2s ease infinite;
+    }
+
+    .circle-out .circle-els:nth-child(3) {
+        margin-left:-40px;
+        animation: move-down 2s ease infinite;
+    }
+
+    @keyframes move-left {
+      50% {
+         transform: translate(-40px, 0);
+      }
+    }
+
+    @keyframes move-right {
+      50% {
+         transform: translate(40px, 0);
+      }
+    }
+
+    @keyframes move-up {
+      50% {
+         transform: translate(0, 40px);
+      }
+    }
+
+    @keyframes move-down {
+      50% {
+         transform: translate(0, -40px);
+      }
+    }
+
+    /*icon flip spin*/
+    .flip-spin {
+      width:100%;
+      text-align:center;
+    }
+
+    .spinner {
+      width: 30px;
+      height: 30px;
+      margin:0;
+      -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+      animation: rotateplane 1.2s infinite ease-in-out;
+    }
+
+    @-webkit-keyframes rotateplane {
+      0% { -webkit-transform: perspective(120px)  rotateX(180deg) rotateY(180deg)}
+      25% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg)}
+      50% { -webkit-transform: perspective(120px) rotateY(180deg) rotateY(180deg)}
+      75% { -webkit-transform: perspective(120px) rotateY(180deg)}
+      100% { -webkit-transform: perspective(120px) rotateY(180deg) }
+    }
+
+    @keyframes rotateplane {
+      0% {
+        transform: perspective(120px) rotateX(180deg) rotateY(180deg);
+        -webkit-transform: perspective(120px) rotateX(180deg) rotateY(180deg)
+      } 25% {
+        transform: perspective(120px) rotateY(180) rotateX(180deg);
+        -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg)
+      } 50% {
+        transform: perspective(120px) rotateY(180deg) rotateY(180deg);
+        -webkit-transform: perspective(120px) rotateY(180deg) rotateY(180deg);
+      } 75% {
+         transform: perspective(120px) rotateY(180deg);
+        -webkit-transform: perspective(120px) rotateY(180deg);
+      } 100% {
+        transform: perspective(120px) rotateY(180deg);
+        -webkit-transform: perspective(120px) rotateY(180deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>CSS3 ANIMATED LOADERS</h1>
+
+  <div class="loader-container">
+    <h2>diamond loader</h2>
+    <div class="diamond">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+      <div class="bounce4"></div>
+    </div>
+  </div>
+
+  <div class="loader-container">
+    <h2>line loader</h2>
+    <div class="line">
+      <div class="circle1"></div>
+      <div class="circle2"></div>
+      <div class="circle3"></div>
+      <div class="circle4"></div>
+    </div>
+  </div>
+
+  <div class="loader-container">
+    <h2>circle loader</h2>
+    <div class="container">
+      <div class="circle">
+      </div>
+    </div>
+  </div>
+
+  <div class="loader-container">
+    <h2>square to circle</h2>
+    <div class="container">
+      <div class="square-circle">
+      </div>
+    </div>
+  </div>
+
+  <div class="loader-container">
+    <h2>icon pulse</h2>
+    <div class="icon-container">
+      <img class="icon" src="https://www.google.com/favicon.ico" />
+    </div>
+  </div>
+
+  <div class="loader-container">
+    <h2>circle rotate</h2>
+    <div class="container-circles">
+      <div class="circle-el"></div>
+      <div class="circle-el"></div>
+      <div class="circle-el"></div>
+      <div class="circle-el"></div>
+    </div>
+  </div>
+
+  <div class="loader-container">
+    <h2>circle out</h2>
+    <div class="circle-out">
+      <div class="circle-els"></div>
+      <div class="circle-els"></div>
+      <div class="circle-els"></div>
+      <div class="circle-els"></div>
+    </div>
+  </div>
+
+  <div class="loader-container">
+    <h2>icon flip spin</h2>
+    <div class="flip-spin">
+      <img class="spinner" src="https://www.google.com/favicon.ico" />
+    </div>
+  </div>
+</body>
+
+</html>
