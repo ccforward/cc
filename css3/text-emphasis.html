@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>text-emphasis</title>
+  <style>
+  em {
+    -webkit-text-emphasis: triangle;
+            text-emphasis: triangle;
+    font-style: normal;
+  }
+
+  .emphasis-1 {
+    -webkit-text-emphasis: filled double-circle deeppink;
+            text-emphasis: filled double-circle deeppink;
+  }
+
+  .emphasis-2 {
+    -webkit-text-emphasis: open triangle rebeccapurple;
+            text-emphasis: open triangle rebeccapurple;
+    -webkit-text-emphasis-position: under;
+            text-emphasis-position: under;
+  }
+
+  .emphasis-3 {
+    -webkit-text-emphasis: filled sesame blue;
+            text-emphasis: filled sesame blue;
+  }
+
+  .emphasis-4 {
+    -webkit-text-emphasis: '$' lime;
+            text-emphasis: '$' lime;
+  }
+
+  .emphasis-5 {
+    -webkit-text-emphasis: '💩';
+            text-emphasis: '💩';
+  }
+
+  p {
+    color: hsl(0 0% 20%);
+    font-size: 3rem;
+    line-height: 1.5;
+    font-weight: 300;
+    margin: 0;
+  }
+
+  html {
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  body {
+    min-block-size: 100%;
+    min-inline-size: 100%;
+    margin: 0;
+    padding: 5ch;
+    box-sizing: border-box;
+    display: grid;
+    place-content: center;
+    gap: 2ch;
+    font-family: system-ui, sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- spec https://drafts.csswg.org/css-text-decor-3/#text-emphasis-property -->
+
+  <p>Bears <em class="emphasis-1">beats</em> Battlestar Galactica</p>
+
+  <p>No shirt, no shoes, <em class="emphasis-2">no diiiiiiice</em>.</p>
+
+  <p>I'm gonna make him an offer he <em class="emphasis-3">can't</em> refuse.</p>
+
+  <p>Show me the <em class="emphasis-4">money</em>!</p>
+
+  <p><em class="emphasis-5">Roses</em> really smell like pooOOoo</p>
+
+</body>
+
+</html>
