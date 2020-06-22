@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Fill Hover</title>
+  <style>
+    body {
+      font-family: "Europa", sans-serif;
+      background-color: black;
+    }
+
+    h1 {
+      color: white;
+      text-transform: uppercase;
+      font-size: 4em;
+      font-weight: 200;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+    }
+    h2 {
+      color: white;
+      text-transform: uppercase;
+      font-size: 4em;
+      font-weight: 200;
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+    }
+
+    .glitch {
+      line-height: 1;
+    }
+    .glitch:before {
+      content: attr(data-text);
+      position: absolute;
+      color: red;
+      animation: glitch 0.3s infinite;
+    }
+    @keyframes glitch {
+      0% {
+        -webkit-clip-path: polygon(73% 56%, 28% 32%, 62% 41%, 83% 4%);
+                clip-path: polygon(73% 56%, 28% 32%, 62% 41%, 83% 4%);
+        text-shadow: 1px 0 0 blue, 2px 0 0 lime;
+      }
+      5% {
+        -webkit-clip-path: polygon(33% 87%, 83% 28%, 90% 81%, 52% 19%);
+                clip-path: polygon(33% 87%, 83% 28%, 90% 81%, 52% 19%);
+        text-shadow: 1px 0 0 blue, 1px 0 0 lime;
+      }
+      10% {
+        -webkit-clip-path: polygon(48% 58%, 56% 46%, 71% 94%, 38% 6%);
+                clip-path: polygon(48% 58%, 56% 46%, 71% 94%, 38% 6%);
+        text-shadow: 2px 0 0 blue, 3px 0 0 lime;
+      }
+      15% {
+        -webkit-clip-path: polygon(38% 54%, 5% 45%, 76% 37%, 37% 50%);
+                clip-path: polygon(38% 54%, 5% 45%, 76% 37%, 37% 50%);
+        text-shadow: 1px 0 0 blue, 3px 0 0 lime;
+      }
+      20% {
+        -webkit-clip-path: polygon(41% 25%, 90% 83%, 81% 76%, 12% 51%);
+                clip-path: polygon(41% 25%, 90% 83%, 81% 76%, 12% 51%);
+        text-shadow: 2px 0 0 blue, 1px 0 0 lime;
+      }
+      25% {
+        -webkit-clip-path: polygon(81% 5%, 14% 59%, 29% 27%, 87% 98%);
+                clip-path: polygon(81% 5%, 14% 59%, 29% 27%, 87% 98%);
+        text-shadow: 2px 0 0 blue, 2px 0 0 lime;
+      }
+      30% {
+        -webkit-clip-path: polygon(58% 75%, 7% 54%, 65% 82%, 6% 10%);
+                clip-path: polygon(58% 75%, 7% 54%, 65% 82%, 6% 10%);
+        text-shadow: 1px 0 0 blue, 2px 0 0 lime;
+      }
+      35% {
+        -webkit-clip-path: polygon(83% 40%, 23% 7%, 98% 15%, 6% 91%);
+                clip-path: polygon(83% 40%, 23% 7%, 98% 15%, 6% 91%);
+        text-shadow: 3px 0 0 blue, 1px 0 0 lime;
+      }
+      40% {
+        -webkit-clip-path: polygon(40% 3%, 35% 18%, 92% 70%, 68% 59%);
+                clip-path: polygon(40% 3%, 35% 18%, 92% 70%, 68% 59%);
+        text-shadow: 2px 0 0 blue, 1px 0 0 lime;
+      }
+      45% {
+        -webkit-clip-path: polygon(55% 87%, 21% 92%, 79% 38%, 38% 56%);
+                clip-path: polygon(55% 87%, 21% 92%, 79% 38%, 38% 56%);
+        text-shadow: 2px 0 0 blue, 2px 0 0 lime;
+      }
+      50% {
+        -webkit-clip-path: polygon(22% 13%, 86% 97%, 85% 33%, 3% 23%);
+                clip-path: polygon(22% 13%, 86% 97%, 85% 33%, 3% 23%);
+        text-shadow: 3px 0 0 blue, 2px 0 0 lime;
+      }
+      55% {
+        -webkit-clip-path: polygon(27% 35%, 80% 36%, 26% 69%, 28% 27%);
+                clip-path: polygon(27% 35%, 80% 36%, 26% 69%, 28% 27%);
+        text-shadow: 3px 0 0 blue, 3px 0 0 lime;
+      }
+      60% {
+        -webkit-clip-path: polygon(25% 74%, 52% 66%, 84% 47%, 46% 16%);
+                clip-path: polygon(25% 74%, 52% 66%, 84% 47%, 46% 16%);
+        text-shadow: 3px 0 0 blue, 3px 0 0 lime;
+      }
+      65% {
+        -webkit-clip-path: polygon(98% 77%, 10% 89%, 70% 70%, 28% 65%);
+                clip-path: polygon(98% 77%, 10% 89%, 70% 70%, 28% 65%);
+        text-shadow: 2px 0 0 blue, 2px 0 0 lime;
+      }
+      70% {
+        -webkit-clip-path: polygon(34% 31%, 33% 36%, 53% 8%, 29% 43%);
+                clip-path: polygon(34% 31%, 33% 36%, 53% 8%, 29% 43%);
+        text-shadow: 1px 0 0 blue, 2px 0 0 lime;
+      }
+      75% {
+        -webkit-clip-path: polygon(81% 28%, 7% 75%, 59% 73%, 15% 87%);
+                clip-path: polygon(81% 28%, 7% 75%, 59% 73%, 15% 87%);
+        text-shadow: 3px 0 0 blue, 3px 0 0 lime;
+      }
+      80% {
+        -webkit-clip-path: polygon(68% 23%, 18% 96%, 56% 34%, 9% 38%);
+                clip-path: polygon(68% 23%, 18% 96%, 56% 34%, 9% 38%);
+        text-shadow: 1px 0 0 blue, 3px 0 0 lime;
+      }
+      85% {
+        -webkit-clip-path: polygon(72% 10%, 91% 39%, 76% 100%, 36% 44%);
+                clip-path: polygon(72% 10%, 91% 39%, 76% 100%, 36% 44%);
+        text-shadow: 1px 0 0 blue, 2px 0 0 lime;
+      }
+      90% {
+        -webkit-clip-path: polygon(59% 90%, 77% 16%, 49% 11%, 96% 71%);
+                clip-path: polygon(59% 90%, 77% 16%, 49% 11%, 96% 71%);
+        text-shadow: 1px 0 0 blue, 3px 0 0 lime;
+      }
+      95% {
+        -webkit-clip-path: polygon(24% 83%, 28% 68%, 70% 20%, 1% 63%);
+                clip-path: polygon(24% 83%, 28% 68%, 70% 20%, 1% 63%);
+        text-shadow: 3px 0 0 blue, 1px 0 0 lime;
+      }
+      100% {
+        -webkit-clip-path: polygon(80% 36%, 43% 69%, 49% 26%, 52% 93%);
+                clip-path: polygon(80% 36%, 43% 69%, 49% 26%, 52% 93%);
+        text-shadow: 1px 0 0 blue, 2px 0 0 lime;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="glitch" data-text="Hello World!">Hello World!</h1>
+  <h2 class="glitch" data-text="ABCDEFG HIJKLMN OPQRST UVWXYZ 0123456789">ABCDEFG HIJKLMN OPQRST UVWXYZ 0123456789</h2>
+</body>
+
+
+</html>
