@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Glich</title>
+  <style>
+    @keyframes example {
+      0% {
+        -webkit-filter: saturate(8);
+        filter: saturate(8);
+        left: 20px;
+      }
+      25% {
+        -webkit-filter: hue-rotate(180deg);
+        filter: hue-rotate(180deg);
+        right: 20px;
+      }
+      50% {
+        -webkit-filter: invert(.8);
+        filter: invert(.8);
+        top: 20px;
+      }
+      100% {
+        -webkit-filter: hue-rotate(0deg);
+        filter: hue-rotate(0deg);
+        bottom: 20px;
+      }
+    }
+
+    .glich:hover {
+      position: relative;
+      animation-name: example;
+      animation-duration: 500ms;
+      cursor: pointer;
+    }
+
+    .container {
+      display: table-cell;
+      overflow: hidden;
+      height: 353px;
+      width: 353px;
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img class="glich" width="400" src="https://img.alicdn.com/tfs/TB15rF.eQcx_u4jSZFlXXXnUFXa-1036-1558.jpg">
+  </div>
+  <div class="container">
+    <img class="glich" width="400" src="https://img.alicdn.com/tfs/TB15rF.eQcx_u4jSZFlXXXnUFXa-1036-1558.jpg">
+  </div>
+</body>
+
+
+</html>
