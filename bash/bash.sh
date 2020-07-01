@@ -27,8 +27,12 @@ alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 alias apaconf='sudo vim /etc/apache2/httpd.conf'
 
 #git
-alias gam="git add .;git commit -m"
-#alias glog='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
+alias gam="git add -A;git commit -m"
+alias gst="git st"
+alias gpush='git push origin $(git rev-parse --abbrev-ref HEAD)'
+alias gpull='git pull origin $(git rev-parse --abbrev-ref HEAD)'
+alias glogq='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
 alias glog="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gaa='git add --all'
 alias gcl='git clone'
+alias gc-='git co -'
