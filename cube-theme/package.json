@@ -1,0 +1,23 @@
+{
+	"name": "cube-theme",
+	"displayName": "Cube Theme",
+	"description": "A theme made by ccforward",
+	"version": "1.0.1",
+	"publisher": "ccforward",
+	"icon": "images/icon.png",
+	"engines": {
+		"vscode": "^1.5.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"contributes": {
+		"themes": [
+			{
+				"label": "cc-theme",
+				"uiTheme": "vs-dark",
+				"path": "./cc.tmTheme"
+			}
+		]
+	}
+}
