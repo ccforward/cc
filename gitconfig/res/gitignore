@@ -1,6 +1,5 @@
 #===directory===#
-build/
-templates/inc/
+temp/
 
 #===vim===#
 .*.sw[a-z]
@@ -13,7 +12,7 @@ templates/inc/
 *.log
 
 #===Windows===#
-Thumbs.db 
+Thumbs.db
 Desktop.ini
 
 #===TextMate===#
